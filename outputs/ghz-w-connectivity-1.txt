@@ -1,0 +1,29 @@
+Problem Name:ghz-w-connectivity
+Connectivity: ALL
+allowedGates: [H, X, Y, <class 'projectq.ops._gates.Rx'>, CX]
+numberOfQubits: 3
+
+bestCandidate has error:0.12764451765501383
+bestCandidate has circuit:Circuit: [(Rx(0.91),2), (Y,0), (H,0), (X,2), (CX,0,2), (Y,0), (Rx(1.21),2), (X,2), (CX,0,1)]
+bestCandidate has error:0.12764451765501383
+bestCandidate has circuit:Circuit: [(Rx(0.91),2), (Y,0), (H,0), (X,2), (CX,0,2), (Y,0), (Rx(1.21),2), (X,2), (CX,0,1)]
+bestCandidate has error:0.12764451765501383
+bestCandidate has circuit:Circuit: [(Rx(0.91),2), (Y,0), (H,0), (X,2), (CX,0,2), (Y,0), (Rx(1.21),2), (X,2), (CX,0,1)]
+bestCandidate has error:0.12764451765501383
+bestCandidate has circuit:Circuit: [(Rx(0.91),2), (Y,0), (H,0), (X,2), (CX,0,2), (Y,0), (Rx(1.21),2), (X,2), (CX,0,1)]
+bestCandidate has error:0.0773111184731815
+bestCandidate has circuit:Circuit: [(CX,0,2), (H,1), (CX,1,0), (H,1), (CX,1,2), (X,2), (X,2), (Rx(0.792),0), (H,0)]
+bestCandidate has error:0.0773111184731815
+bestCandidate has circuit:Circuit: [(CX,0,2), (H,1), (CX,1,0), (H,1), (CX,1,2), (X,2), (X,2), (Rx(0.792),0), (H,0)]
+bestCandidate has error:0.0773111184731815
+bestCandidate has circuit:Circuit: [(CX,0,2), (H,1), (CX,1,0), (H,1), (CX,1,2), (X,2), (X,2), (Rx(0.792),0), (H,0)]
+Genetic algorithm has found a solution in 8 generations.
+We have 2 many non-dominated solutions.
+
+0th solution has error:0.29289321881345254
+0th solution has circuit:
+Circuit:]
+
+1th solution has error:2.220446049250313e-16
+1th solution has circuit:
+Circuit: [(X,0), (H,1), (CX,1,0), (X,1), (X,1), (X,1), (Y,2), (X,2), (CX,1,2)]

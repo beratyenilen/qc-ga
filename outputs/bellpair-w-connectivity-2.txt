@@ -1,0 +1,87 @@
+Problem Name:bellpair-w-connectivity
+Connectivity: ALL
+allowedGates: [H, X, <class 'projectq.ops._gates.Rz'>, CX]
+numberOfQubits: 2
+
+Genetic algorithm has found a solution in 1 generations.
+We have 20 many non-dominated solutions.
+
+0th solution has error:0.29289321881345254
+0th solution has circuit:
+Circuit: [(CX,0,1)]
+
+1th solution has error:0.29289321881345254
+1th solution has circuit:
+Circuit: [(CX,0,1)]
+
+2th solution has error:0.29289321881345254
+2th solution has circuit:
+Circuit: [(CX,1,0)]
+
+3th solution has error:0.29289321881345254
+3th solution has circuit:
+Circuit: [(CX,0,1)]
+
+4th solution has error:0.29289321881345254
+4th solution has circuit:
+Circuit: [(CX,1,0)]
+
+5th solution has error:0.29289321881345254
+5th solution has circuit:
+Circuit: [(CX,1,0)]
+
+6th solution has error:0.29289321881345254
+6th solution has circuit:
+Circuit: [(Rz(5.83),1)]
+
+7th solution has error:0.29289321881345254
+7th solution has circuit:
+Circuit: [(Rz(1.06),1)]
+
+8th solution has error:0.29289321881345254
+8th solution has circuit:
+Circuit: [(Rz(0.51),0)]
+
+9th solution has error:0.29289321881345254
+9th solution has circuit:
+Circuit: [(CX,0,1)]
+
+10th solution has error:0.29289321881345254
+10th solution has circuit:
+Circuit: [(Rz(4.15),0)]
+
+11th solution has error:0.29289321881345254
+11th solution has circuit:
+Circuit: [(CX,0,1)]
+
+12th solution has error:0.29289321881345254
+12th solution has circuit:
+Circuit: [(Rz(3.83),0)]
+
+13th solution has error:0.29289321881345254
+13th solution has circuit:
+Circuit: [(CX,0,1)]
+
+14th solution has error:0.29289321881345254
+14th solution has circuit:
+Circuit: [(Rz(0.59),1)]
+
+15th solution has error:0.29289321881345254
+15th solution has circuit:
+Circuit: [(CX,1,0)]
+
+16th solution has error:0.29289321881345254
+16th solution has circuit:
+Circuit: [(CX,1,0)]
+
+17th solution has error:0.29289321881345254
+17th solution has circuit:
+Circuit: [(Rz(5.32),1)]
+
+18th solution has error:0.2928932188134524
+18th solution has circuit:
+Circuit: [(Rz(4.34),0), (Rz(6.15),1), (CX,0,1), (CX,0,1)]
+
+19th solution has error:1.1102230246251565e-16
+19th solution has circuit:
+Circuit: [(Rz(1.28),0), (H,1), (CX,0,1), (CX,0,1), (CX,1,0)]

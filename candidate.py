@@ -9,17 +9,20 @@ class Candidate:
   ''' 
   This class is a container for an individual in GA. 
   '''
-  def __init__(self, numberOfQubits=2, allowedGates=[H,X,Y,Z,CNOT], EMC=2.0, ESL=2.0):
+  def __init__(self, numberOfQubits=2, allowedGates=[H,X,Y,Z,CNOT], connectivity="ALL", EMC=2.0, ESL=2.0):
     self.numberOfQubits = numberOfQubits
     self.allowedGates = allowedGates
+    self.connectivity = connectivity
     # EMC stands for Expected Mutation Count
     self.EMC = EMC
     # ESL stands for Expected Sequence Length
     self.ESL = ESL
     self.circuit = self.generateRandomCircuit() 
+    
 
   def __str__(self):
     output = "numberOfQubits: " + str(self.numberOfQubits)
+    output += "\nConnectivity = " + str(self.connectivity)
     output +="\nallowedGates: ["
     for i in range(len(self.allowedGates)):
       if self.allowedGates[i] == Rx:
@@ -66,7 +69,7 @@ class Candidate:
     if initialize:
       # If we are generating a random circuit while creating a new individual
       # we should choose the mean value of the geometric dist. to be 30. 
-      p = 1 / 10
+      p = 1 / 30
     else:
       # If not, than we are basically using this in a mutation in which case
       # we should choose the mean value of the geometric dist. to be ESL.
@@ -79,7 +82,10 @@ class Candidate:
       gate = random.choice(self.allowedGates) 
       if gate in [CNOT, CX]:
         # if gate to add is CNOT we need to choose control and target indices
-        control, target = random.sample(range(self.numberOfQubits), 2)
+        if self.connectivity == "ALL":
+          control, target = random.sample(range(self.numberOfQubits), 2)
+        else:
+          control, target = random.choice(self.connectivity)
         # TFG stands for Two Qubit Fixed Gate
         producedCircuit.append(("TFG", gate, control, target))
       elif gate in [H,X,Y,Z,T,Tdagger,S,Sdagger]:
@@ -267,8 +273,7 @@ class Candidate:
     random point in self.circuit and its inverse is inserted to another point.
     '''
     circuitToInsert = self.generateRandomCircuit(initialize=False)
-    # This is not the proper way to get the inverse of all circuits. 
-    # I may need to write down a getInverseCircuit(circuit) function !!
+    # MAYBE CONNECTIVITY IS NOT REFLECTIVE ? 
     inverseCircuit = getInverseCircuit(circuitToInsert, verbose)
     oldCircuitLength = len(self.circuit)
     if oldCircuitLength >= 2:
@@ -315,7 +320,11 @@ class Candidate:
     
     elif self.circuit[index][0] == "TFG":
       # This means we have two qubit fixed gate
-      newControl, newTarget = random.sample(range(self.numberOfQubits), 2)
+      if self.connectivity == "ALL":
+        newControl, newTarget = random.sample(range(self.numberOfQubits), 2)
+      else:
+        newControl, newTarget = random.choice(self.connectivity)
+
       if verbose:
         print("\nBefore TFG discreteMutation at index", index)
         self.printCircuit(verbose)
@@ -373,7 +382,11 @@ class Candidate:
     
     elif self.circuit[index][0] == "TFG":
       # This means we have two qubit fixed gate
-      newControl, newTarget = random.sample(range(self.numberOfQubits), 2)
+      if self.connectivity == "ALL":
+        newControl, newTarget = random.sample(range(self.numberOfQubits), 2)
+      else:
+        newControl, newTarget = random.choice(self.connectivity)
+
       if verbose:
         print("\nBefore TFG continuousMutation at index", index)
         self.printCircuit(verbose)
@@ -440,7 +453,6 @@ class Candidate:
     while len(circuitToInsert) == 0:
       circuitToInsert = self.generateRandomCircuit(initialize=False)
     circuitToInsert = [circuitToInsert[0]]
-    # AGAIN THIS IS NOT A CORRECT WAY TO GET THE INVERSE OF A CIRCUIT
     inverseCircuit = getInverseCircuit(circuitToInsert)
     if verbose:
       print("circuitToInsert:")

@@ -71,6 +71,12 @@ def chooseIndividual(ranks, currentRank, verbose=False):
   if verbose:
     print("randomNumber:", randomNumber, ", leftBorder:", leftBorder, ", rightBorder:", rightBorder)
     print("listIndex: ", listIndex, " len(ranks[listIndex]): ", len(ranks[listIndex]), " elementIndex:", elementIndex)
+
+  while len(ranks[listIndex]) == 0:
+    listIndex += 1
+    if len(ranks[listIndex]) != 0:
+      elementIndex = random.choice(range(len(ranks[listIndex])))
+
   if elementIndex >= len(ranks[listIndex]):
     elementIndex = -1
   return ranks[listIndex][elementIndex]

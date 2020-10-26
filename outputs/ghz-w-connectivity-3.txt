@@ -1,0 +1,21 @@
+Problem Name:ghz-w-connectivity
+Connectivity: [(0, 1), (1, 0), (1, 2), (2, 1)]
+allowedGates: [H, X, CX]
+numberOfQubits: 3
+
+bestCandidate has error:0.29289321881345254
+bestCandidate has circuit:Circuit: [(CX,1,0)]
+Genetic algorithm has found a solution in 2 generations.
+We have 3 many non-dominated solutions.
+
+0th solution has error:0.29289321881345254
+0th solution has circuit:
+Circuit:]
+
+1th solution has error:0.29289321881345254
+1th solution has circuit:
+Circuit:]
+
+2th solution has error:2.220446049250313e-16
+2th solution has circuit:
+Circuit: [(H,1), (CX,1,0), (X,2), (CX,1,2), (X,2)]
