@@ -1,0 +1,3 @@
+MAX_CIRCUIT_LENGTH = 10
+epsilon = 0.0001 
+

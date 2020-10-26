@@ -1,0 +1,288 @@
+Problem Name:bellpair
+allowedGates: [<class 'projectq.ops._gates.Rx'>, <class 'projectq.ops._gates.Ry'>, <class 'projectq.ops._gates.Rz'>, CX]
+numberOfQubits: 2
+
+bestCandidate has error:0.03686445936491556
+bestCandidate has circuit:Circuit: [(Rx(1.14),1), (Rx(6.0),0), (Rz(4.07),1), (CX,1,0), (Rz(3.97),0)]
+bestCandidate has error:0.002137697828080487
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (Ry(1.44),1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.002137697828080487
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (Ry(1.44),1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.002137697828080487
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (Ry(1.44),1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.002137697828080487
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (Ry(1.44),1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.002137697828080487
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (Ry(1.44),1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.002137697828080487
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (Ry(1.44),1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.0009944970330402203
+bestCandidate has circuit:Circuit: [(Rz(3.25),0), (Ry(1.66),0), (CX,0,1)]
+bestCandidate has error:0.0009944970330402203
+bestCandidate has circuit:Circuit: [(Rz(3.25),0), (Ry(1.66),0), (CX,0,1)]
+bestCandidate has error:0.0009944970330402203
+bestCandidate has circuit:Circuit: [(Rz(3.25),0), (Ry(1.66),0), (CX,0,1)]
+bestCandidate has error:0.0009944970330402203
+bestCandidate has circuit:Circuit: [(Rz(3.25),0), (Ry(1.66),0), (CX,0,1)]
+bestCandidate has error:0.0009944970330402203
+bestCandidate has circuit:Circuit: [(Rz(3.25),0), (Ry(1.66),0), (CX,0,1)]
+bestCandidate has error:0.0009944970330402203
+bestCandidate has circuit:Circuit: [(Rz(3.25),0), (Ry(1.66),0), (CX,0,1)]
+bestCandidate has error:0.0009944970330402203
+bestCandidate has circuit:Circuit: [(Rz(3.25),0), (Ry(1.66),0), (CX,0,1)]
+bestCandidate has error:0.0009944970330402203
+bestCandidate has circuit:Circuit: [(Rz(3.25),0), (Ry(1.66),0), (CX,0,1)]
+bestCandidate has error:0.0009944970330402203
+bestCandidate has circuit:Circuit: [(Rz(3.25),0), (Ry(1.66),0), (CX,0,1)]
+bestCandidate has error:0.0009944970330402203
+bestCandidate has circuit:Circuit: [(Rz(3.25),0), (Ry(1.66),0), (CX,0,1)]
+Genetic algorithm has found a solution in 18 generations.
+We have 62 many non-dominated solutions.
+
+0th solution has error:0.2928932188134524
+0th solution has circuit:
+Circuit: [(Rz(2.22),1)]
+
+1th solution has error:0.2928932188134524
+1th solution has circuit:
+Circuit: [(Rz(1.68),1)]
+
+2th solution has error:0.2928932188134524
+2th solution has circuit:
+Circuit: [(Rz(1.68),1)]
+
+3th solution has error:0.2928932188134524
+3th solution has circuit:
+Circuit: [(Rz(6.031),0)]
+
+4th solution has error:0.2928932188134524
+4th solution has circuit:
+Circuit: [(Rz(6.031),0)]
+
+5th solution has error:0.2928932188134524
+5th solution has circuit:
+Circuit: [(Rz(4.34),0)]
+
+6th solution has error:0.2928932188134524
+6th solution has circuit:
+Circuit: [(Rz(4.34),0)]
+
+7th solution has error:0.2928932188134524
+7th solution has circuit:
+Circuit: [(Rz(4.34),0)]
+
+8th solution has error:0.2928932188134524
+8th solution has circuit:
+Circuit: [(Rz(4.34),0)]
+
+9th solution has error:0.2928932188134524
+9th solution has circuit:
+Circuit: [(Rz(4.34),0)]
+
+10th solution has error:0.2928932188134524
+10th solution has circuit:
+Circuit: [(Rz(4.34),0)]
+
+11th solution has error:0.2928932188134524
+11th solution has circuit:
+Circuit: [(Rz(1.68),1)]
+
+12th solution has error:0.2928932188134524
+12th solution has circuit:
+Circuit: [(Rz(1.68),1)]
+
+13th solution has error:0.2928932188134524
+13th solution has circuit:
+Circuit: [(Rz(4.34),1)]
+
+14th solution has error:0.2928932188134524
+14th solution has circuit:
+Circuit: [(Rz(4.34),1)]
+
+15th solution has error:0.2928932188134524
+15th solution has circuit:
+Circuit: [(Rz(0.523),1)]
+
+16th solution has error:0.2928932188134524
+16th solution has circuit:
+Circuit: [(Rz(0.523),1)]
+
+17th solution has error:0.2928932188134524
+17th solution has circuit:
+Circuit: [(Rz(0.523),1)]
+
+18th solution has error:0.2928932188134524
+18th solution has circuit:
+Circuit: [(Rz(1.882),1)]
+
+19th solution has error:0.2928932188134524
+19th solution has circuit:
+Circuit: [(Rz(6.17),0)]
+
+20th solution has error:0.2928932188134524
+20th solution has circuit:
+Circuit: [(Rz(6.17),0)]
+
+21th solution has error:0.2928932188134524
+21th solution has circuit:
+Circuit: [(Rz(2.22),1)]
+
+22th solution has error:0.2928932188134524
+22th solution has circuit:
+Circuit: [(Rz(2.22),1)]
+
+23th solution has error:0.29289321881345254
+23th solution has circuit:
+Circuit:]
+
+24th solution has error:0.29289321881345254
+24th solution has circuit:
+Circuit:]
+
+25th solution has error:0.29289321881345254
+25th solution has circuit:
+Circuit:]
+
+26th solution has error:0.29289321881345254
+26th solution has circuit:
+Circuit:]
+
+27th solution has error:0.29289321881345254
+27th solution has circuit:
+Circuit:]
+
+28th solution has error:0.29289321881345254
+28th solution has circuit:
+Circuit:]
+
+29th solution has error:0.29289321881345254
+29th solution has circuit:
+Circuit:]
+
+30th solution has error:0.29289321881345254
+30th solution has circuit:
+Circuit:]
+
+31th solution has error:0.29289321881345254
+31th solution has circuit:
+Circuit:]
+
+32th solution has error:0.29289321881345254
+32th solution has circuit:
+Circuit:]
+
+33th solution has error:0.29289321881345254
+33th solution has circuit:
+Circuit:]
+
+34th solution has error:0.29289321881345254
+34th solution has circuit:
+Circuit:]
+
+35th solution has error:0.29289321881345254
+35th solution has circuit:
+Circuit:]
+
+36th solution has error:0.29289321881345254
+36th solution has circuit:
+Circuit:]
+
+37th solution has error:0.29289321881345254
+37th solution has circuit:
+Circuit:]
+
+38th solution has error:0.29289321881345254
+38th solution has circuit:
+Circuit:]
+
+39th solution has error:0.29289321881345254
+39th solution has circuit:
+Circuit:]
+
+40th solution has error:0.29289321881345254
+40th solution has circuit:
+Circuit:]
+
+41th solution has error:0.29289321881345254
+41th solution has circuit:
+Circuit:]
+
+42th solution has error:0.29289321881345254
+42th solution has circuit:
+Circuit:]
+
+43th solution has error:0.29289321881345254
+43th solution has circuit:
+Circuit:]
+
+44th solution has error:0.29289321881345254
+44th solution has circuit:
+Circuit:]
+
+45th solution has error:0.29289321881345254
+45th solution has circuit:
+Circuit:]
+
+46th solution has error:0.29289321881345254
+46th solution has circuit:
+Circuit:]
+
+47th solution has error:0.29289321881345254
+47th solution has circuit:
+Circuit:]
+
+48th solution has error:0.29289321881345254
+48th solution has circuit:
+Circuit:]
+
+49th solution has error:0.29289321881345254
+49th solution has circuit:
+Circuit:]
+
+50th solution has error:0.29289321881345254
+50th solution has circuit:
+Circuit:]
+
+51th solution has error:0.29289321881345254
+51th solution has circuit:
+Circuit:]
+
+52th solution has error:0.29289321881345254
+52th solution has circuit:
+Circuit:]
+
+53th solution has error:0.29289321881345254
+53th solution has circuit:
+Circuit:]
+
+54th solution has error:0.29289321881345254
+54th solution has circuit:
+Circuit:]
+
+55th solution has error:0.29289321881345254
+55th solution has circuit:
+Circuit:]
+
+56th solution has error:0.29289321881345254
+56th solution has circuit:
+Circuit:]
+
+57th solution has error:0.29289321881345254
+57th solution has circuit:
+Circuit:]
+
+58th solution has error:0.29289321881345254
+58th solution has circuit:
+Circuit:]
+
+59th solution has error:0.003166137277324843
+59th solution has circuit:
+Circuit: [(Ry(1.73),0), (CX,0,1)]
+
+60th solution has error:0.003166137277324843
+60th solution has circuit:
+Circuit: [(Ry(1.73),0), (CX,0,1)]
+
+61th solution has error:1.4570048651685319e-05
+61th solution has circuit:
+Circuit: [(Ry(1.56),1), (CX,0,1), (CX,1,0)]

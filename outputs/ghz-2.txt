@@ -1,0 +1,66 @@
+Problem Name:ghz
+allowedGates: [H, X, Y, <class 'projectq.ops._gates.Rx'>, CX]
+numberOfQubits: 3
+
+bestCandidate has error:0.29289321881345254
+bestCandidate has circuit:Circuit: [(CX,2,0)]
+bestCandidate has error:0.29289321881345254
+bestCandidate has circuit:Circuit: [(CX,2,0)]
+bestCandidate has error:0.062077012986271995
+bestCandidate has circuit:Circuit: [(X,1), (CX,2,1), (Y,2), (H,1), (Rx(3.85),2), (Y,1), (CX,1,0), (CX,0,2)]
+bestCandidate has error:0.062077012986271995
+bestCandidate has circuit:Circuit: [(X,1), (CX,2,1), (Y,2), (H,1), (Rx(3.85),2), (Y,1), (CX,1,0), (CX,0,2)]
+bestCandidate has error:0.062077012986271995
+bestCandidate has circuit:Circuit: [(X,1), (CX,2,1), (Y,2), (H,1), (Rx(3.85),2), (Y,1), (CX,1,0), (CX,0,2)]
+bestCandidate has error:0.062077012986271995
+bestCandidate has circuit:Circuit: [(X,1), (CX,2,1), (Y,2), (H,1), (Rx(3.85),2), (Y,1), (CX,1,0), (CX,0,2)]
+bestCandidate has error:0.062077012986271995
+bestCandidate has circuit:Circuit: [(X,1), (CX,2,1), (Y,2), (H,1), (Rx(3.85),2), (Y,1), (CX,1,0), (CX,0,2)]
+bestCandidate has error:0.062077012986271995
+bestCandidate has circuit:Circuit: [(X,1), (CX,2,1), (Y,2), (H,1), (Rx(3.85),2), (Y,1), (CX,1,0), (CX,0,2)]
+bestCandidate has error:0.062077012986271995
+bestCandidate has circuit:Circuit: [(X,1), (CX,2,1), (Y,2), (H,1), (Rx(3.85),2), (Y,1), (CX,1,0), (CX,0,2)]
+bestCandidate has error:0.062077012986271995
+bestCandidate has circuit:Circuit: [(X,1), (CX,2,1), (Y,2), (H,1), (Rx(3.85),2), (Y,1), (CX,1,0), (CX,0,2)]
+Genetic algorithm has found a solution in 11 generations.
+We have 10 many non-dominated solutions.
+
+0th solution has error:0.29289321881345254
+0th solution has circuit:
+Circuit:]
+
+1th solution has error:0.29289321881345254
+1th solution has circuit:
+Circuit:]
+
+2th solution has error:0.29289321881345254
+2th solution has circuit:
+Circuit:]
+
+3th solution has error:0.29289321881345254
+3th solution has circuit:
+Circuit:]
+
+4th solution has error:0.29289321881345254
+4th solution has circuit:
+Circuit:]
+
+5th solution has error:0.29289321881345254
+5th solution has circuit:
+Circuit:]
+
+6th solution has error:0.29289321881345254
+6th solution has circuit:
+Circuit:]
+
+7th solution has error:0.29289321881345254
+7th solution has circuit:
+Circuit:]
+
+8th solution has error:0.29289321881345254
+8th solution has circuit:
+Circuit:]
+
+9th solution has error:2.220446049250313e-16
+9th solution has circuit:
+Circuit: [(X,1), (H,2), (CX,2,1), (CX,0,1), (X,1), (CX,2,0)]
