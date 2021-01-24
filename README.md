@@ -8,7 +8,11 @@ More details will be added later on.
 # Changelog
 
 1 - Make it multi-objective, it is not working as expected.
+
 2 - Add qubit mapping thing as an additional feature.
+
 3 - Add physical error of gates for each qubit.
+
 4 - Add a new mutation as optimization.
+
 5 - arbitrary rotation parameters
