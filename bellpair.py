@@ -36,13 +36,17 @@ def evaluateInd(individual, verbose=False):
     print(wantedState)
     print("dotProduct is:", dotProduct)
     print("error is then:", error)
-  return (error, len(individual.circuit))
+  if len(individual.circuit)>0:
+    return (error, len(individual.circuit)/MAX_CIRCUIT_LENGTH)
+  else:
+    return (error, 1.0)
 
 
 def main():
   
   numberOfQubits = 2
-  allowedGates = [Rx,Ry, Rz, CNOT]
+  #allowedGates = [Rx,Ry, Rz, CNOT]
+  allowedGates = [X,H,S,CNOT,Y,Z]
   problemName = "bellpair"
   problemDescription = "Problem Name:" + problemName + "\n"
   problemDescription += "allowedGates: [" 
@@ -66,7 +70,7 @@ def main():
   toolbox.register("evaluate", evaluateInd)
 
   # LETS SEE IF IT WORKS
-  NGEN = 500
+  NGEN = 100
   POPSIZE = 1000
 
   verbose = False

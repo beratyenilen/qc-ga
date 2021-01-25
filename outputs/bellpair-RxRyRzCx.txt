@@ -1,0 +1,98 @@
+Problem Name:bellpair
+allowedGates: [<class 'projectq.ops._gates.Rx'>, <class 'projectq.ops._gates.Ry'>, <class 'projectq.ops._gates.Rz'>, CX]
+numberOfQubits: 2
+
+bestCandidate has error:0.006650982359342361
+bestCandidate has circuit:Circuit: [(Rz(4.26),0), (CX,1,0), (Ry(1.01),0), (Ry(0.33),0), (CX,0,1)]
+bestCandidate has error:0.006650982359342361
+bestCandidate has circuit:Circuit: [(Rz(4.26),0), (CX,1,0), (Ry(1.01),0), (Ry(0.33),0), (CX,0,1)]
+bestCandidate has error:0.006650982359342361
+bestCandidate has circuit:Circuit: [(Rz(4.26),0), (CX,1,0), (Ry(1.01),0), (Ry(0.33),0), (CX,0,1)]
+bestCandidate has error:0.006650982359342361
+bestCandidate has circuit:Circuit: [(Rz(4.26),0), (CX,1,0), (Ry(1.01),0), (Ry(0.33),0), (CX,0,1)]
+bestCandidate has error:0.006650982359342361
+bestCandidate has circuit:Circuit: [(Rz(4.26),0), (CX,1,0), (Ry(1.01),0), (Ry(0.33),0), (CX,0,1)]
+bestCandidate has error:0.006650982359342361
+bestCandidate has circuit:Circuit: [(Rz(4.26),0), (CX,1,0), (Ry(1.01),0), (Ry(0.33),0), (CX,0,1)]
+bestCandidate has error:0.006650982359342361
+bestCandidate has circuit:Circuit: [(Rz(4.26),0), (CX,1,0), (Ry(1.01),0), (Ry(0.33),0), (CX,0,1)]
+bestCandidate has error:0.006650982359342361
+bestCandidate has circuit:Circuit: [(Rz(4.26),0), (CX,1,0), (Ry(1.01),0), (Ry(0.33),0), (CX,0,1)]
+bestCandidate has error:0.00013942899730945424
+bestCandidate has circuit:Circuit: [(Rx(6.26),0), (Rz(1.592),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:0.00013942899730945424
+bestCandidate has circuit:Circuit: [(Rx(6.26),0), (Rz(1.592),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:0.00013942899730945424
+bestCandidate has circuit:Circuit: [(Rx(6.26),0), (Rz(1.592),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:0.00011186142002939103
+bestCandidate has circuit:Circuit: [(Ry(0.834),0), (Ry(3.12),0), (Rz(4.85),1), (Ry(3.93),0), (CX,0,1)]
+bestCandidate has error:0.00011186142002939103
+bestCandidate has circuit:Circuit: [(Ry(0.834),0), (Ry(3.12),0), (Rz(4.85),1), (Ry(3.93),0), (CX,0,1)]
+bestCandidate has error:0.00011186142002939103
+bestCandidate has circuit:Circuit: [(Ry(0.834),0), (Ry(3.12),0), (Rz(4.85),1), (Ry(3.93),0), (CX,0,1)]
+bestCandidate has error:0.00011186142002939103
+bestCandidate has circuit:Circuit: [(Ry(0.834),0), (Ry(3.12),0), (Rz(4.85),1), (Ry(3.93),0), (CX,0,1)]
+bestCandidate has error:0.00011186142002939103
+bestCandidate has circuit:Circuit: [(Ry(0.834),0), (Ry(3.12),0), (Rz(4.85),1), (Ry(3.93),0), (CX,0,1)]
+bestCandidate has error:0.00011186142002939103
+bestCandidate has circuit:Circuit: [(Ry(0.834),0), (Ry(3.12),0), (Rz(4.85),1), (Ry(3.93),0), (CX,0,1)]
+bestCandidate has error:0.00011186142002939103
+bestCandidate has circuit:Circuit: [(Ry(0.834),0), (Ry(3.12),0), (Rz(4.85),1), (Ry(3.93),0), (CX,0,1)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:7.223979528814262e-05
+bestCandidate has circuit:Circuit: [(Rz(2.6),0), (Ry(4.58),1), (CX,0,1), (CX,0,1), (Ry(3.25),1), (CX,1,0)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(Ry(1.58),0), (CX,0,1)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(Ry(1.58),0), (CX,0,1)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(Ry(1.58),0), (CX,0,1)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(Ry(1.58),0), (CX,0,1)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(Ry(1.58),0), (CX,0,1)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(Ry(1.58),0), (CX,0,1)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(Ry(1.58),0), (CX,0,1)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(Ry(1.58),0), (CX,0,1)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(Ry(1.58),0), (CX,0,1)]
+bestCandidate has error:0.2928932188134524
+bestCandidate has circuit:Circuit: [(Rz(1.57),0)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(CX,1,0), (Ry(1.58),1), (CX,1,0)]
+bestCandidate has error:1.058843137247134e-05
+bestCandidate has circuit:Circuit: [(Ry(1.58),0), (CX,0,1)]
+bestCandidate has error:0.03243721590147297
+bestCandidate has circuit:Circuit: [(Ry(1.06),0), (CX,0,1)]

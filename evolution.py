@@ -40,7 +40,7 @@ def chooseIndividual(ranks, currentRank, verbose=False):
   """
   This function takes a nested of list of individuals, sorted according to 
   their ranks and chooses a random individual. Each individual's probability
-  to be chosen is exp(-(individual's rank)).
+  to be chosen is proportional to exp(-(individual's rank)).
   """
   L = len(ranks)
   T = 0
@@ -96,16 +96,17 @@ def selectAndEvolve(pop, toolbox, verbose=False):
     for i in range(len(ranks)):
       print(i, len(ranks[i]))
 
-  # Now we will carry 100 best individuals to the next generation directly.
+  # Now we will carry toCarry many best individuals to the next generation directly.
+  toCarry = 100
   nextGeneration = []
   currentRank = 0
   flag = False
-  while len(nextGeneration) < 100:
-    if (len(nextGeneration) + len(ranks[currentRank])) < 100:
+  while len(nextGeneration) < toCarry:
+    if (len(nextGeneration) + len(ranks[currentRank])) < toCarry:
       nextGeneration += ranks[currentRank]
       currentRank += 1
     else:
-      chooseUpTo = 100 - len(nextGeneration)
+      chooseUpTo = toCarry - len(nextGeneration)
       nextGeneration += ranks[currentRank][:chooseUpTo]
       ranks[currentRank] = ranks[currentRank][chooseUpTo:]
       flag = True
@@ -122,12 +123,13 @@ def selectAndEvolve(pop, toolbox, verbose=False):
       print(len(ranks[i]))
   
   # Now at this step I may loop over the chosen individuals and check if
-  # two indvs have really close fitness values, less than let's0.1, and remove one.
-  # However, I will skip this at this point.
+  # two indvs have really close fitness values, less than let's say 0.1, and 
+  # remove one. However, I will skip this at this point. 
 
   # We should assign a probability to choose each indv, w.r.t to their ranks.
+  probToMutate = 0.5  # Probability to perform mutation.
   while len(nextGeneration) < 1000:
-    if random.random() <= 0.5:
+    if random.random() <= probToMutate:
       # If this is the case, we'll mutate an individual and add it to nextGeneration
       individual = chooseIndividual(ranks, currentRank, verbose)
       mutant, = toolbox.mutate(individual)
@@ -146,7 +148,7 @@ def selectAndEvolve(pop, toolbox, verbose=False):
 def terminateCondition(pop, toolbox, epsilon=0.001, verbose=False):
   """
   This function gets the rank 0 solutions and if there is a solution with error
-  less than epsilon it return True and all the non-dominated solutions.
+  less than epsilon it returns True and all the non-dominated solutions.
   Returns:
     Bool, List of non-dominated solutions
   """
@@ -162,7 +164,7 @@ def terminateCondition(pop, toolbox, epsilon=0.001, verbose=False):
 def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon=0.001, verbose=False):
   # Evaluate the individuals with an invalid fitness
   invalid_ind = [ind for ind in pop if not ind.fitness.valid]
-  fitnesses = map(toolbox.evaluate, invalid_ind)
+  fitnesses = map(toolbox.evaluate, invalid_ind) 
   for ind, fit in zip(invalid_ind, fitnesses):
     ind.fitness.values = fit
   
@@ -170,6 +172,9 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
   outputFile.write(problemDescription)
   for g in range(NGEN):
     foundSolution, nonDominatedSolutions = terminateCondition(pop, toolbox, epsilon, verbose)
+    '''
+    # Allrighthy, Now I will comment out this section. I want GA to run NGEN
+    # many generations and that is it. 
     if foundSolution:
       # This means we can terminate the genetic algorithm.
       outputFile.write("\nGenetic algorithm has found a solution in " + str(g+1) + " generations.\n")
@@ -181,10 +186,12 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
         outputFile.write("\n")
       
       return
+    '''
     # Select and evolve next generation of individuals
     nextGeneration = toolbox.selectAndEvolve(pop, toolbox, verbose)
     # Evaluate the fitnesses of the new generation
     # We will evaluate the fitnesses of all the individuals just to be safe.
+    # Mutations might be changing the fitness values, I am not sure.
     fitnesses = toolbox.map(toolbox.evaluate, nextGeneration)
     for ind, fit in zip(nextGeneration, fitnesses):
       ind.fitness.values = fit

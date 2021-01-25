@@ -97,7 +97,7 @@ class Candidate:
         # choose the index to apply the operator
         target = random.choice(range(self.numberOfQubits))
         # choose the rotation parameter between 0 and 2pi up to 3 significiant figures 
-        # !! We may change this significant figure things later on
+        # !! We may change this significant figure things later on 
         significantFigure = 2
         parameter = round(pi*random.uniform(0,2), significantFigure)
         producedCircuit.append(("SG", gate, target, parameter))
