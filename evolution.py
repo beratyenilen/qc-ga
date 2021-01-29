@@ -170,7 +170,9 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
   
   outputFile = open("./outputs/"+problemName+".txt", "w")
   outputFile.write(problemDescription)
+  print("Starting evolution:")
   for g in range(NGEN):
+    print(g,"/",NGEN)
     foundSolution, nonDominatedSolutions = terminateCondition(pop, toolbox, epsilon, verbose)
     '''
     # Allrighthy, Now I will comment out this section. I want GA to run NGEN

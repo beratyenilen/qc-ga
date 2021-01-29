@@ -7,7 +7,7 @@ More details will be added later on.
 
 # Changelog
 
-1 - Make it multi-objective, it is not working as expected.
+1 - Make it multi-objective, it is not working as expected. Done ?
 
 2 - Add qubit mapping thing as an additional feature.
 

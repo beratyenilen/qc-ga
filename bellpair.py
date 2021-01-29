@@ -24,7 +24,7 @@ def createBellPair():
 def evaluateInd(individual, verbose=False):
   if (len(individual.circuit) >= MAX_CIRCUIT_LENGTH):
     del individual.fitness.values
-    return (1.0, len(individual.circuit))
+    return (1.0, 1.0)
   finalState = individual.simulateCircuit()
   wantedState = createBellPair()
   dotProduct = np.vdot(wantedState, finalState)

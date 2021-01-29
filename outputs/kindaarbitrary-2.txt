@@ -1,0 +1,1005 @@
+Kind of Arbitrary State initalization for:
+0.3|00>0.5|01>0.66|10>0|11>
+numberOfQubits=2
+allowedGates=[<class 'projectq.ops._gates.Rz'>, <projectq.ops._gates.XGate object at 0x112f50d00>, <projectq.ops._metagates.ControlledGate object at 0x112f5bf40>]
+
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.3399999999999994
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.85),0), (CX,0,1), (X,0), (Rz(4.64),1), (X,1), (Rz(1.49),1), (Rz(3.39),1), (Rz(2.19),0), (X,1), (X,0), (X,0), (CX,0,1), (Rz(3.08),0), (X,1), (X,1), (CX,0,1), (X,0), (X,0), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(0.55),1), (X,1), (CX,0,1), (CX,1,0), (Rz(3.29),1), (Rz(4.85),0), (CX,0,1), (Rz(2.11),0), (X,0), (X,0), (Rz(3.27),0), (X,0), (Rz(5.43),0), (Rz(0.37),1), (CX,1,0), (X,0), (X,1), (CX,1,0), (CX,0,1), (CX,0,1), (Rz(1.5),1), (Rz(1.63),0), (Rz(2.22),0), (X,0), (X,0), (Rz(2.14),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (Rz(5.86),0), (Rz(0.58),1), (Rz(0.44),0), (Rz(5.64),0), (Rz(3.38),0), (X,1), (CX,1,0), (Rz(0.52),1), (CX,1,0), (X,1), (X,1), (CX,0,1), (CX,1,0), (Rz(1.8),1), (CX,1,0), (Rz(4.5),0), (Rz(2.35),1), (Rz(1.6),1), (X,1), (X,0), (Rz(4.55),1), (Rz(0.64),1), (CX,1,0), (X,0), (X,1), (X,0), (CX,0,1), (Rz(0.5),0), (X,1), (CX,1,0), (Rz(1.68),1), (X,1), (CX,1,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (X,1), (Rz(4.324),0), (X,0), (Rz(1.2),1), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.093),0), (X,0), (Rz(0.19),0), (Rz(3.85),0), (Rz(2.468),0), (Rz(4.19),0), (Rz(4.98),1), (X,0), (Rz(5.989),1), (X,0), (X,1), (Rz(1.05),0), (CX,1,0), (Rz(6.11),1), (X,0), (Rz(5.96),1), (CX,1,0), (Rz(1.45),1)]
+bestCandidate has error:0.33999999999999964
+bestCandidate has circuit:Circuit: [(X,0), (Rz(4.09),0), (CX,0,1), (Rz(1.5),1), (Rz(3.85),0), (Rz(2.468),0), (Rz(4.19),0), (Rz(4.98),1), (X,0), (Rz(5.989),1), (Rz(2.093),0), (X,0), (X,0), (X,0), (Rz(4.783),1), (CX,1,0), (CX,0,1), (Rz(0.19),0), (CX,1,0), (Rz(6.11),1), (Rz(5.96),1), (CX,1,0), (Rz(1.45),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.82),1), (X,0), (X,1), (X,0), (Rz(5.463),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(1.6),1), (X,1), (Rz(4.862),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,1,0), (Rz(1.6),1), (CX,1,0), (CX,1,0), (X,1), (Rz(4.862),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(1.6),1), (CX,1,0), (CX,1,0), (X,1), (CX,1,0), (CX,1,0), (Rz(4.862),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(1.6),1), (CX,1,0), (CX,1,0), (X,1), (Rz(4.862),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(1.6),1), (CX,1,0), (X,1), (Rz(4.862),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(1.6),1), (CX,1,0), (X,1), (Rz(4.862),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.24),0), (X,1), (Rz(0.043),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(5.3),1), (X,1), (Rz(0.983),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.16),0), (X,1), (Rz(6.123),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.93),0), (X,1), (Rz(1.353),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.01),0), (X,1), (X,1), (X,1), (Rz(1.273),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(3.09),0), (Rz(6.12),0), (Rz(4.06),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.03),0), (X,0), (X,1), (X,0), (Rz(0.253),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.01),0), (X,1), (Rz(5.273),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.67),0), (X,1), (Rz(1.613),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(5.86),0), (CX,0,1), (CX,1,0), (Rz(5.9),0), (Rz(0.57),1), (Rz(1.17),1), (Rz(0.383),1), (Rz(5.113),1), (CX,1,0), (CX,0,1), (Rz(0.423),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(5.68),0), (Rz(3.93),0), (X,1), (Rz(2.353),0), (Rz(0.603),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (X,1), (Rz(4.04),0), (X,1), (Rz(2.243),0), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.65),0), (CX,0,1), (X,1), (CX,0,1), (Rz(0.633),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (CX,0,1), (Rz(2.27),1), (X,1), (Rz(4.013),1), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.6),1), (Rz(2.683),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.49),0), (Rz(5.37),1), (X,1), (Rz(0.913),1), (Rz(4.793),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.56),0), (X,1), (Rz(2.723),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (X,0), (Rz(3.62),0), (X,1), (Rz(2.663),0), (X,0), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.35),0), (X,1), (Rz(5.933),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.19),0), (X,1), (Rz(5.093),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.3),0), (X,0), (X,1), (X,0), (Rz(3.983),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.163),1), (X,1), (X,1), (X,1), (Rz(3.753),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(4.02),1), (X,1), (X,1), (Rz(2.263),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.65),0), (X,1), (Rz(0.633),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.46),0), (X,0), (X,0), (CX,1,0), (Rz(4.05),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.62),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (X,1), (X,0), (Rz(0.88),0), (X,1), (Rz(5.403),0), (X,0), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.85),0), (X,1), (Rz(0.433),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(4.79),1), (Rz(3.12),0), (X,0), (CX,0,1), (X,1), (CX,0,1), (X,0), (Rz(3.163),0), (Rz(1.493),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(6.06),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.84),0), (X,1), (Rz(5.443),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.19),1), (Rz(2.55),1), (Rz(6.17),1), (Rz(4.83),1), (X,1), (X,1), (X,1), (Rz(1.453),1), (Rz(0.113),1), (Rz(3.733),1), (Rz(4.093),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.78),0), (X,1), (Rz(0.503),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.85),0), (Rz(3.433),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (X,1), (CX,0,1), (Rz(6.14),0), (X,1), (Rz(0.143),0), (CX,0,1), (X,1), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.43),0), (Rz(2.15),1), (Rz(5.11),1), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(5.78),0), (CX,1,0), (Rz(1.33),0), (Rz(4.953),0), (X,0), (X,0), (X,1), (Rz(0.503),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.81),1), (CX,1,0), (Rz(1.473),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.63),1), (X,1), (Rz(3.653),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(4.763),0), (X,1), (CX,0,1), (Rz(0.94),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.79),0), (CX,0,1), (X,1), (CX,0,1), (Rz(4.493),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (X,1), (Rz(3.74),1), (CX,0,1), (Rz(2.543),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.93),0), (CX,0,1), (Rz(0.45),0), (Rz(5.65),1), (Rz(3.49),0), (X,0), (X,0), (X,1), (X,0), (X,0), (Rz(2.793),0), (Rz(0.633),1), (Rz(5.833),0), (CX,0,1), (Rz(3.353),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(3.41),0), (Rz(0.24),1), (Rz(5.38),0), (X,0), (X,1), (X,0), (Rz(0.903),0), (Rz(6.043),1), (Rz(2.873),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.03),0), (X,1), (Rz(2.253),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.03),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.72),0), (CX,0,1), (X,1), (CX,0,1), (Rz(0.563),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.25),0), (X,1), (Rz(4.033),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.3),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.75),0), (X,1), (Rz(4.533),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.36),0), (X,1), (Rz(3.923),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.75),0), (X,1), (Rz(4.533),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.19),1), (X,1), (Rz(4.093),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.11),1), (X,0), (X,1), (X,0), (Rz(5.173),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.74),0), (X,1), (Rz(1.74),0), (Rz(3.543),0), (Rz(4.543),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (CX,0,1), (CX,0,1), (Rz(5.98),0), (X,0), (X,1), (X,0), (Rz(0.303),0), (CX,0,1), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.26),0), (X,1), (Rz(5.023),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.9),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.3),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.24),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.85),0), (X,1), (Rz(1.433),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.11),0), (X,1), (Rz(4.173),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.46),0), (X,1), (Rz(4.823),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.74),0), (CX,0,1), (X,1), (Rz(4.543),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.03),1), (X,0), (X,1), (X,0), (Rz(1.253),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(1.06),1), (Rz(0.73),0), (Rz(5.8),1), (Rz(5.78),0), (X,1), (Rz(0.503),0), (Rz(0.483),1), (Rz(5.553),0), (Rz(5.223),1), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.61),0), (Rz(4.12),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.24),0), (Rz(4.4),0), (X,1), (Rz(1.883),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.28),0), (X,1), (Rz(4.003),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(3.58),1), (CX,1,0), (CX,0,1), (Rz(5.24),1), (CX,0,1), (X,1), (CX,1,0), (Rz(2.703),1), (Rz(5.73),0), (Rz(4.4),1), (Rz(0.553),0), (X,0), (Rz(1.883),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (X,0), (Rz(2.08),0), (X,1), (Rz(4.203),0), (X,0), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(3.58),1), (CX,1,0), (CX,0,1), (CX,0,1), (X,1), (CX,1,0), (Rz(2.703),1), (Rz(5.73),0), (Rz(4.4),1), (X,0), (Rz(1.883),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (X,0), (X,0), (Rz(0.4),1), (Rz(3.97),1), (Rz(3.79),1), (Rz(1.12),1), (X,1), (Rz(5.163),1), (Rz(2.493),1), (Rz(2.313),1), (Rz(5.883),1), (X,0), (X,0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.7),1), (CX,0,1), (Rz(3.583),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.22),1), (Rz(2.73),0), (CX,0,1), (Rz(0.67),1), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.239),1), (Rz(5.284),0), (CX,0,1), (CX,0,1), (Rz(1.2),1), (Rz(2.64),1), (Rz(2.14),1), (Rz(0.348),0), (Rz(4.143),1), (Rz(3.643),1), (Rz(5.083),1), (CX,0,1), (CX,0,1), (Rz(2.453),0), (Rz(2.933),1), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.239),1), (Rz(5.284),0), (CX,0,1), (Rz(0.348),0), (CX,0,1), (Rz(2.453),0), (Rz(2.933),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.37),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.38),1), (CX,0,1), (Rz(4.903),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.63),0), (X,1), (Rz(2.653),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.6),0), (X,1), (Rz(1.683),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.34),0), (X,1), (Rz(4.943),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.19),0), (Rz(5.32),1), (Rz(2.97),0), (CX,0,1), (Rz(3.313),0), (Rz(0.65),1), (Rz(4.6),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.83),0), (X,1), (Rz(1.453),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (X,0), (X,0), (CX,1,0), (Rz(3.87),0), (X,0), (X,1), (X,1), (X,1), (X,0), (Rz(2.413),0), (CX,1,0), (X,0), (X,0), (CX,1,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.48),0), (X,1), (Rz(4.803),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.06),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(3.3),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(2.55),0), (X,1), (Rz(3.733),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.26),0), (X,1), (Rz(5.023),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.98),0), (X,1), (Rz(4.303),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.47),0), (CX,0,1), (X,1), (CX,0,1), (Rz(5.813),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(2.71),0), (CX,0,1), (X,1), (CX,0,1), (Rz(3.573),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (CX,0,1), (X,1), (Rz(2.05),1), (Rz(4.233),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.82),0), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.55),0), (X,1), (Rz(0.733),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.49),0), (X,1), (Rz(2.793),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.56),0), (X,1), (Rz(3.723),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.27),1), (X,0), (X,1), (X,0), (Rz(0.013),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.84),0), (X,1), (Rz(2.443),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.06),1), (Rz(0.58),0), (X,1), (Rz(5.703),0), (Rz(6.223),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (CX,1,0), (X,0), (Rz(0.8),1), (CX,1,0), (X,1), (CX,1,0), (Rz(5.483),1), (X,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.85),0), (Rz(2.84),1), (X,1), (X,1), (X,1), (X,1), (X,1), (X,1), (X,1), (Rz(3.443),1), (Rz(3.433),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.01),0), (X,1), (Rz(0.273),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.68),1), (X,1), (X,1), (CX,0,1), (CX,1,0), (X,0), (CX,1,0), (X,1), (CX,1,0), (X,0), (CX,1,0), (CX,0,1), (X,1), (X,1), (Rz(4.603),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.37),0), (X,1), (Rz(2.913),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.22),0), (X,1), (Rz(4.063),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.87),1), (Rz(2.84),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.94),0), (CX,0,1), (X,1), (CX,0,1), (Rz(3.343),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.23),0), (X,1), (Rz(6.053),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(4.36),1), (Rz(1.923),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.88),0), (X,1), (Rz(2.403),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.51),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.87),0), (X,1), (Rz(2.413),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (X,1), (X,1), (X,1), (Rz(2.73),1), (Rz(4.79),0), (Rz(1.493),0), (Rz(3.553),1), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.52),1), (X,1), (Rz(4.763),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.94),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.14),0), (Rz(4.9),1), (Rz(0.25),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.34),1), (X,1), (X,1), (X,1), (Rz(1.943),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (CX,0,1), (Rz(1.32),1), (X,1), (Rz(4.963),1), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.85),0), (X,1), (Rz(2.433),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.94),1), (Rz(2.13),0), (CX,0,1), (Rz(5.41),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.73),0), (X,1), (Rz(4.553),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.85),0), (X,1), (Rz(2.433),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.05),0), (X,1), (Rz(5.233),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.94),0), (Rz(5.84),1), (CX,1,0), (Rz(2.06),1), (Rz(4.44),1), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.98),1), (X,1), (Rz(3.303),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(X,1), (Rz(1.28),1), (Rz(5.74),1), (Rz(5.003),1), (Rz(1.26),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.93),0), (X,1), (Rz(3.353),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.27),0), (X,1), (Rz(4.013),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.94),0), (X,1), (Rz(0.343),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,1,0), (CX,0,1), (Rz(4.29),0), (CX,1,0), (Rz(1.993),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.82),0), (X,1), (Rz(5.463),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.14),0), (X,1), (Rz(4.143),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(2.72),0), (X,1), (Rz(3.563),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.2),0), (X,1), (Rz(2.083),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.14),0), (Rz(2.73),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.79),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.25),0), (X,1), (Rz(1.033),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(4.84),0), (Rz(0.69),0), (CX,0,1), (CX,1,0), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.2),0), (Rz(3.43),0), (X,1), (Rz(2.853),0), (Rz(0.083),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.76),0), (X,1), (Rz(4.523),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.14),0), (X,1), (Rz(4.143),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.36),0), (X,1), (Rz(4.923),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.52),0), (Rz(1.51),1), (X,1), (Rz(4.773),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(5.3),0), (X,0), (Rz(1.46),1), (X,1), (Rz(4.823),1), (X,0), (Rz(0.983),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(5.3),0), (X,0), (Rz(1.46),1), (X,1), (Rz(4.823),1), (X,0), (Rz(0.983),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.12),0), (X,1), (Rz(0.163),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.77),0), (X,1), (Rz(0.513),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(3.17),0), (X,1), (Rz(3.113),0), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.02),0), (Rz(0.65),1), (X,1), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.52),0), (X,1), (Rz(1.763),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(2.56),0), (X,1), (Rz(3.723),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.12),0), (X,1), (Rz(1.163),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,1,0), (Rz(5.39),1), (X,1), (Rz(0.893),1), (CX,1,0), (CX,1,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.53),0), (X,1), (Rz(1.753),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.28),0), (X,1), (Rz(5.003),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(5.64),0), (X,1), (Rz(0.643),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.73),0), (CX,0,1), (CX,0,1), (X,1), (Rz(0.94),1), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.9),0), (X,1), (Rz(0.383),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.57),0), (CX,1,0), (Rz(3.713),0), (X,1), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.92),0), (X,1), (Rz(2.363),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.54),0), (X,1), (Rz(3.743),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(X,0), (Rz(1.08),1), (X,0), (Rz(2.94),1), (Rz(5.203),1), (X,0), (X,1), (Rz(3.343),1), (X,0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(0.073),0), (Rz(4.9),1), (Rz(6.21),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.08),1), (Rz(4.43),1), (Rz(4.56),0), (X,1), (Rz(1.723),0), (Rz(1.853),1), (Rz(2.203),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.36),0), (X,1), (Rz(1.923),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (X,1), (X,0), (X,0), (X,0), (X,1), (Rz(6.09),0), (Rz(4.5),0), (X,1), (Rz(1.783),0), (Rz(0.193),0), (X,1), (X,0), (X,0), (X,0), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.49),0), (X,1), (Rz(2.793),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.34),0), (CX,0,1), (X,1), (CX,0,1), (Rz(0.943),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.48),0), (X,1), (Rz(4.803),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.43),0), (X,1), (Rz(0.853),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.78),0), (CX,0,1), (Rz(4.32),0), (X,1), (Rz(1.963),0), (CX,0,1), (Rz(1.503),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.99),1), (X,0), (Rz(2.22),1), (Rz(3.35),0), (Rz(5.35),0), (X,1), (Rz(0.933),0), (Rz(2.933),0), (Rz(4.063),1), (X,0), (Rz(3.293),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.99),1), (X,0), (Rz(2.22),1), (Rz(3.35),0), (Rz(5.35),0), (X,1), (Rz(0.933),0), (Rz(2.933),0), (Rz(4.063),1), (X,0), (Rz(3.293),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.99),1), (X,0), (Rz(2.22),1), (Rz(3.35),0), (Rz(5.35),0), (X,1), (Rz(0.933),0), (Rz(2.933),0), (Rz(4.063),1), (X,0), (Rz(3.293),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.99),1), (X,0), (Rz(2.22),1), (Rz(3.35),0), (Rz(5.35),0), (X,1), (Rz(0.933),0), (Rz(2.933),0), (Rz(4.063),1), (X,0), (Rz(3.293),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.22),0), (X,1), (Rz(1.063),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(3.023),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.0),1), (X,1), (Rz(5.283),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.3),0), (X,1), (Rz(3.983),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.9),0), (X,1), (Rz(1.383),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(X,1), (Rz(3.06),0), (Rz(1.87),1), (Rz(5.11),1), (Rz(4.413),1), (Rz(3.223),0), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(0.79),1), (Rz(6.03),1), (CX,0,1), (X,1), (X,1), (X,0), (X,0), (X,1), (Rz(5.353),1), (X,0), (X,0), (X,1), (X,1), (CX,0,1), (Rz(5.493),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.79),0), (Rz(3.14),0), (X,1), (Rz(3.143),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.87),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(1.4),0), (X,1), (Rz(4.883),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.0),1), (X,0), (X,1), (X,0), (Rz(4.283),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(5.93),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.82),0), (X,1), (Rz(2.463),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (X,1), (X,0), (X,0), (Rz(1.89),0), (X,1), (Rz(4.393),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.66),0), (X,1), (Rz(1.623),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.79),0), (X,1), (Rz(5.493),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.48),0), (X,1), (Rz(4.803),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(0.0),1), (X,1), (Rz(6.283),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.82),1), (CX,1,0), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(2.52),0), (X,1), (Rz(3.763),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.95),0), (X,1), (X,1), (X,1), (Rz(0.333),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.72),0), (X,0), (CX,0,1), (X,1), (CX,0,1), (X,0), (Rz(0.563),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.91),0), (X,0), (X,1), (X,0), (Rz(1.373),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (X,1), (X,1), (CX,0,1), (Rz(3.16),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.67),1), (X,1), (Rz(1.613),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.71),0), (X,1), (Rz(3.573),0), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (X,0), (Rz(3.37),0), (X,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.12),0), (CX,0,1), (X,1), (CX,0,1), (Rz(4.163),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(3.26),0), (Rz(1.63),1), (Rz(4.04),1), (X,1), (CX,1,0), (Rz(2.243),1), (Rz(4.653),1), (Rz(3.023),0), (Rz(2.033),0), (CX,1,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.2),1), (Rz(6.11),1), (X,0), (CX,1,0), (Rz(0.12),0), (X,0), (X,1), (X,0), (Rz(6.163),0), (CX,1,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.603),1), (Rz(2.68),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.03),0), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(2.1),0), (Rz(0.1),1), (X,0), (Rz(0.81),0), (X,1), (Rz(1.43),0), (Rz(1.56),0), (CX,0,1), (X,1), (Rz(0.16),0), (X,1), (CX,0,1), (Rz(4.723),0), (Rz(4.853),0), (X,1), (Rz(5.473),0), (X,0), (Rz(6.183),1), (Rz(4.183),0), (Rz(3.39),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.24),1), (Rz(3.09),0), (Rz(2.71),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (X,1), (Rz(5.94),1), (X,0), (Rz(0.12),0), (X,1), (Rz(6.163),0), (X,0), (Rz(0.343),1), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.14),0), (X,1), (Rz(0.143),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.12),0), (X,1), (Rz(0.163),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (X,0), (Rz(5.53),0), (CX,0,1), (Rz(2.62),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.503),1), (Rz(0.78),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.19),0), (X,1), (Rz(1.093),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(0.82),1), (X,1), (Rz(5.463),1), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.66),0), (X,1), (Rz(3.623),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.46),0), (X,1), (Rz(4.823),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(4.29),0), (X,1), (Rz(1.993),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(5.53),1), (Rz(5.3),1), (Rz(1.85),1), (X,1), (Rz(4.433),1), (Rz(0.983),1), (Rz(0.753),1), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.87),0), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.23),0), (Rz(4.98),1), (X,1), (Rz(0.89),0), (X,1), (X,1), (Rz(1.303),1), (Rz(0.053),0), (Rz(5.393),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.82),1), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(4.823),0), (Rz(4.03),1), (Rz(1.46),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.78),0), (X,1), (Rz(4.503),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(5.27),0), (Rz(1.79),0), (Rz(0.67),1), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.82),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(1.31),0), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(3.06),1), (X,1), (Rz(3.223),1), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.09),1), (X,1), (Rz(0.193),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (Rz(3.37),0), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.06),1), (X,1), (Rz(6.223),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.93),0), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.37),1), (Rz(1.913),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.56),0), (X,1), (Rz(5.723),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.62),0), (X,1), (Rz(2.663),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.84),0), (Rz(4.45),1), (X,0), (Rz(1.31),1), (Rz(3.02),1), (X,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.87),0), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(5.78),0), (Rz(5.25),0), (Rz(4.34),0), (CX,0,1), (Rz(1.033),0), (Rz(0.503),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(1.37),0), (X,1), (Rz(4.913),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.85),0), (X,1), (Rz(0.433),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.22),0), (X,1), (Rz(1.063),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.9),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.01),0), (X,1), (Rz(6.273),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(4.97),0), (X,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.11),0), (X,0), (CX,0,1), (X,0), (Rz(0.173),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.54),0), (CX,0,1), (X,1), (CX,0,1), (Rz(4.743),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(1.34),0), (X,1), (Rz(4.943),0), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.19),0), (X,1), (Rz(3.093),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(X,1), (Rz(3.58),1), (X,0), (Rz(6.26),0), (Rz(0.023),0), (X,0), (Rz(2.703),1), (Rz(4.343),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(X,1), (Rz(3.58),1), (X,0), (Rz(6.26),0), (X,0), (Rz(2.703),1), (Rz(4.343),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (X,1), (Rz(5.25),0), (Rz(1.033),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.49),0), (X,1), (Rz(5.793),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.32),0), (CX,0,1), (Rz(5.3),0), (X,1), (Rz(2.08),0), (X,1), (Rz(4.203),0), (X,1), (Rz(0.983),0), (CX,0,1), (Rz(3.963),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.62),0), (X,1), (Rz(5.663),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.08),0), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.463),0), (Rz(0.82),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.44),0), (X,1), (X,1), (X,1), (Rz(3.843),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.77),0), (X,1), (Rz(0.513),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,0,1), (CX,1,0), (CX,0,1), (Rz(1.86),0), (X,1), (Rz(4.423),0), (CX,0,1), (CX,1,0), (CX,0,1), (CX,1,0), (X,0), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.81),0), (X,1), (Rz(1.473),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.47),1), (X,0), (Rz(3.7),1), (CX,1,0), (Rz(2.583),1), (X,0), (Rz(2.813),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.57),1), (Rz(4.713),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.93),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (X,0), (Rz(0.39),0), (X,1), (Rz(5.893),0), (X,0), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (CX,0,1), (Rz(4.57),0), (CX,0,1), (X,1), (CX,0,1), (Rz(1.713),0), (CX,0,1), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.27),0), (X,1), (Rz(5.013),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.87),1), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.59),0), (X,1), (Rz(2.693),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.02),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(0.49),0), (X,1), (Rz(5.793),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.32),0), (CX,0,1), (X,1), (CX,0,1), (Rz(5.963),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.72),0), (X,1), (Rz(0.563),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.11),0), (X,1), (X,1), (X,1), (Rz(0.173),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (CX,0,1), (Rz(1.97),0), (X,1), (Rz(4.313),0), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(0.42),0), (Rz(1.85),1), (CX,0,1), (CX,0,1), (X,1), (CX,0,1), (CX,0,1), (Rz(4.433),1), (Rz(5.863),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(0.42),0), (Rz(1.85),1), (CX,0,1), (X,1), (CX,0,1), (CX,0,1), (Rz(4.433),1), (Rz(5.863),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.42),0), (Rz(4.75),1), (Rz(5.863),0), (X,1), (Rz(1.533),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.78),0), (X,1), (Rz(5.503),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.11),1), (X,1), (Rz(6.173),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(5.9),1), (X,0), (Rz(4.55),1), (Rz(3.1),0), (X,1), (Rz(3.183),0), (Rz(1.733),1), (X,0), (Rz(0.383),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.87),0), (X,1), (Rz(5.413),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.94),0), (X,1), (Rz(0.343),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (X,0), (X,1), (Rz(5.19),0), (X,1), (Rz(1.093),0), (X,1), (X,0), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(0.85),0), (X,0), (X,1), (X,0), (Rz(5.433),0), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(1.73),1), (CX,0,1), (CX,1,0), (CX,1,0), (X,1), (X,0), (Rz(2.25),0), (X,1), (X,1), (X,1), (Rz(4.033),0), (X,0), (X,1), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(4.553),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(1.73),1), (CX,0,1), (CX,1,0), (CX,1,0), (X,1), (X,0), (Rz(2.25),0), (X,1), (X,1), (X,1), (Rz(4.033),0), (X,0), (X,1), (CX,1,0), (CX,1,0), (CX,0,1), (Rz(4.553),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.45),1), (X,1), (Rz(1.833),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (X,1), (Rz(3.33),1), (Rz(4.4),0), (X,1), (Rz(1.883),0), (Rz(2.953),1), (X,1), (CX,0,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(X,0), (Rz(0.44),1), (CX,0,1), (CX,0,1), (Rz(1.06),1), (Rz(5.11),1), (Rz(4.24),1), (X,1), (Rz(2.043),1), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.53),0), (X,1), (Rz(4.753),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (X,0), (Rz(2.12),0), (X,1), (Rz(4.163),0), (X,0), (X,0), (X,0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.91),0), (X,1), (Rz(0.373),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.81),0), (X,1), (Rz(4.473),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.63),1), (X,1), (Rz(4.653),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(3.88),0), (X,1), (Rz(4.24),0), (Rz(1.71),0), (CX,0,1), (CX,0,1), (CX,0,1), (X,1), (CX,0,1), (CX,0,1), (CX,0,1), (Rz(4.573),0), (Rz(2.043),0), (X,1), (Rz(2.403),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.37),0), (X,1), (Rz(1.913),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(0.64),0), (X,1), (Rz(5.643),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.9),0), (CX,0,1), (Rz(2.92),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.09),1), (X,1), (CX,0,1), (Rz(5.403),0), (Rz(0.88),0), (Rz(0.193),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.77),0), (X,1), (Rz(0.513),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(4.97),0), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.29),0), (X,1), (Rz(3.993),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(0.67),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.19),0), (CX,1,0), (Rz(5.093),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.3),0), (X,0), (X,1), (X,0), (Rz(3.983),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.62),0), (X,1), (Rz(3.663),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.79),0), (Rz(2.99),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.23),0), (X,1), (Rz(5.053),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.35),0), (CX,0,1), (Rz(1.63),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.78),0), (X,1), (Rz(4.503),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.198),1), (CX,1,0), (X,1), (CX,0,1), (Rz(1.603),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(3.6),0), (Rz(5.25),0), (X,0), (Rz(2.0),1), (X,1), (Rz(4.283),1), (X,0), (Rz(1.033),0), (Rz(2.683),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.04),0), (X,1), (Rz(0.243),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.95),0), (X,1), (Rz(2.333),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.11),1), (X,0), (CX,0,1), (Rz(5.28),1), (Rz(1.15),0), (X,1), (X,1), (X,1), (Rz(5.133),0), (Rz(1.003),1), (CX,0,1), (X,0), (Rz(0.173),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.99),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.37),1), (X,1), (Rz(1.913),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.09),0), (CX,0,1), (X,1), (X,1), (X,1), (CX,0,1), (Rz(6.193),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(6.09),0), (Rz(5.55),1), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(6.09),0), (Rz(5.55),1), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(6.09),0), (Rz(5.55),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.9),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.64),0), (X,1), (Rz(3.653),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.57),0), (X,1), (Rz(2.713),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.87),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.77),0), (X,1), (Rz(0.513),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.82),1), (X,1), (Rz(5.463),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.03),0), (X,1), (Rz(3.253),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.29),0), (X,1), (Rz(1.993),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.04),0), (X,1), (Rz(1.243),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.16),0), (X,1), (Rz(3.123),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.87),0), (X,1), (X,1), (CX,1,0), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.65),0), (X,1), (Rz(0.633),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(5.7),0), (Rz(0.94),0), (X,0), (Rz(0.36),1), (X,1), (Rz(5.923),1), (X,0), (Rz(5.343),0), (Rz(0.583),0), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(1.52),0), (X,1), (Rz(4.763),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.91),1), (X,1), (Rz(1.373),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(0.82),1), (Rz(0.26),0), (X,1), (Rz(5.463),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (CX,0,1), (Rz(3.88),0), (X,1), (Rz(2.403),0), (X,0), (CX,0,1), (CX,0,1), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,1,0), (X,0), (Rz(1.53),0), (X,1), (Rz(4.753),0), (X,0), (CX,1,0), (CX,1,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (X,1), (CX,0,1), (X,1), (Rz(3.65),0), (X,1), (Rz(2.633),0), (X,1), (CX,0,1), (X,1), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.85),0), (X,1), (Rz(0.433),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(0.67),1), (Rz(1.5),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (X,1), (Rz(1.61),1), (CX,0,1), (Rz(4.673),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(1.28),1), (CX,0,1), (X,0), (CX,0,1), (Rz(2.22),1), (Rz(1.91),0), (X,1), (Rz(4.373),0), (Rz(4.063),1), (CX,0,1), (X,0), (CX,0,1), (Rz(5.003),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(0.37),0), (Rz(4.19),0), (X,1), (Rz(5.913),0), (CX,1,0), (Rz(2.093),1), (CX,1,0)]
+bestCandidate has error:0.33999999999999964
+bestCandidate has circuit:Circuit: [(Rz(1.28),1), (CX,0,1), (X,0), (CX,0,1), (Rz(2.22),1), (Rz(1.91),0), (X,1), (Rz(4.373),0), (CX,0,1), (X,0), (CX,0,1), (Rz(5.003),1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(1.28),1), (CX,0,1), (Rz(2.22),1), (Rz(1.91),0), (X,1), (Rz(4.373),0), (Rz(4.063),1), (CX,0,1), (CX,0,1), (Rz(5.003),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.19),0), (Rz(3.74),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.58),0), (X,1), (Rz(3.703),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.89),0), (CX,1,0), (Rz(1.393),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.15),0), (X,1), (Rz(0.133),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.08),0), (X,1), (Rz(1.203),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (CX,0,1), (Rz(0.36),0), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(1.04),0), (Rz(5.243),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.23),0), (X,1), (Rz(2.053),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.58),0), (X,1), (Rz(1.703),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.87),0), (Rz(4.62),1), (Rz(5.413),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.63),0), (X,1), (Rz(5.653),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.12),1), (X,1), (Rz(2.163),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.17),1), (X,1), (X,1), (Rz(3.113),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.27),0), (X,1), (CX,0,1), (Rz(4.013),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.01),0), (X,1), (Rz(4.273),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (CX,0,1), (Rz(6.04),1), (CX,0,1), (Rz(0.243),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(2.41),0), (Rz(0.82),0), (Rz(1.85),1), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.65),0), (X,1), (Rz(1.633),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.39),0), (X,1), (Rz(2.893),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (X,0), (CX,1,0), (X,1), (CX,1,0), (Rz(2.44),0), (X,1), (Rz(3.843),0), (CX,1,0), (X,1), (CX,1,0), (X,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.35),0), (CX,0,1), (CX,0,1), (CX,0,1), (X,1), (Rz(5.46),0), (X,0), (Rz(0.5),1), (CX,0,1), (Rz(0.19),0), (CX,0,1), (X,1), (CX,0,1), (Rz(6.093),0), (CX,0,1), (Rz(5.783),1), (X,0), (Rz(0.823),0), (X,1), (CX,0,1), (CX,0,1), (CX,0,1), (Rz(3.933),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.51),0), (X,1), (Rz(0.773),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.35),0), (X,1), (Rz(4.36),0), (X,1), (Rz(1.923),0), (X,1), (Rz(5.933),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.2),0), (Rz(1.19),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.23),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.52),0), (X,1), (Rz(4.763),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(6.21),0), (X,0), (CX,0,1), (Rz(5.34),1), (Rz(4.63),1), (CX,0,1), (X,0), (Rz(0.073),0), (CX,0,1), (CX,1,0), (CX,1,0), (Rz(5.9),0), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(6.21),0), (X,0), (CX,0,1), (Rz(5.34),1), (Rz(4.63),1), (CX,0,1), (X,0), (Rz(0.073),0), (CX,0,1), (CX,1,0), (CX,1,0), (Rz(5.9),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.56),0), (X,0), (X,0), (X,1), (Rz(5.723),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.81),0), (X,1), (Rz(1.473),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.68),0), (X,1), (Rz(3.603),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.97),0), (X,1), (Rz(4.313),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.91),0), (X,1), (Rz(1.373),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.87),1), (Rz(1.67),0), (X,1), (Rz(4.613),0), (Rz(2.413),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.87),1), (X,1), (Rz(4.0),0), (X,0), (X,1), (Rz(2.283),0), (X,1), (Rz(2.413),1), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.14),1), (X,0), (CX,0,1), (X,1), (CX,0,1), (X,0), (Rz(6.143),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(2.55),0), (X,0), (Rz(5.68),0), (X,0), (X,1), (X,0), (Rz(0.603),0), (X,0), (Rz(3.733),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.142),0), (Rz(1.92),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.19),1), (X,1), (Rz(4.093),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.35),0), (X,1), (Rz(3.933),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.3),1), (CX,1,0), (CX,0,1), (X,0), (CX,0,1), (CX,1,0), (Rz(0.983),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.05),0), (X,1), (Rz(4.233),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(0.36),1), (Rz(3.45),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.87),0), (CX,0,1), (X,1), (CX,0,1), (Rz(2.413),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.0),1), (X,0), (X,0), (Rz(4.91),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.75),0), (X,1), (Rz(2.533),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(5.3),0), (Rz(0.983),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(1.68),1), (Rz(1.32),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.73),0), (X,1), (CX,0,1), (X,1), (CX,1,0), (X,1), (Rz(5.553),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.49),1), (X,1), (Rz(1.793),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.07),0), (X,1), (Rz(6.213),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(2.27),1), (Rz(2.06),1), (CX,1,0), (Rz(1.57),0), (Rz(0.61),0), (X,1), (Rz(5.673),0), (Rz(4.713),0), (CX,1,0), (Rz(4.223),1), (Rz(4.013),1), (CX,1,0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(4.23),1), (CX,1,0), (Rz(4.42),1), (CX,1,0), (Rz(3.67),0), (X,1), (Rz(2.613),0), (Rz(1.863),1), (Rz(2.053),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.07),0), (X,1), (Rz(0.213),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.51),0), (X,1), (Rz(0.773),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(0.92),0), (Rz(1.71),0), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(6.19),0), (Rz(1.79),0), (X,1), (Rz(4.493),0), (Rz(4.87),1), (Rz(0.093),1), (Rz(1.413),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (X,0), (X,1), (CX,0,1), (CX,0,1), (Rz(5.18),1), (X,1), (Rz(1.103),1), (CX,0,1), (CX,0,1), (X,1), (X,0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.62),1), (Rz(4.11),1), (Rz(3.66),1), (CX,0,1), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(1.08),0), (CX,1,0), (CX,1,0), (X,1), (CX,1,0), (CX,1,0), (Rz(5.203),0), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.15),0), (X,1), (Rz(4.133),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.06),0), (CX,1,0), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.79),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (X,1), (Rz(5.93),0), (X,1), (Rz(0.353),0), (X,1), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.41),0), (CX,0,1), (X,1), (CX,0,1), (Rz(2.873),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.39),0), (Rz(1.36),0), (X,1), (CX,0,1), (X,1), (CX,0,1), (X,1), (Rz(4.923),0), (Rz(5.893),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(3.1),1), (X,1), (X,1), (Rz(3.183),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(3.24),0), (Rz(3.043),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.27),1), (X,1), (Rz(4.013),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.18),0), (X,0), (X,1), (X,0), (X,1), (X,1), (X,1), (X,1), (Rz(5.103),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(1.12),0), (Rz(6.01),0), (Rz(4.21),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(0.07),1), (X,1), (Rz(6.213),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.2),0), (X,1), (Rz(4.083),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.49),1), (X,1), (Rz(1.793),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.79),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.62),0), (X,1), (Rz(5.663),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.08),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.36),0), (X,1), (Rz(4.923),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.93),0), (X,1), (Rz(1.353),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.93),1), (Rz(1.91),0), (CX,1,0), (X,1), (X,0), (X,1), (X,1), (Rz(4.953),1), (CX,1,0), (Rz(5.633),0), (Rz(3.353),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.24),1), (CX,0,1), (Rz(2.12),1), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.25),0), (X,1), (X,1), (X,1), (Rz(5.033),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.73),0), (X,1), (Rz(0.553),0)]
+bestCandidate has error:0.33999999999999975
+bestCandidate has circuit:Circuit: [(Rz(2.14),1), (Rz(1.88),1), (CX,0,1), (Rz(4.77),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.88),0), (CX,0,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.61),0), (X,1), (Rz(4.673),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.03),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,0), (Rz(5.543),1), (X,1), (Rz(0.74),1), (X,0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.63),0), (CX,0,1), (X,1), (CX,0,1), (Rz(2.653),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.12),1), (X,1), (Rz(2.163),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(1.79),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (X,1), (CX,0,1), (Rz(1.07),0), (X,0), (X,1), (X,0), (Rz(5.213),0), (CX,0,1), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.77),0), (X,1), (Rz(0.513),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.12),1), (X,1), (Rz(3.163),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.25),1), (CX,0,1), (Rz(3.033),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.86),1), (X,1), (Rz(5.29),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.89),0), (X,1), (Rz(1.393),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(5.023),0), (Rz(1.26),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.52),0), (CX,0,1), (Rz(0.763),0), (X,1), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(6.06),1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.69),0), (X,1), (Rz(3.593),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,1,0), (Rz(1.72),0), (X,1), (Rz(4.563),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.7),0), (X,1), (Rz(2.583),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (CX,0,1), (Rz(3.16),1), (CX,1,0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.44),0), (X,1), (Rz(4.843),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.73),1), (X,1), (Rz(3.553),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (X,1), (Rz(5.92),0), (CX,0,1), (X,1), (CX,0,1), (Rz(0.363),0), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.76),0), (CX,0,1), (Rz(1.4),0), (CX,1,0), (Rz(3.32),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(3.63),0), (X,1), (Rz(2.653),0), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(1.84),1), (X,1), (Rz(4.443),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.92),0), (X,1), (Rz(5.363),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.82),0), (X,1), (Rz(3.463),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(3.03),0), (X,1), (Rz(3.253),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.51),0), (X,1), (Rz(5.773),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(3.99),1), (X,0), (X,1), (X,0), (Rz(2.293),1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(0.27),0), (CX,0,1), (X,1), (CX,0,1), (Rz(6.013),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.25),0), (X,1), (Rz(2.033),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(X,1), (Rz(0.76),0), (X,0), (X,1), (X,1), (X,1), (CX,0,1), (X,1), (CX,0,1), (X,1), (X,1), (X,1), (X,0), (Rz(5.523),0), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (Rz(5.94),0), (X,1), (Rz(0.343),0), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(5.22),0), (X,1), (Rz(1.063),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(2.39),0), (Rz(2.84),0), (X,1), (Rz(3.443),0), (Rz(3.893),0)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(CX,0,1), (X,1), (X,1), (CX,0,1), (Rz(2.52),0), (X,1), (Rz(3.763),0), (CX,0,1), (X,1), (X,1), (CX,0,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.57),0), (X,1), (Rz(1.713),0), (X,1), (X,1)]
+bestCandidate has error:0.33999999999999986
+bestCandidate has circuit:Circuit: [(Rz(4.13),1), (Rz(0.67),1), (X,1)]
+bestCandidate has error:0.33999999999999964
+bestCandidate has circuit:Circuit: [(X,1), (Rz(3.97),0), (Rz(4.32),1), (Rz(3.43),0), (CX,0,1), (X,1), (CX,0,1), (Rz(2.853),0), (Rz(1.963),1), (Rz(2.313),0), (X,1)]
