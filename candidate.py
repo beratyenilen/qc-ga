@@ -1,8 +1,8 @@
 import random
 import copy
-from numpy.random import geometric
+import numpy.random
 import projectq
-from projectq.ops import H, X, Y, Z, T, Tdagger, S, Sdagger, CNOT, Measure, All, CX, Rx, Ry, Rz
+from projectq.ops import H, X, Y, Z, T, Tdagger, S, Sdagger, CNOT, Measure, All, CX, Rx, Ry, Rz, SqrtX
 from math import pi
 
 class Candidate:
@@ -75,7 +75,7 @@ class Candidate:
       # we should choose the mean value of the geometric dist. to be ESL.
       p = 1 / self.ESL
     # Produced circuit will have this length
-    cirLength = geometric(p) 
+    cirLength = numpy.random.geometric(p) 
     producedCircuit = []
     for i in range(cirLength):
       # Choose a gate to add from allowedGates
@@ -360,7 +360,7 @@ class Candidate:
     
     if self.circuit[index][0] == "SG":
       # This means we have a single rotation gate
-      newParameter = pi*random.uniform(0,2)
+      newParameter = float(self.circuit[index][-1]) + numpy.random.normal(scale=0.2)
       if verbose:
         print("\nBefore SG continousMutation at index", index)
         self.printCircuit(verbose)
@@ -541,7 +541,7 @@ class Candidate:
     if index == (circuitLength-1):
       self.circuit = self.circuit[:-1]
     else:
-      sequenceLength = geometric(p=(1/self.ESL))
+      sequenceLength = numpy.random.geometric(p=(1/self.ESL))
       if verbose:
         print("sequenceLength:", sequenceLength)
       if (index + sequenceLength) >= circuitLength:
@@ -604,7 +604,7 @@ class Candidate:
     else:
       index1 = random.choice(range(circuitLength-1))
     
-    sequenceLength = geometric(p=(1/self.ESL))
+    sequenceLength = numpy.random.geometric(p=(1/self.ESL))
     if (index1 + sequenceLength) >= circuitLength:
       index2 = circuitLength-1
     else:
@@ -681,11 +681,11 @@ class Candidate:
         print("Before crossover:")
         child.printCircuit()
       if turn == 1:
-        numberOfGatesToSelect = geometric(p1)
+        numberOfGatesToSelect = numpy.random.geometric(p1)
         child.circuit += parent1Circuit[:numberOfGatesToSelect]
         turn = 2
       else:
-        numberOfGatesToSelect = geometric(p2)
+        numberOfGatesToSelect = numpy.random.geometric(p2)
         child.circuit += parent2Circuit[:numberOfGatesToSelect]
         turn = 1
       if verbose:

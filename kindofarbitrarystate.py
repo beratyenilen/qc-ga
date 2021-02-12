@@ -41,10 +41,10 @@ def evaluateInd(individual, verbose=False):
     print("Wanted state is:",wanted)
     print("Produced state is",got)
     print("Error is:",error)
-  if len(individual.circuit)>0:
+  if len(individual.circuit)>0 and len(individual.circuit)<MAX_CIRCUIT_LENGTH:
     return (error, len(individual.circuit)/MAX_CIRCUIT_LENGTH)
   else:
-    return (error,1)
+    return (error,1.0)
 
 # Your main function
 if __name__ == "__main__":
@@ -87,10 +87,10 @@ if __name__ == "__main__":
   toolbox.register("select", tools.selNSGA2)
   toolbox.register("selectAndEvolve", selectAndEvolve)
   toolbox.register("evaluate", evaluateInd)
-
+  
   # Get it running
-  NGEN = 500      # For how many generations should the algorithm run ? 
-  POPSIZE = 1000  # How many individuals should be in the population ? 
+  NGEN = 50        # For how many generations should the algorithm run ? 
+  POPSIZE = 200  # How many individuals should be in the population ? 
   verbose = False # Do you want functions to print out information. 
                   # Note that they will print out a lot of things. 
   

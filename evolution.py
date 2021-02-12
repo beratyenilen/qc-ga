@@ -1,7 +1,12 @@
 import random
 from candidate import Candidate
 from deap.tools.emo import sortNondominated
+from deap import tools
 import math
+import numpy as np
+from constants import *
+import pickle
+from copy import deepcopy
 
 def mutateInd(individual, verbose=False):
   mutationChoice = random.choice(range(11))
@@ -33,10 +38,10 @@ def crossoverInd(parent1, parent2, toolbox, verbose=False):
   child1 = toolbox.individual()
   child2 = toolbox.individual()
   Candidate.crossOver(parent1, parent2, child1)
-  Candidate.crossOver(parent1, parent2, child2)
+  Candidate.crossOver(parent2, parent1, child2)
   return (child1, child2)
 
-def chooseIndividual(ranks, currentRank, verbose=False):
+def chooseIndividual(ranks, currentRank=1, verbose=False):
   """
   This function takes a nested of list of individuals, sorted according to 
   their ranks and chooses a random individual. Each individual's probability
@@ -53,7 +58,7 @@ def chooseIndividual(ranks, currentRank, verbose=False):
   randomNumber = random.uniform(0, T)
   # Find out which sublist this random number corresponds to
   # Let's say T = exp(-1) + exp(-2) + exp(-3) + exp(-4) and if our random number
-  # is between 0 and exp(-1), than it belongs to first list, ranks[0]. If it is
+  # is between 0 and 1, than it belongs to first list, ranks[0]. If it is
   # between exp(-1) and exp(-1)+exp(-2) than it belongs to second list etc.
   listIndex = -1
   rightBorder = 0
@@ -79,7 +84,8 @@ def chooseIndividual(ranks, currentRank, verbose=False):
 
   if elementIndex >= len(ranks[listIndex]):
     elementIndex = -1
-  return ranks[listIndex][elementIndex]
+  cp = deepcopy(ranks[listIndex][elementIndex])
+  return cp, listIndex, elementIndex
 
 def selectAndEvolve(pop, toolbox, verbose=False):
   """
@@ -92,32 +98,31 @@ def selectAndEvolve(pop, toolbox, verbose=False):
   # individuals with rank i.
   ranks = sortNondominated(pop, len(pop))
   if verbose:
-    print("Each rank includes this many individuals:")
     for i in range(len(ranks)):
-      print(i, len(ranks[i]))
+      print("Rank",i, "has", len(ranks[i]),"many individuals.")
 
-  # Now we will carry toCarry many best individuals to the next generation directly.
-  toCarry = 100
+  # Now we will carry the top 10% individuals to the next generation directly.
+  toCarry = int(len(pop)/10)
   nextGeneration = []
-  currentRank = 0
-  flag = False
+  #currentRank = 0
+  #flag = False
   while len(nextGeneration) < toCarry:
     if (len(nextGeneration) + len(ranks[currentRank])) < toCarry:
-      nextGeneration += ranks[currentRank]
+      nextGeneration += deepcopy(ranks[currentRank])
       currentRank += 1
     else:
       chooseUpTo = toCarry - len(nextGeneration)
-      nextGeneration += ranks[currentRank][:chooseUpTo]
-      ranks[currentRank] = ranks[currentRank][chooseUpTo:]
-      flag = True
+      nextGeneration += deepcopy(ranks[currentRank][:chooseUpTo])
+      #ranks[currentRank] = ranks[currentRank][chooseUpTo:] 
+      #flag = True
   if verbose:
     print("Length of nextGeneration: ", len(nextGeneration))
-  
+  '''
   if flag:
     ranks = ranks[currentRank:]
   else:
     ranks = ranks[(currentRank+1):]
-  
+  '''
   if verbose:
     for i in range(len(ranks)):
       print(len(ranks[i]))
@@ -127,22 +132,36 @@ def selectAndEvolve(pop, toolbox, verbose=False):
   # remove one. However, I will skip this at this point. 
 
   # We should assign a probability to choose each indv, w.r.t to their ranks.
-  probToMutate = 0.5  # Probability to perform mutation.
-  while len(nextGeneration) < 1000:
+  probToMutate = 10/12  # Probability to perform mutation.
+  # Crossover prob. is 1/12 according to Potocek. We can increase it a little more.
+  currentRank = 1
+  while len(nextGeneration) < len(pop):
     if random.random() <= probToMutate:
       # If this is the case, we'll mutate an individual and add it to nextGeneration
-      individual = chooseIndividual(ranks, currentRank, verbose)
+      individual,li,ei = chooseIndividual(ranks, currentRank, verbose)
+      #print("BEFORE MUTATION")
+      #ranks[li][ei].printCircuit()
       mutant, = toolbox.mutate(individual)
       nextGeneration.append(mutant)
+      #print("AFTER MUTATION")
+      #ranks[li][ei].printCircuit()
     else:
       # If this is the case, we'll mate two individuals and add children to nextGeneration
-      parent1 = chooseIndividual(ranks, currentRank, verbose)
-      parent2 =  chooseIndividual(ranks, currentRank, verbose)
+      parent1,li1,ei1 = chooseIndividual(ranks, currentRank, verbose)
+      parent2, li2,ei2 =  chooseIndividual(ranks, currentRank, verbose)
       while parent1 is parent2:
-        parent2 =  chooseIndividual(ranks, currentRank, verbose)
+        parent2 = deepcopy(ranks[li2-1][ei2-1])
+      #print("BEFORE CROSSOVER P1")
+      #ranks[li1][ei1].printCircuit()
+      #print("BEFORE CROSSOVER P2")
+      #ranks[li2][ei2].printCircuit()
       child1, child2 = toolbox.mate(parent1, parent2)
-      nextGeneration += [child1, child2]
-  
+      nextGeneration.append(child1)
+      nextGeneration.append(child2)
+      #print("AFTER CROSSOVER P1")
+      #ranks[li1][ei1].printCircuit()
+      #print("AFTER CROSSOVER P2")
+      #ranks[li2][ei2].printCircuit()
   return nextGeneration
 
 def terminateCondition(pop, toolbox, epsilon=0.001, verbose=False):
@@ -160,6 +179,10 @@ def terminateCondition(pop, toolbox, epsilon=0.001, verbose=False):
       break
   return foundSolution, nonDominatedSolutions
 
+def bookKeep(bestCandidate, outputFile):
+  outputFile.write("\nbestCandidate has error:" + str(bestCandidate.fitness.values[0]))
+  outputFile.write("\nbestCandidate has circuit:")
+  outputFile.write(bestCandidate.printCircuit(verbose=False))
 
 def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon=0.001, verbose=False):
   # Evaluate the individuals with an invalid fitness
@@ -171,24 +194,25 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
   outputFile = open("./outputs/"+problemName+".txt", "w")
   outputFile.write(problemDescription)
   print("Starting evolution:")
+  # Register statistics functions to the toolbox
+  stats_fit = tools.Statistics(key=lambda ind: ind.fitness.values[0])
+  stats_size = tools.Statistics(key=lambda ind: ind.fitness.values[1]*MAX_CIRCUIT_LENGTH)
+  mstats = tools.MultiStatistics(fitness=stats_fit, size=stats_size)  
+  mstats.register("avg", np.mean)
+  mstats.register("std", np.std)
+  mstats.register("min", np.min)
+  mstats.register("max", np.max)
+  
+  # Create the logbook
+  logbook = tools.Logbook()
+  # Start evolution
   for g in range(NGEN):
     print(g,"/",NGEN)
-    foundSolution, nonDominatedSolutions = terminateCondition(pop, toolbox, epsilon, verbose)
-    '''
-    # Allrighthy, Now I will comment out this section. I want GA to run NGEN
-    # many generations and that is it. 
-    if foundSolution:
-      # This means we can terminate the genetic algorithm.
-      outputFile.write("\nGenetic algorithm has found a solution in " + str(g+1) + " generations.\n")
-      outputFile.write("We have "+str(len(nonDominatedSolutions))+" many non-dominated solutions.\n")
-      for i in range(len(nonDominatedSolutions)):
-        outputFile.write("\n"+str(i)+"th solution has error:"+str(nonDominatedSolutions[i].fitness.values[0])+'\n')
-        outputFile.write(str(i)+"th solution has circuit:\n")
-        outputFile.write(nonDominatedSolutions[i].printCircuit(verbose=False))
-        outputFile.write("\n")
-      
-      return
-    '''
+    # Retrieve the statistics for this generation.
+    record = mstats.compile(pop)
+    logbook.record(gen=g+1, **record)
+    _, nonDominatedSolutions = terminateCondition(pop, toolbox, epsilon, verbose)
+
     # Select and evolve next generation of individuals
     nextGeneration = toolbox.selectAndEvolve(pop, toolbox, verbose)
     # Evaluate the fitnesses of the new generation
@@ -199,13 +223,41 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
       ind.fitness.values = fit
 
     # The population is entirely replaced by the next generation of individuals.
-    pop[:] = nextGeneration
+    pop = nextGeneration
     bestCandidate = nonDominatedSolutions[0]
     for i in range(len(nonDominatedSolutions)):
       if bestCandidate.fitness.values[0] > nonDominatedSolutions[i].fitness.values[0]:
         bestCandidate = nonDominatedSolutions[i]
+    bookKeep(bestCandidate, outputFile)
+    
+  
+  logbook.header = "gen", "evals", "fitness", "size"
+  logbook.chapters["fitness"].header = "min", "max", "avg", "std"
+  logbook.chapters["size"].header = "min", "max", "avg", "std"
+  print(logbook)
+  gen = logbook.select("gen")
+  fit_mins = logbook.chapters["fitness"].select("min")
+  size_avgs = logbook.chapters["size"].select("avg")
+  print(fit_mins)
+  print(size_avgs)
+  import matplotlib.pyplot as plt
 
-    outputFile.write("\nbestCandidate has error:" + str(bestCandidate.fitness.values[0]))
-    outputFile.write("\nbestCandidate has circuit:")
-    outputFile.write(bestCandidate.printCircuit(verbose=False))
+  fig, ax1 = plt.subplots()
+  line1 = ax1.plot(gen, fit_mins, "b-", label="Minimum Fitness")
+  ax1.set_xlabel("Generation")
+  ax1.set_ylabel("Fitness", color="b")
+  for tl in ax1.get_yticklabels():
+      tl.set_color("b")
 
+  ax2 = ax1.twinx()
+  line2 = ax2.plot(gen, size_avgs, "r-", label="Average Size")
+  ax2.set_ylabel("Size", color="r")
+  for tl in ax2.get_yticklabels():
+      tl.set_color("r")
+
+  lns = line1 + line2
+  labs = [l.get_label() for l in lns]
+  ax1.legend(lns, labs, loc="center right")
+
+  plt.show()
+  
