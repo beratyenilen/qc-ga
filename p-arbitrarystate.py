@@ -1,6 +1,6 @@
 # Importing the necessary modules. 
 import projectq
-from projectq.ops import H, X, Y, Z, T, Tdagger, S, Sdagger, CNOT, Measure, All, Rx, Ry, Rz, SqrtX
+from projectq.ops import H, X, Y, Z, T, Tdagger, S, Sdagger, CNOT, Measure, All, Rx, Ry, Rz, SqrtX, Swap
 import numpy as np
 import copy
 from constants import *
@@ -65,7 +65,7 @@ if __name__ == "__main__":
   # Initialize your variables
   numberOfQubits = 2
   # Let's try to use the basis gate of IBM Quantum Computers
-  allowedGates = [Rx,Ry,Rz,X,CNOT] 
+  allowedGates = [X, SqrtX, CNOT, Rz, Swap] 
   problemName = "kindaarbitrary"
   problemDescription = "Kind of Arbitrary State initalization for:\n"
   problemDescription += str(c0)+"|00>"+str(c1)+"|01>"+str(c2)+"|10>"+str(c3)+"|11>\n"

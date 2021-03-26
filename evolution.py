@@ -52,8 +52,6 @@ def chooseIndividual(ranks, currentRank=1, verbose=False):
   # Calculate the summation of exponential terms
   for i in range(L):
     T += math.exp(-currentRank-i)
-  if verbose:
-    print("T:",T)
   # Choose a random number between 0 and T
   randomNumber = random.uniform(0, T)
   # Find out which sublist this random number corresponds to
@@ -73,9 +71,6 @@ def chooseIndividual(ranks, currentRank=1, verbose=False):
   # Now, we will find out which index approximately the chosen number corresponds
   # to by using a simple relation.
   elementIndex = math.floor(len(ranks[listIndex])*(randomNumber-leftBorder)/(rightBorder-leftBorder))
-  if verbose:
-    print("randomNumber:", randomNumber, ", leftBorder:", leftBorder, ", rightBorder:", rightBorder)
-    print("listIndex: ", listIndex, " len(ranks[listIndex]): ", len(ranks[listIndex]), " elementIndex:", elementIndex)
 
   while len(ranks[listIndex]) == 0:
     listIndex += 1
@@ -97,15 +92,16 @@ def selectAndEvolve(pop, toolbox, verbose=False):
   # This function returns a list and ith element of the list contains the 
   # individuals with rank i.
   ranks = sortNondominated(pop, len(pop))
-  if verbose:
-    for i in range(len(ranks)):
-      print("Rank",i, "has", len(ranks[i]),"many individuals.")
-
   # Now we will carry the top 10% individuals to the next generation directly.
   toCarry = int(len(pop)/10)
   nextGeneration = []
-  #currentRank = 0
-  #flag = False
+  bestCandidate = ranks[0][0]
+  for rank in ranks:
+    for indv in rank:
+      if indv.fitness.values[0] < bestCandidate.fitness.values[0]:
+        bestCandidate = indv
+  nextGeneration.append(deepcopy(bestCandidate))
+  currentRank = 0
   while len(nextGeneration) < toCarry:
     if (len(nextGeneration) + len(ranks[currentRank])) < toCarry:
       nextGeneration += deepcopy(ranks[currentRank])
@@ -113,20 +109,7 @@ def selectAndEvolve(pop, toolbox, verbose=False):
     else:
       chooseUpTo = toCarry - len(nextGeneration)
       nextGeneration += deepcopy(ranks[currentRank][:chooseUpTo])
-      #ranks[currentRank] = ranks[currentRank][chooseUpTo:] 
-      #flag = True
-  if verbose:
-    print("Length of nextGeneration: ", len(nextGeneration))
-  '''
-  if flag:
-    ranks = ranks[currentRank:]
-  else:
-    ranks = ranks[(currentRank+1):]
-  '''
-  if verbose:
-    for i in range(len(ranks)):
-      print(len(ranks[i]))
-  
+
   # Now at this step I may loop over the chosen individuals and check if
   # two indvs have really close fitness values, less than let's say 0.1, and 
   # remove one. However, I will skip this at this point. 
@@ -139,29 +122,17 @@ def selectAndEvolve(pop, toolbox, verbose=False):
     if random.random() <= probToMutate:
       # If this is the case, we'll mutate an individual and add it to nextGeneration
       individual,li,ei = chooseIndividual(ranks, currentRank, verbose)
-      #print("BEFORE MUTATION")
-      #ranks[li][ei].printCircuit()
       mutant, = toolbox.mutate(individual)
       nextGeneration.append(mutant)
-      #print("AFTER MUTATION")
-      #ranks[li][ei].printCircuit()
     else:
       # If this is the case, we'll mate two individuals and add children to nextGeneration
       parent1,li1,ei1 = chooseIndividual(ranks, currentRank, verbose)
       parent2, li2,ei2 =  chooseIndividual(ranks, currentRank, verbose)
       while parent1 is parent2:
         parent2 = deepcopy(ranks[li2-1][ei2-1])
-      #print("BEFORE CROSSOVER P1")
-      #ranks[li1][ei1].printCircuit()
-      #print("BEFORE CROSSOVER P2")
-      #ranks[li2][ei2].printCircuit()
       child1, child2 = toolbox.mate(parent1, parent2)
       nextGeneration.append(child1)
       nextGeneration.append(child2)
-      #print("AFTER CROSSOVER P1")
-      #ranks[li1][ei1].printCircuit()
-      #print("AFTER CROSSOVER P2")
-      #ranks[li2][ei2].printCircuit()
   return nextGeneration
 
 def terminateCondition(pop, toolbox, epsilon=0.001, verbose=False):
@@ -193,7 +164,7 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
   
   outputFile = open("./outputs/"+problemName+".txt", "w")
   outputFile.write(problemDescription)
-  print("Starting evolution:")
+  print("Starting evolution, writing outputs to ./outputs/"+problemName+".txt")
   # Register statistics functions to the toolbox
   stats_fit = tools.Statistics(key=lambda ind: ind.fitness.values[0])
   stats_size = tools.Statistics(key=lambda ind: ind.fitness.values[1]*MAX_CIRCUIT_LENGTH)
@@ -230,7 +201,6 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
         bestCandidate = nonDominatedSolutions[i]
     bookKeep(bestCandidate, outputFile)
     
-  
   logbook.header = "gen", "evals", "fitness", "size"
   logbook.chapters["fitness"].header = "min", "max", "avg", "std"
   logbook.chapters["size"].header = "min", "max", "avg", "std"
@@ -260,4 +230,4 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
   ax1.legend(lns, labs, loc="center right")
 
   plt.show()
-  
+  return pop

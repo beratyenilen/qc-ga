@@ -1,105 +1,305 @@
 Kind of Arbitrary State initalization for:
 0.3|00>0.5|01>0.66|10>0|11>
 numberOfQubits=2
-allowedGates=[<class 'projectq.ops._gates.Rx'>, <class 'projectq.ops._gates.Ry'>, <class 'projectq.ops._gates.Rz'>, <projectq.ops._gates.XGate object at 0x11660fe50>, <projectq.ops._metagates.ControlledGate object at 0x1167430d0>]
+allowedGates=[<projectq.ops._gates.XGate object at 0x10da00e20>, <projectq.ops._gates.SqrtXGate object at 0x10da083a0>, <projectq.ops._metagates.ControlledGate object at 0x10db340a0>, <class 'projectq.ops._gates.Rz'>, <projectq.ops._gates.SwapGate object at 0x10da08460>]
 
-bestCandidate has error:0.16985787645597483
-bestCandidate has circuit:Circuit: [(Rz(0.59),0), (Rz(3.58),1), (Rx(0.61),1), (X,0), (CX,1,0), (X,0), (X,0), (Ry(3.49),0), (Rx(0.74),0), (Rz(0.51),0), (X,1), (Rz(4.03),1), (Rx(3.18),0), (CX,0,1), (Rz(4.23),0), (X,1), (Ry(5.72),0), (Rz(0.99),1), (CX,0,1), (Rx(0.18),1)]
-bestCandidate has error:0.13005133059637708
-bestCandidate has circuit:Circuit: [(Rz(0.59),1), (Rz(3.58),0), (Rx(0.61),0), (X,1), (CX,0,1), (X,1), (X,1), (Ry(3.49),1), (Rx(0.74),1), (Rz(0.51),1), (X,0), (Rz(4.03),0), (Rx(3.18),1), (CX,1,0), (Rz(4.23),1), (X,0), (Ry(5.72),1), (Rz(0.99),0), (CX,1,0), (Rx(0.18),0)]
-bestCandidate has error:0.12765594250942003
-bestCandidate has circuit:Circuit: [(Rz(0.59),1), (Rz(3.58),0), (Rx(0.61),0), (X,1), (CX,0,1), (X,1), (X,1), (Ry(3.49),1), (Rx(0.74),1), (X,0), (Rz(4.03),0), (Rx(3.18),1), (CX,1,0), (Rz(4.23),1), (X,0), (Ry(5.72),1), (Rz(0.99),0), (CX,1,0), (Rx(0.18),0)]
-bestCandidate has error:0.12765594250942003
-bestCandidate has circuit:Circuit: [(X,1), (Rz(3.58),0), (Rx(0.61),0), (X,1), (CX,0,1), (X,1), (Ry(3.49),1), (Rx(0.74),1), (X,0), (Rz(4.03),0), (Rx(3.18),1), (CX,1,0), (Rz(4.23),1), (X,0), (Ry(5.72),1), (Rz(0.99),0), (CX,1,0), (Rx(0.18),0)]
-bestCandidate has error:0.12765594250942003
-bestCandidate has circuit:Circuit: [(X,1), (Rz(3.58),0), (Rx(0.61),0), (X,1), (CX,0,1), (X,1), (Ry(3.49),1), (Rx(0.74),1), (X,0), (Rz(4.03),0), (Rx(3.18),1), (CX,1,0), (Rz(4.23),1), (X,0), (Ry(5.72),1), (Rz(0.99),0), (CX,1,0), (Rx(0.18),0)]
-bestCandidate has error:0.1605915008055384
-bestCandidate has circuit:Circuit: [(Rz(0.59),1), (Rz(3.58),0), (Rx(0.61),0), (X,1), (CX,0,1), (X,1), (X,1), (Ry(3.49),1), (Rx(0.74),1), (X,0), (Rz(4.03),0), (Rx(3.18),1), (CX,1,0), (Rz(4.23),1), (Ry(0.68),0), (X,0), (Ry(5.72),1), (Rz(0.99),0), (CX,1,0)]
-bestCandidate has error:0.19424478167110437
-bestCandidate has circuit:Circuit: [(CX,0,1), (Ry(0.69),0), (CX,1,0), (X,1), (CX,1,0), (Ry(5.593),0), (CX,0,1)]
-bestCandidate has error:0.1799000015123503
-bestCandidate has circuit:Circuit: [(CX,0,1), (CX,0,1), (CX,1,0), (Ry(1.02),0), (CX,1,0), (CX,0,1), (X,1)]
-bestCandidate has error:0.1799000015123503
-bestCandidate has circuit:Circuit: [(CX,0,1), (CX,1,0), (Ry(1.02),0), (CX,1,0), (CX,0,1), (X,1)]
-bestCandidate has error:0.22205733974563868
-bestCandidate has circuit:Circuit: [(CX,1,0), (Ry(5.593),0), (X,1), (CX,0,1), (Ry(0.69),0), (CX,0,1)]
-bestCandidate has error:0.1733661026098725
-bestCandidate has circuit:Circuit: [(CX,1,0), (Ry(5.593),0), (X,1), (Rz(5.88),0), (Ry(1.54),1), (CX,0,1), (Ry(0.69),0), (Ry(4.743),1), (Rz(0.403),0), (CX,0,1)]
-bestCandidate has error:0.1733661026098725
-bestCandidate has circuit:Circuit: [(CX,1,0), (Ry(5.593),0), (X,1), (Rz(5.88),0), (Ry(1.54),1), (CX,0,1), (Ry(0.69),0), (Ry(4.743),1), (Rz(0.403),0), (CX,0,1)]
-bestCandidate has error:0.12489096224842122
-bestCandidate has circuit:Circuit: [(Ry(2.35),1), (Ry(5.593),0), (Rz(5.88),0), (Ry(1.54),1), (CX,0,1), (Ry(0.69),0), (Ry(4.743),1), (Rz(0.403),0), (CX,0,1)]
-bestCandidate has error:0.16203544448662088
-bestCandidate has circuit:Circuit: [(Ry(2.35),1), (CX,0,1), (Ry(0.69),0), (CX,0,1)]
-bestCandidate has error:0.13328721929842713
-bestCandidate has circuit:Circuit: [(Ry(5.62),0), (Ry(2.35),1), (CX,0,1), (Ry(0.69),0), (Ry(0.663),0), (CX,0,1)]
-bestCandidate has error:0.13328721929842713
-bestCandidate has circuit:Circuit: [(Ry(5.62),0), (Ry(2.35),1), (CX,0,1), (Ry(0.69),0), (Ry(0.663),0), (CX,0,1)]
-bestCandidate has error:0.13328721929842713
-bestCandidate has circuit:Circuit: [(Ry(5.62),0), (Ry(2.35),1), (CX,0,1), (Ry(0.69),0), (Ry(0.663),0), (CX,0,1)]
-bestCandidate has error:0.12926394529745877
-bestCandidate has circuit:Circuit: [(Ry(2.35),1), (Rz(1.44),1), (CX,0,1), (Rx(0.34),0), (CX,0,1), (Rz(4.843),1), (CX,0,1), (Ry(0.69),0), (CX,0,1)]
-bestCandidate has error:0.15649579078308018
-bestCandidate has circuit:Circuit: [(Ry(2.35),1), (Ry(0.063),0), (Ry(0.69),0), (CX,0,1)]
-bestCandidate has error:0.1474624689117252
-bestCandidate has circuit:Circuit: [(Ry(2.35),1), (Ry(0.69),0), (Ry(0.69),0), (CX,0,1)]
-bestCandidate has error:0.1388157619568391
-bestCandidate has circuit:Circuit: [(Ry(2.493),1), (Ry(0.602),0), (Ry(0.69),0), (CX,0,1)]
-bestCandidate has error:0.1388157619568391
-bestCandidate has circuit:Circuit: [(Ry(2.493),1), (Ry(0.69),0), (Ry(0.602),0), (CX,0,1)]
-bestCandidate has error:0.15400250537582683
-bestCandidate has circuit:Circuit: [(Ry(2.282),1), (Ry(0.731),0), (Ry(0.69),0), (CX,0,1)]
-bestCandidate has error:0.1586746560819723
-bestCandidate has circuit:Circuit: [(Ry(0.063),0), (Ry(2.282),1), (Ry(0.69),0), (CX,0,1)]
-bestCandidate has error:0.14730225972106692
-bestCandidate has circuit:Circuit: [(Ry(0.956),0), (Rz(6.23),1), (Ry(2.282),1), (Rz(0.053),1), (CX,0,1)]
-bestCandidate has error:0.14716672830442978
-bestCandidate has circuit:Circuit: [(Ry(0.956),0), (Ry(2.282),1), (Rz(6.23),1), (Rz(0.053),1), (CX,0,1)]
-bestCandidate has error:0.14730225972106692
-bestCandidate has circuit:Circuit: [(Rz(6.23),1), (Ry(2.282),1), (Ry(0.956),0), (Rz(0.053),1), (CX,0,1)]
-bestCandidate has error:0.14716672664734332
-bestCandidate has circuit:Circuit: [(Rz(6.23),1), (Ry(2.282),1), (Ry(0.956),0), (CX,0,1)]
-bestCandidate has error:0.2464922452917554
-bestCandidate has circuit:Circuit: [(Rx(4.82),0), (Ry(0.69),1), (Rx(4.51),1), (Rx(1.463),0), (Rx(1.9),1), (Ry(2.282),0), (Rx(4.383),1), (Ry(0.063),1), (CX,1,0)]
-bestCandidate has error:0.24819713454892844
-bestCandidate has circuit:Circuit: [(Rx(4.82),0), (Ry(0.69),1), (Rx(4.51),1), (Rx(1.463),0), (Rx(1.9),1), (Ry(2.282),0), (Rx(4.383),1), (CX,0,1), (Ry(0.063),1), (CX,0,1), (CX,1,0)]
-bestCandidate has error:0.256698061558825
-bestCandidate has circuit:Circuit: [(Rx(4.82),1), (Ry(0.69),0), (Rx(4.51),0), (Rx(1.463),1), (Rx(1.9),0), (Ry(2.282),1), (Rx(4.383),0), (CX,1,0), (Ry(0.063),0), (CX,1,0), (CX,0,1)]
-bestCandidate has error:0.24748887201003023
-bestCandidate has circuit:Circuit: [(Ry(0.21),0), (Ry(2.58),0), (X,0), (Ry(6.073),0), (Ry(2.281),1), (X,0), (Ry(3.703),0)]
-bestCandidate has error:0.2559715019951123
-bestCandidate has circuit:Circuit: [(CX,1,0), (Ry(0.89),0), (Ry(2.282),1)]
-bestCandidate has error:0.2494458683343428
-bestCandidate has circuit:Circuit: [(Ry(0.36),0), (Ry(2.282),1)]
-bestCandidate has error:0.2701135828310379
-bestCandidate has circuit:Circuit: [(Ry(0.21),0), (Ry(6.04),1), (Rz(1.05),0), (Ry(2.296),1)]
-bestCandidate has error:0.27502055465630115
-bestCandidate has circuit:Circuit: [(Ry(2.282),1)]
-bestCandidate has error:0.2750042964047017
-bestCandidate has circuit:Circuit: [(Rz(3.71),0), (Ry(1.54),0), (Ry(2.282),1), (Ry(4.743),0), (Rz(2.573),0)]
-bestCandidate has error:0.2633193609050952
-bestCandidate has circuit:Circuit: [(Rz(3.71),0), (Ry(1.433),0), (Ry(2.282),1), (Ry(4.691),0), (Rz(2.573),0)]
-bestCandidate has error:0.2488298283112147
-bestCandidate has circuit:Circuit: [(Rz(3.71),0), (Ry(1.54),0), (Rx(4.97),0), (Ry(5.31),0), (Ry(2.077),1), (Ry(4.743),0), (Rz(2.829),0)]
-bestCandidate has error:0.25997542096818127
-bestCandidate has circuit:Circuit: [(Ry(4.11),1), (CX,1,0), (Ry(2.285),1)]
-bestCandidate has error:0.2220294176739105
-bestCandidate has circuit:Circuit: [(Ry(1.45),1), (Ry(4.13),0), (Ry(4.78),1), (Rz(2.92),0), (Ry(1.503),1), (Ry(2.153),0), (Ry(4.833),1), (CX,0,1), (Ry(2.285),1)]
-bestCandidate has error:0.27500209940264697
-bestCandidate has circuit:Circuit: [(Ry(1.54),0), (Ry(4.743),0), (Ry(2.285),1), (Rz(2.573),0)]
-bestCandidate has error:0.2750020994026471
-bestCandidate has circuit:Circuit: [(Ry(1.54),0), (Ry(2.285),1), (Ry(4.743),0), (CX,0,1), (CX,0,1), (Rz(2.573),0)]
-bestCandidate has error:0.2750183113140331
-bestCandidate has circuit:Circuit: [(Rz(3.03),0), (Ry(2.285),1)]
-bestCandidate has error:0.26386937565227053
-bestCandidate has circuit:Circuit: [(Ry(0.12),0), (Ry(2.285),1)]
-bestCandidate has error:0.26386937565227053
-bestCandidate has circuit:Circuit: [(Ry(0.12),0), (Ry(2.285),1)]
-bestCandidate has error:0.2750183113140331
-bestCandidate has circuit:Circuit: [(Rz(3.03),0), (Ry(2.285),1)]
-bestCandidate has error:0.2750183113140331
-bestCandidate has circuit:Circuit: [(Rz(1.96),1), (Ry(2.285),1)]
-bestCandidate has error:0.24602994601712014
-bestCandidate has circuit:Circuit: [(CX,1,0), (Ry(0.5),0), (Rz(1.28),1), (Ry(2.282),1)]
-bestCandidate has error:0.24061865664268411
-bestCandidate has circuit:Circuit: [(CX,1,0), (Ry(0.5),0), (Rz(1.28),1), (Ry(2.158),1)]
+bestCandidate has error:0.16362775924646833
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Rz(4.5),0), (SqrtX,1), (Swap,0,1), (Rz(3.36),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16333976332664513
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.36),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16333976332664513
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.36),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16333976332664513
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.36),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1633397633266449
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.9),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16232354443810393
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.955),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16232354443810393
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.955),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16232354443810393
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.955),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16232354443810393
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.955),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16232354443810393
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.955),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16232354443810393
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.955),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16232354443810393
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.955),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16232354443810393
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.955),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.1623232780358459
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(2.955),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,1,0), (Rz(3.34),0), (Rz(1.24),0), (Rz(4.41),0), (CX,0,1), (Rz(1.873),0), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16153020506619165
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16153020506619165
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16153020506619165
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16153020506619165
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16153020506619165
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16153020506619165
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16153020506619165
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16085263514707748
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16085263514707748
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16085263514707748
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16068726522800603
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16068726522800603
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16068726522800603
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (0, 0), (1, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16055677583637495
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (Rz(2.25),1), (Rz(1.39),1), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16055677583637495
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (Rz(2.25),1), (Rz(1.39),1), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16055677583637495
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (Rz(2.25),1), (Rz(1.39),1), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16055677583637495
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (Rz(2.25),1), (Rz(1.39),1), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16055677583637495
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,1,0), (SqrtX,1), (Swap,0,1), (Rz(3.126),1), (SqrtX,1), (SqrtX,0), (SqrtX,0), (Rz(3.93),1), (Rz(3.17),0), (SqrtX,1), (SqrtX,0), (X,1), (CX,0,1), (CX,1,0), (Swap,1,0), (CX,0,1), (X,0), (Rz(3.046),0), (Rz(2.25),1), (Rz(1.39),1), (CX,0,1), (CX,1,0), (X,1), (CX,0,1), (CX,0,1), (SqrtX,0), (CX,0,1), (SqrtX,0), (X,0), (X,1), (X,1), (CX,0,1), (Swap,1,0), (Swap,0,1), (Rz(3.34),0), (Rz(1.24),0), (CX,0,1), (X,1), (Swap,1,0), (CX,1,0), (CX,1,0), (CX,0,1)]
+bestCandidate has error:0.16011097413259712
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.16011097413259712
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.16011097413259712
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.16011097413259712
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.16011097413259712
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.16011097413259712
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.16011097413259712
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.16011097413259712
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.15433907839427796
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(4.076),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.198),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.1541778415021503
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(0.43),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.1541778415021503
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(0.43),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.1541778415021503
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(0.43),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.1541778415021503
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(Swap,0,1), (SqrtX,0), (Swap,1,0), (Rz(3.126),0), (SqrtX,0), (SqrtX,1), (SqrtX,1), (Rz(3.93),0), (Rz(0.43),0), (Rz(3.17),1), (SqrtX,0), (SqrtX,1), (X,0), (CX,1,0), (CX,0,1), (Swap,0,1), (CX,1,0), (X,1), (Rz(3.046),1), (Rz(2.25),0), (Rz(1.39),0), (CX,1,0), (CX,0,1), (X,0), (CX,1,0), (CX,1,0), (SqrtX,1), (CX,1,0), (SqrtX,1), (X,1), (X,0), (X,0), (CX,1,0), (Swap,0,1), (Swap,1,0), (Rz(3.34),1), (Rz(1.24),1), (CX,1,0), (X,0), (Swap,0,1), (CX,0,1), (CX,0,1), (CX,1,0)]
+bestCandidate has error:0.15321174822022066
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15321174822022066
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15321174822022066
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15321174822022066
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15321174822022066
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15321174822022066
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15321174822022066
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15321174822022066
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15321174822022066
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15277225367508906
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15277225367508906
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15277225367508906
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15277225367508906
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15277225367508906
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15277225367508906
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.1527720471318137
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (Rz(5.293),0), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.1527720471318137
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (Rz(5.293),0), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.1527720471318137
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (Rz(5.293),0), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.1527720471318137
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (Rz(5.293),0), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.1527720471318137
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (Rz(5.293),0), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.1527720471318137
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (Rz(5.293),0), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.1527720471318137
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (Rz(5.293),0), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15277204713181358
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15277204713181358
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15277204713181358
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.15277204713181358
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,1), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.14549528355666663
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),1), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.14549528355666663
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),1), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.14549528355666663
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),1), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.14549528355666663
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),1), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.14549528355666663
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),1), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.14549528355666663
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),1), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.14549528355666663
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),1), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.14549528355666663
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),1), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.14549528355666663
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (Rz(0.07),1), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.13628584148634482
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (X,0), (Rz(0.1),1), (CX,1,0), (CX,1,0), (Rz(0.07),1), (X,0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.13628584148634482
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (X,0), (Rz(0.1),1), (CX,1,0), (CX,1,0), (Rz(0.07),1), (X,0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.13628584148634482
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (X,0), (Rz(0.1),1), (CX,1,0), (CX,1,0), (Rz(0.07),1), (X,0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.13628584148634482
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (X,0), (Rz(0.1),1), (CX,1,0), (CX,1,0), (Rz(0.07),1), (X,0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.13628584148634482
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (X,0), (Rz(0.1),1), (CX,1,0), (CX,1,0), (Rz(0.07),1), (X,0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.13628584148634482
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (X,0), (Rz(0.1),1), (CX,1,0), (CX,1,0), (Rz(0.07),1), (X,0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.13628584148634482
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (X,0), (Rz(0.1),1), (CX,1,0), (CX,1,0), (Rz(0.07),1), (X,0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.13628584148634482
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (X,0), (Rz(0.1),1), (CX,1,0), (CX,1,0), (Rz(0.07),1), (X,0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.13628584148634482
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (Rz(1.0),0), (X,0), (Rz(0.1),1), (CX,1,0), (CX,1,0), (Rz(0.07),1), (X,0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
+bestCandidate has error:0.12994134462982965
+bestCandidate has circuit:Qubit Mapping:[('log', 'phy'), (1, 0), (0, 1)]
+Circuit: [(SqrtX,0), (SqrtX,0), (SqrtX,1), (SqrtX^\dagger,0), (Rz(5.293),0), (X,1), (Rz(1.0),0), (X,0), (X,1), (Rz(0.1),1), (CX,1,0), (CX,1,0), (Rz(0.07),1), (X,0), (X,1), (CX,0,1), (Rz(0.99),0), (CX,0,1), (Rz(3.57),1), (X,1), (CX,0,1), (SqrtX,0), (SqrtX,0), (Swap,1,0), (X,1), (SqrtX,1), (X,0), (X,1), (X,0)]
