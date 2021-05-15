@@ -9,7 +9,14 @@ import pickle
 from copy import deepcopy
 
 def mutateInd(individual, verbose=False):
-  mutationChoice = random.choice(range(11))
+  if individual.fitness.values[0] < NEXT_STAGE_ERROR and not individual.optimized:
+    individual.optimize()
+    individual.parameterMutation()
+    return individual, 
+  if individual.optimized:
+    individual.parameterMutatıon()
+    return individual, 
+  mutationChoice = random.choice(range(12))
   if mutationChoice == 0:
     individual.discreteUniformMutation()
   elif mutationChoice == 1:
@@ -30,6 +37,8 @@ def mutateInd(individual, verbose=False):
     individual.sequenceSwap()
   elif mutationChoice == 9:
     individual.sequenceScramble()
+  elif mutationChoice == 10:
+    individual.permutationMutation()
   else:
     individual.moveGate()
   return individual,
