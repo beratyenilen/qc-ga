@@ -8,7 +8,6 @@ from deap import creator, base, tools
 from candidate import Candidate
 from constants import *
 from evolution import crossoverInd, mutateInd, selectAndEvolve, geneticAlgorithm
-import pickle
 
 # Import additional modules you want to use in here
 
@@ -35,7 +34,6 @@ def desiredState():
         0.07813584 + 0.12933371j,
         0.14077403 + 0.04833421j,
         0.1864469 + 0.02210824j,
-
         0.04930783 + 0.17694084j,
         0.03305475 + 0.0548612j,
         0.15951635 + 0.02474114j,
@@ -44,7 +42,6 @@ def desiredState():
         0.1711776 + 0.05024366j,
         0.03407228 + 0.12793345j,
         0.14235411 + 0.14044561j,
-
         0.04584613 + 0.02082665j,
         0.13775167 + 0.12803463j,
         0.17285302 + 0.02778957j,
@@ -53,7 +50,6 @@ def desiredState():
         0.15122561 + 0.141271j,
         0.06105595 + 0.09488902j,
         0.01724461 + 0.13417011j,
-        
         0.18846858 + 0.1717289j,
         0.04372904 + 0.20581626j,
         0.07840571 + 0.1703873j,
@@ -152,23 +148,12 @@ if __name__ == "__main__":
     toolbox.register("evaluate", evaluateInd)
 
     # Get it running
-    NGEN = 100  # For how many generations should the algorithm run ?
-    POPSIZE = 50  # How many individuals should be in the population ?
+    NGEN = 1000  # For how many generations should the algorithm run ?
+    POPSIZE = 500  # How many individuals should be in the population ?
     verbose = False  # Do you want functions to print out information.
     # Note that they will print out a lot of things.
 
     # Initialize a random population
     pop = toolbox.population(n=POPSIZE)
     # Run the genetic algorithm
-
-    f = open("./outputs/populations/testpop", "rb")
-    pop = pickle.load(f)
-    f.close()
-
-    pop = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose)
-
-    f = open("./outputs/populations/testpop", "wb")
-    pickle.dump(pop, f)
-    f.close()
-
-
+    geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose)

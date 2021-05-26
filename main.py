@@ -9,8 +9,6 @@ def main():
   creator.create("FitnessMin", base.Fitness, weights=(-1.0, -1.0))
   creator.create("Individual", Candidate, fitness=creator.FitnessMin)
 
-  creator.create("name",)
-
   toolbox = base.Toolbox()
   toolbox.register("individual", creator.Individual)
   toolbox.register("population", tools.initRepeat, list, toolbox.individual)
@@ -20,8 +18,6 @@ def main():
   toolbox.register("select", tools.selNSGA2)
   toolbox.register("selectAndEvolve", selectAndEvolve)
   toolbox.register("evaluate", evaluateInd)
-
-  toolbox.register("naem",)
 
   # LETS SEE IF IT WORKS
   NGEN = 500
