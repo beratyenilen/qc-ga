@@ -38,9 +38,6 @@ def getFidelities(circs, machine_simulator, desired_vector):
                 b = perm[qubits[0].index]
                 perm[qubits[0].index] = clbits[0].index
                 perm[a] = b
-                print("q: "+str(qubits[0].index))
-                print("c: "+str(clbits[0].index))
-                print(perm)
         circs[i].remove_final_measurements()
         circs[i].save_density_matrix()
         
