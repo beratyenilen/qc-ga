@@ -164,7 +164,7 @@ def bookKeep(bestCandidate, outputFile):
   outputFile.write("\nbestCandidate has circuit:")
   outputFile.write(bestCandidate.printCircuit(verbose=False))
 
-def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon=0.001, verbose=False):
+def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon=0.001, verbose=False, returnLog=False):
   # Evaluate the individuals with an invalid fitness
   invalid_ind = [ind for ind in pop if not ind.fitness.valid]
   fitnesses = map(toolbox.evaluate, invalid_ind) 
@@ -239,4 +239,6 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
   ax1.legend(lns, labs, loc="center right")
 
   plt.show()
+  if returnLog:
+      return pop, logbook
   return pop

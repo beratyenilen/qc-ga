@@ -14,7 +14,7 @@ import pickle
 from qiskit import Aer, execute
 from qiskit.quantum_info import state_fidelity
 from datetime import datetime
-import uuid
+from tools import save
 
 n = 5       #   Number of qubits
 state_index = 42  
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     """     
 
     # Run the genetic algorithm
-    pop = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose)
+    pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
 
 
     # Printing 10 best circuits
@@ -154,15 +154,7 @@ if __name__ == "__main__":
     while (True):
         response = input('Save the values? (Y/N) ')
         if response.lower() == 'y':
-            time = datetime.now()
-            time_str = time.strftime("%d.%m.%y-%H:%M")
-            ID = time.strftime("%d%m%y%H%M%S")+str(POPSIZE)+str(NGEN)+str(n)+str(state_index)
-            f = open('saved/'+ID+"-"+time_str+"-"+str(POPSIZE)+"pop-"+str(NGEN)+"GEN-"+state_name, 'wb')
-            pickle.dump(pop, f)
-            f.close()
-            print('Saved!')
+            save(pop, logbook, "saved/test/", state_name=state_name)
             break
         elif response.lower() == 'n':
             break
-
-    
