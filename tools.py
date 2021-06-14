@@ -1,6 +1,11 @@
 import pickle
 from datetime import datetime
 
+#   Functions for handling and analyzing 
+#   the population and logbook data
+
+
+#   Save a population object and a logbook   
 def save(pop, logbook, path, state_name="unknown_state"):
     n = pop[0].numberOfQubits
     NGEN = len(logbook.select("gen")) 
@@ -15,4 +20,21 @@ def save(pop, logbook, path, state_name="unknown_state"):
     f.close()
     print('Saved!')
 
-
+#
+#   Load a population object and corresponding logbook.
+#
+#   Path contains the name of pop/logbook file 
+#   WITHOUT .pop/.logbook extension
+#
+def load(path):
+    f = open(path+".pop", 'rb')
+    pop = pickle.load(f)
+    f.close()
+    f = open(path+".logbook", 'rb')
+    logbook = pickle.load(f)
+    f.close()
+    return pop, logbook
+    
+#   Load allowed gateset, fitness and seed from a file
+def getSetup(path):
+    return 0
