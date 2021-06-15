@@ -137,10 +137,13 @@ if __name__ == "__main__":
         elif response.lower() == 'n':
             break
     """     
+    import time
+    start = time.perf_counter()
 
     # Run the genetic algorithm
     pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
 
+    finish = time.perf_counter()
 
     # Printing 10 best circuits
     backend = Aer.get_backend('statevector_simulator')
@@ -151,10 +154,13 @@ if __name__ == "__main__":
         print(1 - state_fidelity(desiredState(), pop[i].getPermutationMatrix() @ statevector))
         
     # Prompt to save the results
-    while (True):
-        response = input('Save the values? (Y/N) ')
-        if response.lower() == 'y':
-            save(pop, logbook, "saved/test/", state_name=state_name)
-            break
-        elif response.lower() == 'n':
-            break
+    #while (True):
+    #    response = input('Save the values? (Y/N) ')
+    #    if response.lower() == 'y':
+    #        save(pop, logbook, "saved/test/", state_name=state_name)
+    #        break
+    #    elif response.lower() == 'n':
+    #        break
+
+    
+    print(f'Runtime: {round(finish-start, 2)}s')
