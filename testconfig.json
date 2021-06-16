@@ -4,5 +4,6 @@
   "generations": 100,
   "popsize": 50,
   "multiprocessing": false,
-  "verbose": true
+  "verbose": true,
+  "save": true
 }

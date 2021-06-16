@@ -14,6 +14,8 @@ import time
 import multiprocessing
 import sys
 
+from qiskit import Aer, execute
+from qiskit.quantum_info import state_fidelity
 
 def loadState(numberOfQubits, stateName):
     f = open('states/'+str(numberOfQubits)+'_qubits/' + stateName, 'rb')
@@ -97,6 +99,7 @@ def main():
         stateIndex = data['index']
         multiProcess = data['multiprocessing']
         verbose = data['verbose']
+        saveResult = data['save']
     except OSError:
         print("ERROR:   Could not open ", sys.argv[1])
         return
@@ -130,8 +133,6 @@ def main():
         pool = multiprocessing.Pool()
         toolbox.register("map", pool.map)
 
-
-    toolbox = base.Toolbox()
     toolbox.register("individual", creator.Individual, numberOfQubits, allowedGates)
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
@@ -168,26 +169,23 @@ def main():
     finish = time.perf_counter()
 
 
-    plotFitSize(logbook)
-    plotFitSize(logbook, fitness="avg")
-    plotFitSize(logbook, fitness="std")
+#    plotFitSize(logbook)
+#    plotFitSize(logbook, fitness="avg")
+#    plotFitSize(logbook, fitness="std")
 
     # Printing 10 best circuits
-    #backend = Aer.get_backend('statevector_simulator')
-    #for i in range(10):
-    #    print(evaluateInd(pop[i]))
-    #    circ = pop[i].toQiskitCircuit()
-    #    statevector = execute(circ, backend).result().get_statevector(circ)
-    #    print(1 - state_fidelity(desiredState(), pop[i].getPermutationMatrix() @ statevector))
+    backend = Aer.get_backend('statevector_simulator')
+    for i in range(10):
+        print(evaluateInd(pop[i]))
+        circ = pop[i].toQiskitCircuit()
+        statevector = execute(circ, backend).result().get_statevector(circ)
+        print(1 - state_fidelity(desiredState(), pop[i].getPermutationMatrix() @ statevector))
         
     # Prompt to save the results
-    #while (True):
-    #    response = input('Save the values? (Y/N) ')
-    #    if response.lower() == 'y':
-    #        save(pop, logbook, "saved/test/", state_name=state_name)
-    #        break
-    #    elif response.lower() == 'n':
-    #        break
+    if saveResult:
+        directory = "saved/test/"
+        save(pop, logbook, directory, problemName)
+        print(f"The population and logbook were saved in {directory}{problemName}")
 
     print(f'Runtime: {round(finish-start, 2)}s')
 
