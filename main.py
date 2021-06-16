@@ -12,7 +12,7 @@ from tools import *
 from datetime import datetime
 import time
 import multiprocessing
-import sys
+import config
 
 from qiskit import Aer, execute
 from qiskit.quantum_info import state_fidelity
@@ -73,37 +73,15 @@ def evaluateInd(individual, verbose=False):
     else:
         return (error, 1.0)
 
-from configparser import ConfigParser
-def loadConfig(f):
-    config = ConfigParser()
-    config.read(f)
-    print(config.sections())
-    print(config['qubits'])
-    
-import json
 def main():
-    """
-        This program expects config file as command line argument
-    """
-
-    if len(sys.argv)==1:
-        print("No agument given!")
-        return
-    
-    try:
-        with open(sys.argv[1]) as f:
-            data = json.load(f)
-        numberOfQubits = data['qubits']
-        NGEN = data['generations']
-        POPSIZE = data['popsize']
-        stateIndex = data['index']
-        multiProcess = data['multiprocessing']
-        verbose = data['verbose']
-        saveResult = data['save']
-    except OSError:
-        print("ERROR:   Could not open ", sys.argv[1])
-        return
-
+    numberOfQubits = config.numberOfQubits
+    NGEN = config.NGEN
+    POPSIZE = config.POPSIZE
+    stateIndex = config.stateIndex
+    multiProcess = config.multiProcess
+    verbose = config.verbose
+    saveResult = config.saveResult
+    allowedGates = config.allowedGates
      
     # Initialize your variables
     #stateIndex = 42 
@@ -114,8 +92,6 @@ def main():
     ID = now.strftime("%d%m%y%H%M%S")+str(POPSIZE)+str(NGEN)+str(numberOfQubits)   #This needs improving
     problemName = f"{ID}-{timeStr}-{POPSIZE}pop-{NGEN}GEN-{stateName}"
 
-# Let's try to use the basis gate of IBM Quantum Computers
-    allowedGates = [X, SqrtX, CNOT, Rz, Swap]
     problemDescription = "State initalization for:\n"
     problemDescription += "numberOfQubits=" + str(numberOfQubits) + "\n"
     problemDescription += "allowedGates=" + str(allowedGates) + "\n"

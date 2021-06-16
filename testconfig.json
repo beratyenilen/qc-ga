@@ -1,9 +1,0 @@
-{
-  "index": 23,
-  "qubits": 4,
-  "generations": 100,
-  "popsize": 50,
-  "multiprocessing": false,
-  "verbose": true,
-  "save": true
-}
