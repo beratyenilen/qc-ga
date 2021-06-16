@@ -220,10 +220,6 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
   print(fit_mins)
   print(size_avgs)
 
-  from tools import plotFitSize
-  plotFitSize(logbook)
-  plotFitSize(logbook, fitness="avg")
-  plotFitSize(logbook, fitness="std")
 
   if returnLog:
       return pop, logbook

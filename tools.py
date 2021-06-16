@@ -5,6 +5,13 @@ from datetime import datetime
 #   Functions for handling and analyzing 
 #   the population and logbook data
 
+def problemName(pop, logbook, stateName):
+    n = pop[0].numberOfQubits
+    NGEN = len(logbook.select("gen")) 
+    time = datetime.now()
+    time_str = time.strftime("%d.%m.%y-%H:%M")
+    ID = time.strftime("%d%m%y%H%M%S")+str(len(pop))+str(NGEN)+str(n)   #This needs improving
+    f = open(path+ID+"-"+time_str+"-"+str(len(pop))+"pop-"+str(NGEN)+"GEN-"+state_name+".pop", 'wb')
 
 #   Save a population object and a logbook   
 def save(pop, logbook, path, state_name="unknown_state"):
@@ -72,5 +79,7 @@ def plotFitSize(logbook, fitness="min", size="avg"):
 
   plt.show()
 
-
+#   WIP
+def plotPopFitSize(pop):
+    return 0
 
