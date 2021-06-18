@@ -7,19 +7,19 @@ from pprint import pprint
 from numpy import absolute, vdot
 
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute, Aer, transpile
-from qiskit.tools.visualization import circuit_drawer, plot_circuit_layout, plot_histogram
+#from qiskit.tools.visualization import circuit_drawer, plot_circuit_layout, plot_histogram
 from qiskit.test.mock import FakeVigo, FakeAthens
 from qiskit.quantum_info import state_fidelity, DensityMatrix, Statevector, Operator
 from qiskit import BasicAer
-from qiskit.extensions import Initialize
-from qiskit.providers.aer import QasmSimulator
+#from qiskit.extensions import Initialize
+#from qiskit.providers.aer import QasmSimulator
 from qiskit.providers.aer.extensions import snapshot_density_matrix
 from qiskit.circuit.library import Permutation
-from qiskit.transpiler import PassManager, CouplingMap, Layout
-from qiskit.transpiler.passes import BasicSwap, LayoutTransformation, RemoveFinalMeasurements
+#from qiskit.transpiler import PassManager, CouplingMap, Layout
+#from qiskit.transpiler.passes import BasicSwap, LayoutTransformation, RemoveFinalMeasurements
 
 #   Computes the fidelities for transpiled circuits
-def getFidelities(circs, machine_simulator, desired_vector):
+def getFidelities(n, circs, machine_simulator, desired_vector):
     fidelities = []
     #n_shots = 20
     n_iter = len(circs)
@@ -63,7 +63,7 @@ def getFidelities(circs, machine_simulator, desired_vector):
     return fidelities
 
 #   Generate a random desired_vector
-def randomDV():
+def randomDV(n):
     desired_vector = np.random.rand(2**n)+1j*np.random.rand(2**n)
     desired_vector = desired_vector/np.linalg.norm(desired_vector)
     return desired_vector
@@ -91,25 +91,26 @@ def genCircs(n, fake_machine, desired_vector, n_iter=10, optimization_level=2):
         depths.append(new_circ.depth())
     return circs, depths
 
+def main():
+    machine_simulator = Aer.get_backend('qasm_simulator')
+    fake_machine = FakeAthens()
+    n = 4
 
-machine_simulator = Aer.get_backend('qasm_simulator')
-fake_machine = FakeAthens()
-n = 4
+    desired_vector = randomDV(n)
+    print(desired_vector)
+    print(np.linalg.norm(desired_vector))
 
-desired_vector = randomDV()
-print(desired_vector)
-print(np.linalg.norm(desired_vector))
+    circs, depths = genCircs(n, fake_machine, desired_vector)
 
-circs, depths = genCircs(n, fake_machine, desired_vector)
+    fidelities = getFidelities(n, circs, machine_simulator, desired_vector)
+    mean_fidelity = sum(fidelities)/len(fidelities)
+    print("mean fidelity: " + str(mean_fidelity))
 
-fidelities = getFidelities(circs, machine_simulator, desired_vector)
-mean_fidelity = sum(fidelities)/len(fidelities)
-print("mean fidelity: " + str(mean_fidelity))
+    plt.figure(figsize=(8, 6))
+    plt.hist(fidelities, bins=list(np.arange(0,1.2,0.01)), align='left', color='#AC557C')
+    plt.xlabel('Fidelity', fontsize=14)
+    plt.ylabel('Counts', fontsize=14)
+    plt.show()
 
-plt.figure(figsize=(8, 6))
-plt.hist(fidelities, bins=list(np.arange(0,1.2,0.01)), align='left', color='#AC557C')
-plt.xlabel('Fidelity', fontsize=14)
-plt.ylabel('Counts', fontsize=14)
-plt.show()
-
-
+if __name__ == "__main__":
+    main()
