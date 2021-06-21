@@ -198,9 +198,9 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
     # Evaluate the fitnesses of the new generation
     # We will evaluate the fitnesses of all the individuals just to be safe.
     # Mutations might be changing the fitness values, I am not sure.
-    fitnesses = toolbox.map(toolbox.evaluate, nextGeneration)
-    for ind, fit in zip(nextGeneration, fitnesses):
-      ind.fitness.values = fit
+    
+    for ind in nextGeneration:
+        ind.fitness.values = toolbox.evaluate(ind)
 
     # The population is entirely replaced by the next generation of individuals.
     pop = nextGeneration
