@@ -141,7 +141,7 @@ def selectAndEvolve(pop, toolbox, verbose=False):
         parent2 = deepcopy(ranks[li2-1][ei2-1])
       child1, child2 = toolbox.mate(parent1, parent2)
       nextGeneration.append(child1)
-      nextGeneration.append(child2)
+#      nextGeneration.append(child2)
   return nextGeneration
 
 def terminateCondition(pop, toolbox, epsilon=0.001, verbose=False):
