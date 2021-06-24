@@ -38,6 +38,13 @@ def load(path):
     f.close()
     return pop, logbook
     
+def loadState(numberOfQubits, index):
+    stateName = str(numberOfQubits)+"QB_state"+str(index)
+    f = open('states/'+str(numberOfQubits)+'_qubits/' + stateName, 'rb')
+    desired_state = pickle.load(f)
+    f.close()
+    return desired_state
+
 #   Load allowed gateset, fitness and seed from a file
 def getSetup(path):
     return 0
