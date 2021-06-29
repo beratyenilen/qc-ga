@@ -74,6 +74,7 @@ def evaluateInd(individual, verbose=False):
         return (error, 1.0)
 
 def main():
+    # Initialize your variables
     numberOfQubits = config.numberOfQubits
     NGEN = config.NGEN
     POPSIZE = config.POPSIZE
@@ -83,8 +84,6 @@ def main():
     saveResult = config.saveResult
     allowedGates = config.allowedGates
      
-    # Initialize your variables
-    #stateIndex = 42 
     stateName = str(numberOfQubits)+"QB_state"+str(stateIndex)
     loadState(numberOfQubits, stateName)
     now = datetime.now()
@@ -128,25 +127,20 @@ def main():
     CXPB = 0.2
     MUTPB = 0.2
 
-    
-#    while (true):
-#        response = input('load values? (y/n) ')
-#        if response.lower() == 'y':
-#            f = open('saved/results', 'rb')
-#            pop = pickle.load(f)
-#            f.close()
-#            break
-#        elif response.lower() == 'n':
-#            break
     pop = toolbox.population(n=POPSIZE)
 
+# Loaded checkpoint is provided as a comand line argument
+    import sys
+    if len(sys.argv) > 1:
+        pop, logbook = load(sys.argv[1])
+    
     start = time.perf_counter()
     pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
     finish = time.perf_counter()
 
 
-#    plotFitSize(logbook)
-#    plotFitSize(logbook, fitness="avg")
+    plotFitSize(logbook)
+    plotFitSize(logbook, fitness="avg")
 #    plotFitSize(logbook, fitness="std")
 
     # Printing 10 best circuits

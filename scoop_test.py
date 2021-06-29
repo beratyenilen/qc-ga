@@ -22,7 +22,7 @@ def limit_cpu():
     "is called at every process start"
     p = psutil.Process(os.getpid())
     # set to lowest priority, this is windows only, on Unix use ps.nice(19)
-    p.nice(psutil.BELOW_NORMAL_PRIORITY_CLASS)
+    p.nice(19)
 
 
 def loadState(numberOfQubits, stateName):
@@ -151,6 +151,9 @@ def main():
     toolbox.register("map", futures.map)
     pop = toolbox.population(n=POPSIZE)
 
+#    toolbox.unregister("individual")
+#    toolbox.unregister("population")
+
     start = time.perf_counter()
     pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
     finish = time.perf_counter()
@@ -162,7 +165,7 @@ def main():
 
     # Printing 10 best circuits
     backend = Aer.get_backend('statevector_simulator')
-    for i in range(POPSIZE):
+    for i in range(10):
         print(evaluateInd(pop[i]))
         circ = pop[i].toQiskitCircuit()
         statevector = execute(circ, backend).result().get_statevector(circ)

@@ -7,7 +7,6 @@ import numpy as np
 from constants import *
 import pickle
 from copy import deepcopy
-from time import sleep
 
 def mutateInd(individual, verbose=False):
   if individual.fitness.values[0] < NEXT_STAGE_ERROR and not individual.optimized:
@@ -164,7 +163,6 @@ def selectAndEvolve(pop, toolbox, verbose=False):
       child2.fitness.values = toolbox.evaluate(child2)
       nextGeneration.append(child1)
       nextGeneration.append(child2)
-  sleep(0.1)
   return nextGeneration
 
 def terminateCondition(pop, toolbox, epsilon=0.001, verbose=False):
@@ -189,10 +187,9 @@ def bookKeep(bestCandidate, outputFile):
 
 def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon=0.001, verbose=False, returnLog=False):
   # Evaluate the individuals with an invalid fitness
-  invalid_ind = [ind for ind in pop if not ind.fitness.valid]
-  fitnesses = map(toolbox.evaluate, invalid_ind) 
-  for ind, fit in zip(invalid_ind, fitnesses):
-    ind.fitness.values = fit
+  for ind in pop: 
+    if not ind.fitness.valid:
+      ind.fitness.values = toolbox.evaluate(ind) 
   
   outputFile = open("./outputs/"+problemName+".txt", "w")
   outputFile.write(problemDescription)

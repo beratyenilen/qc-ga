@@ -12,10 +12,10 @@ def mutateInd(individual, verbose=False):
   if individual.fitness.values[0] < NEXT_STAGE_ERROR and not individual.optimized:
     individual.optimize()
     individual.parameterMutation()
-    return individual, 
+    return individual 
   if individual.optimized:
     individual.parameterMutatıon()
-    return individual, 
+    return individual 
   mutationChoice = random.choice(range(12))
   if mutationChoice == 0:
     individual.discreteUniformMutation()
@@ -41,7 +41,7 @@ def mutateInd(individual, verbose=False):
     individual.permutationMutation()
   else:
     individual.moveGate()
-  return individual,
+  return individual
 
 def crossoverInd(parent1, parent2, toolbox, verbose=False):
   child1 = toolbox.individual()
@@ -128,19 +128,22 @@ def selectAndEvolve(pop, toolbox, verbose=False):
   # Crossover prob. is 1/12 according to Potocek. We can increase it a little more.
   currentRank = 1
   while len(nextGeneration) < len(pop):
-    if random.random() <= probToMutate:
+#    if random.random() <= probToMutate:
       # If this is the case, we'll mutate an individual and add it to nextGeneration
       individual,li,ei = chooseIndividual(ranks, currentRank, verbose)
-      mutant, = toolbox.mutate(individual)
+      mutant = toolbox.mutate(individual)
       nextGeneration.append(mutant)
-    else:
+#    else:
       # If this is the case, we'll mate two individuals and add children to nextGeneration
-      parent1,li1,ei1 = chooseIndividual(ranks, currentRank, verbose)
-      parent2, li2,ei2 =  chooseIndividual(ranks, currentRank, verbose)
-      while parent1 is parent2:
-        parent2 = deepcopy(ranks[li2-1][ei2-1])
-      child1, child2 = toolbox.mate(parent1, parent2)
-      nextGeneration.append(child1)
+#      parent1,li1,ei1 = chooseIndividual(ranks, currentRank, verbose)
+#      parent2, li2,ei2 =  chooseIndividual(ranks, currentRank, verbose)
+#      parent1 = pop[random.randint(0,len(pop)-1)]
+#      parent2 = pop[random.randint(0,len(pop)-1)]
+#      while parent1 is parent2:
+#        parent2 = pop[random.randint(0,len(pop)-1)]
+#       # parent2 = deepcopy(ranks[li2-1][ei2-1])
+#      child1, child2 = toolbox.mate(parent1, parent2)
+#      nextGeneration.append(child1)
 #      nextGeneration.append(child2)
   return nextGeneration
 
