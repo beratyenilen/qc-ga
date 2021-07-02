@@ -12,7 +12,6 @@ from tools import *
 from datetime import datetime
 import time
 import multiprocessing
-import config
 import psutil
 
 from qiskit import Aer, execute, QuantumRegister
@@ -84,14 +83,14 @@ def evaluateInd(individual, verbose=False):
     else:
         return (error, 1.0)
 
-numberOfQubits = config.numberOfQubits
-NGEN = config.NGEN
-POPSIZE = config.POPSIZE
-stateIndex = config.stateIndex
-multiProcess = config.multiProcess
-verbose = config.verbose
-saveResult = config.saveResult
-allowedGates = config.allowedGates
+#numberOfQubits = config.numberOfQubits
+#NGEN = config.NGEN
+#POPSIZE = config.POPSIZE
+#stateIndex = config.stateIndex
+#multiProcess = config.multiProcess
+#verbose = config.verbose
+#saveResult = config.saveResult
+#allowedGates = config.allowedGates
  
 # Initialize your variables
 #stateIndex = 42 
@@ -162,7 +161,7 @@ def main():
     finish = time.perf_counter()
 
 
-#    plotFitSize(logbook)
+    plotFitSize(logbook)
 #    plotFitSize(logbook, fitness="avg")
 #    plotFitSize(logbook, fitness="std")
 
@@ -173,38 +172,29 @@ def main():
     print(1 - state_fidelity(desiredState(), pop[0].getPermutationMatrix() @ statevector))
 
 
-    backend = Aer.get_backend('qasm_simulator')
-    n_phys = 5
-    n = numberOfQubits
-    perm = [0,1,2,3,4]
-    qubit_pattern = perm
-        
-    aug_desired_state = desired_state
-
+    # Matching the number of qubits with simulated machine
+#    n_phys = 5
+#    n = numberOfQubits
+#    fake_machine = FakeAthens()
 #    anc = QuantumRegister(n_phys-n, 'ancilla')
 #    circ.add_register(anc)
-    circ.save_density_matrix()
-    
+#    aug_desired_state = desired_state
 #    for k in range(n_phys-n):
 #        aug_desired_state = np.kron([1,0],aug_desired_state)
 
-    perm_circ = Permutation(n_phys, qubit_pattern) # Creating a circuit for qubit mapping
-    perm_unitary = Operator(perm_circ) # Matrix for the previous circuit
+    backend = Aer.get_backend('qasm_simulator')
+    circ.save_density_matrix()
     perm_unitary = pop[0].getPermutationMatrix()
-
-    perm_aug_desired_state = perm_unitary.data @ aug_desired_state
-    pad_vector = perm_aug_desired_state
+    perm_desired_state = perm_unitary.data @ desired_state
 
     result = execute(circ,backend,shots=1).result()
     noisy_dens_matr = result.data()['density_matrix']
-    fid = state_fidelity(pad_vector,noisy_dens_matr)
-        
+    fid = state_fidelity(perm_desired_state, noisy_dens_matr)
+
     print(1-fid)
-
-
-    fake_machine = FakeAthens()
+    print(circ)
         
-    # Prompt to save the results
+    # Save the results
     if saveResult:
         directory = "saved/test/"
         save(pop, logbook, directory, problemName)
@@ -214,4 +204,3 @@ def main():
 
 if __name__=="__main__":
     main()
-
