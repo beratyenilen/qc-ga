@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pickle
+import numpy as np
 from datetime import datetime
 
 #   Functions for handling and analyzing 
@@ -85,3 +86,12 @@ def plotFitSize(logbook, fitness="min", size="avg"):
 def plotPopFitSize(pop):
     return 0
 
+def plotCircLengths(circs, circs2):
+    sizes1 = np.array([circ.size() for circ in circs])
+    max_size = sizes1.max()
+    sizes2 = np.array([circ.size() for circ in circs2])
+    if sizes2.max() > max_size:
+        max_size = sizes2.max()
+    plt.hist(sizes1, bins=max_size, range=(0,max_size), alpha=0.5)
+    plt.hist(sizes2, bins=max_size, range=(0,max_size), alpha=0.5)
+    plt.show()

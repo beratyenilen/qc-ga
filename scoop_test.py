@@ -20,6 +20,8 @@ from qiskit.providers.aer import QasmSimulator
 from qiskit.test.mock import FakeVigo, FakeAthens
 from qiskit.circuit.library import Permutation
 
+from qiskit_transpiler.transpiled_initialization_circuits import genCircs, getFidelities
+
 def limit_cpu():
     "is called at every process start"
     p = psutil.Process(os.getpid())
@@ -161,7 +163,7 @@ def main():
     finish = time.perf_counter()
 
 
-    plotFitSize(logbook)
+#    plotFitSize(logbook)
 #    plotFitSize(logbook, fitness="avg")
 #    plotFitSize(logbook, fitness="std")
 
@@ -175,7 +177,6 @@ def main():
     # Matching the number of qubits with simulated machine
 #    n_phys = 5
 #    n = numberOfQubits
-#    fake_machine = FakeAthens()
 #    anc = QuantumRegister(n_phys-n, 'ancilla')
 #    circ.add_register(anc)
 #    aug_desired_state = desired_state
@@ -193,7 +194,15 @@ def main():
 
     print(1-fid)
     print(circ)
-        
+
+    # Comparing the results with qiskit transpile funtion
+    fake_machine = FakeAthens()
+    qiskit_circs, depths = genCircs(numberOfQubits, fake_machine, desired_state)    
+    circs = [circ.toQiskitCircuit() for circ in pop]
+    circs = circs[0:1]
+    plotCircLengths(qiskit_circs, circs)
+    
+     
     # Save the results
     if saveResult:
         directory = "saved/test/"
