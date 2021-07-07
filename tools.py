@@ -11,8 +11,8 @@ def problemName(pop, logbook, stateName):
     NGEN = len(logbook.select("gen")) 
     time = datetime.now()
     time_str = time.strftime("%d.%m.%y-%H:%M")
-    ID = time.strftime("%d%m%y%H%M%S")+str(len(pop))+str(NGEN)+str(n)   #This needs improving
-    f = open(path+ID+"-"+time_str+"-"+str(len(pop))+"pop-"+str(NGEN)+"GEN-"+state_name+".pop", 'wb')
+#    ID = time.strftime("%d%m%y%H%M%S")+str(len(pop))+str(NGEN)+str(n)   #This needs improving
+    f = open(path+time_str+"-"+str(len(pop))+"pop-"+str(NGEN)+"GEN-"+state_name+".pop", 'wb')
 
 #   Save a population object and a logbook   
 def save(pop, logbook, path, problemName):

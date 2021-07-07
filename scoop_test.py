@@ -3,6 +3,8 @@ import projectq
 from projectq.ops import H,X,Y,Z,T,Tdagger,S,Sdagger,CNOT,Measure,All,Rx,Ry,Rz,SqrtX,Swap
 import numpy as np
 import copy
+import sys
+
 
 from deap import creator, base, tools
 from candidate import Candidate
@@ -81,6 +83,7 @@ def evaluateInd(individual, verbose=False):
         print("Produced state is", got)
         print("Error is:", error)
     if len(individual.circuit) > 0 and len(individual.circuit) < MAX_CIRCUIT_LENGTH:
+        #return (error, len(individual.circuit) / MAX_CIRCUIT_LENGTH)
         return (error, len(individual.circuit) / MAX_CIRCUIT_LENGTH)
     else:
         return (error, 1.0)
@@ -100,8 +103,7 @@ stateName = str(numberOfQubits)+"QB_state"+str(stateIndex)
 loadState(numberOfQubits, stateName)
 now = datetime.now()
 timeStr = now.strftime("%d.%m.%y-%H:%M")
-ID = now.strftime("%d%m%y%H%M%S")+str(POPSIZE)+str(NGEN)+str(numberOfQubits)   #This needs improving
-problemName = f"{ID}-{timeStr}-{POPSIZE}pop-{NGEN}GEN-{stateName}"
+problemName = f"{timeStr}-{POPSIZE}pop-{NGEN}GEN-{stateName}"
 
 problemDescription = "State initalization for:\n"
 problemDescription += "numberOfQubits=" + str(numberOfQubits) + "\n"
@@ -143,18 +145,15 @@ def main():
     MUTPB = 0.2
 
     
-#    while (true):
-#        response = input('load values? (y/n) ')
-#        if response.lower() == 'y':
-#            f = open('saved/results', 'rb')
-#            pop = pickle.load(f)
-#            f.close()
-#            break
-#        elif response.lower() == 'n':
-#            break
-    toolbox.register("map", futures.map)
-    pop = toolbox.population(n=POPSIZE)
+    if len(sys.argv) > 1:
+        path = sys.argv[1]
+        f = open(path, 'rb')
+        pop = pickle.load(f)
+        f.close()
+    else:
+        pop = toolbox.population(n=POPSIZE)
 
+    toolbox.register("map", futures.map)
 #    toolbox.unregister("individual")
 #    toolbox.unregister("population")
 
@@ -183,25 +182,8 @@ def main():
 #    for k in range(n_phys-n):
 #        aug_desired_state = np.kron([1,0],aug_desired_state)
 
-    backend = Aer.get_backend('qasm_simulator')
-    circ.save_density_matrix()
-    perm_unitary = pop[0].getPermutationMatrix()
-    perm_desired_state = perm_unitary.data @ desired_state
-
-    result = execute(circ,backend,shots=1).result()
-    noisy_dens_matr = result.data()['density_matrix']
-    fid = state_fidelity(perm_desired_state, noisy_dens_matr)
-
-    print(1-fid)
-    print(circ)
-
-    # Comparing the results with qiskit transpile funtion
-    fake_machine = FakeAthens()
-    qiskit_circs, depths = genCircs(numberOfQubits, fake_machine, desired_state)    
-    circs = [circ.toQiskitCircuit() for circ in pop]
-    circs = circs[0:1]
-    plotCircLengths(qiskit_circs, circs)
-    
+    from comparison import compare
+    compare(pop, numberOfQubits, desired_state)
      
     # Save the results
     if saveResult:

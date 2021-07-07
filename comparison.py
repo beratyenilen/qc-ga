@@ -31,7 +31,7 @@ def compare(pop, numberOfQubits, desired_state):
     noisy_dens_matr = result.data()['density_matrix']
     fid = state_fidelity(perm_desired_state, noisy_dens_matr)
 
-    print(1-fid)
+    print(fid)
     print(circ)
 
     # Comparing the results with qiskit transpile funtion
