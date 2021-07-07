@@ -1,10 +1,13 @@
+#   
+#   An attempt to implement multiprocessing
+#
+
+
 # Importing the necessary modules.
 import projectq
 from projectq.ops import H,X,Y,Z,T,Tdagger,S,Sdagger,CNOT,Measure,All,Rx,Ry,Rz,SqrtX,Swap
 import numpy as np
-import copy
-import sys
-
+import copy, sys, getopt, os
 
 from deap import creator, base, tools
 from candidate import Candidate
@@ -21,7 +24,6 @@ from qiskit.quantum_info import state_fidelity, DensityMatrix, Statevector, Oper
 from qiskit.providers.aer import QasmSimulator
 from qiskit.test.mock import FakeVigo, FakeAthens
 from qiskit.circuit.library import Permutation
-
 from qiskit_transpiler.transpiled_initialization_circuits import genCircs, getFidelities
 
 def limit_cpu():
@@ -88,22 +90,38 @@ def evaluateInd(individual, verbose=False):
     else:
         return (error, 1.0)
 
-#numberOfQubits = config.numberOfQubits
-#NGEN = config.NGEN
-#POPSIZE = config.POPSIZE
-#stateIndex = config.stateIndex
-#multiProcess = config.multiProcess
-#verbose = config.verbose
-#saveResult = config.saveResult
-#allowedGates = config.allowedGates
- 
-# Initialize your variables
-#stateIndex = 42 
+import argparse
+
+
+# Initialize parser
+parser = argparse.ArgumentParser()
+
+# Adding optional argument
+parser.add_argument("-p", "--POPSIZE", help = "Size of the population")
+parser.add_argument("-g", "--NGEN", help = "The number of generations")
+parser.add_argument("-q", "--NQUBIT", help = "The number of qubits")
+parser.add_argument("-i", "--INDEX", help = "Index of desired state")
+
+# Read arguments from command line
+args = parser.parse_args()
+
+if args.POPSIZE:
+    POPSIZE = int(args.POPSIZE)
+if args.NGEN:
+    NGEN = int(args.NGEN)
+if args.NQUBIT:
+    numberOfQubits = int(args.NQUBIT)
+if args.INDEX:
+    stateIndex = int(args.INDEX)
+
 stateName = str(numberOfQubits)+"QB_state"+str(stateIndex)
 loadState(numberOfQubits, stateName)
 now = datetime.now()
 timeStr = now.strftime("%d.%m.%y-%H:%M")
-problemName = f"{timeStr}-{POPSIZE}pop-{NGEN}GEN-{stateName}"
+#problemName = f"{timeStr}-{POPSIZE}pop-{NGEN}GEN-{stateName}"
+directory = f"performance_data/{numberOfQubits}QB/{POPSIZE}POP/"
+ID = int(len(os.listdir(directory)) / 2)
+problemName = f"{ID}-{NGEN}GEN-{stateName}"
 
 problemDescription = "State initalization for:\n"
 problemDescription += "numberOfQubits=" + str(numberOfQubits) + "\n"
@@ -145,14 +163,15 @@ def main():
     MUTPB = 0.2
 
     
-    if len(sys.argv) > 1:
-        path = sys.argv[1]
-        f = open(path, 'rb')
-        pop = pickle.load(f)
-        f.close()
-    else:
-        pop = toolbox.population(n=POPSIZE)
+    #if len(sys.argv) > 1:
+    #    path = sys.argv[1]
+    #    f = open(path, 'rb')
+    #    pop = pickle.load(f)
+    #    f.close()
+    #else:
+    #    pop = toolbox.population(n=POPSIZE)
 
+    pop = toolbox.population(n=POPSIZE)
     toolbox.register("map", futures.map)
 #    toolbox.unregister("individual")
 #    toolbox.unregister("population")
@@ -182,12 +201,11 @@ def main():
 #    for k in range(n_phys-n):
 #        aug_desired_state = np.kron([1,0],aug_desired_state)
 
-    from comparison import compare
-    compare(pop, numberOfQubits, desired_state)
+#    from comparison import compare
+#    compare(pop, numberOfQubits, desired_state)
      
     # Save the results
     if saveResult:
-        directory = "saved/test/"
         save(pop, logbook, directory, problemName)
         print(f"The population and logbook were saved in {directory}{problemName}")
 
