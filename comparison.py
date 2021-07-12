@@ -21,16 +21,28 @@ from qiskit.transpiler.passes import BasicSwap, LayoutTransformation, RemoveFina
 
 
 def compare(pop, numberOfQubits, desired_state):
-    backend = Aer.get_backend('qasm_simulator')
+    initial_state = [0]*2**numberOfQubits
+    initial_state[0] = 1
     circ = pop[0].toQiskitCircuit()
     circ.save_density_matrix()
     perm_unitary = pop[0].getPermutationMatrix()
-    perm_desired_state = perm_unitary.data @ desired_state
+    perm_desired_state = perm_unitary @ desired_state
 
+    backend = Aer.get_backend('statevector_simulator')
+    statevector = execute(circ, backend).result().get_statevector(circ)
+#    print(state_fidelity(desired_state, perm_unitary @ statevector))
+#    perm_desired_state = desired_state
+
+
+    backend = Aer.get_backend('qasm_simulator')
     result = execute(circ,backend,shots=1).result()
-    noisy_dens_matr = result.data()['density_matrix']
-    fid = state_fidelity(perm_desired_state, noisy_dens_matr)
+    dens_matr = result.data()['density_matrix']
 
+    print(len(dens_matr))
+    print(len(dens_matr@perm_unitary))
+
+    fid = state_fidelity(perm_unitary @ desired_state, dens_matr)
+    
     print(fid)
     print(circ)
 
