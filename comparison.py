@@ -29,8 +29,6 @@ def compare(pop, numberOfQubits, desired_state):
     perm_unitary = pop[0].getPermutationMatrix()
     perm_desired_state = np.linalg.inv(perm_unitary) @ desired_state
 
-    backend = Aer.get_backend('statevector_simulator')
-    statevector = execute(circ, backend).result().get_statevector(circ)
 #    print(state_fidelity(desired_state, perm_unitary @ statevector))
 #    perm_desired_state = desired_state
 
@@ -44,6 +42,17 @@ def compare(pop, numberOfQubits, desired_state):
 
     fid = state_fidelity(perm_desired_state, dens_matr)
     
+    
+    print(circ)
+    print(fid)
+    pop[0].optimize()
+    circ = pop[0].toQiskitCircuit()
+    circ.save_density_matrix()
+    perm_unitary = pop[0].getPermutationMatrix()
+    perm_desired_state = np.linalg.inv(perm_unitary) @ desired_state
+    result = execute(circ,backend,shots=1).result()
+    dens_matr = result.data()['density_matrix']
+    fid = state_fidelity(perm_desired_state, dens_matr)
     print(fid)
     print(circ)
 
