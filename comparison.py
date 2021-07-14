@@ -1,3 +1,4 @@
+from math import perm
 from qiskit_transpiler.transpiled_initialization_circuits import genCircs, getFidelities
 from tools import load, loadState, plotCircLengths
 
@@ -26,10 +27,8 @@ def compare(pop, numberOfQubits, desired_state):
     circ = pop[0].toQiskitCircuit()
     circ.save_density_matrix()
     perm_unitary = pop[0].getPermutationMatrix()
-    perm_desired_state = perm_unitary @ desired_state
+    perm_desired_state = np.linalg.inv(perm_unitary) @ desired_state
 
-    backend = Aer.get_backend('statevector_simulator')
-    statevector = execute(circ, backend).result().get_statevector(circ)
 #    print(state_fidelity(desired_state, perm_unitary @ statevector))
 #    perm_desired_state = desired_state
 
@@ -41,8 +40,19 @@ def compare(pop, numberOfQubits, desired_state):
     print(len(dens_matr))
     print(len(dens_matr@perm_unitary))
 
-    fid = state_fidelity(perm_unitary @ desired_state, dens_matr)
+    fid = state_fidelity(perm_desired_state, dens_matr)
     
+    
+    print(circ)
+    print(fid)
+    pop[0].optimize()
+    circ = pop[0].toQiskitCircuit()
+    circ.save_density_matrix()
+    perm_unitary = pop[0].getPermutationMatrix()
+    perm_desired_state = np.linalg.inv(perm_unitary) @ desired_state
+    result = execute(circ,backend,shots=1).result()
+    dens_matr = result.data()['density_matrix']
+    fid = state_fidelity(perm_desired_state, dens_matr)
     print(fid)
     print(circ)
 
@@ -54,13 +64,13 @@ def compare(pop, numberOfQubits, desired_state):
     plotCircLengths(qiskit_circs, circs)
 
 def main():
-    numberOfQubits = 2
+    numberOfQubits = 3
     desired_state = loadState(numberOfQubits, 42)
     fitnessWeights = (-1.0,-1.0)
     creator.create("FitnessMin", base.Fitness, weights=fitnessWeights)
     creator.create("Individual", Candidate, fitness=creator.FitnessMin)
-#    path = 'saved/test/05.07.21-16:24-50pop-100GEN-2QB_state42.pop'
-    path = sys.argv[1]
+    path = 'saved/results/0-50GEN-3QB_state42.pop'
+#    path = sys.argv[1]
     f = open(path, 'rb')
     pop = pickle.load(f)
     f.close()
