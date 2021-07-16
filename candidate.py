@@ -384,6 +384,41 @@ class Candidate:
         self.circuit = qasm2ls(qc.qasm())
         self.optimized = True
 
+    def trim(self):
+        """
+        (WIP)
+        Optimizes self.circuit by removing redundant gates
+        """
+        finished = False
+        while not finished :
+            finished = True
+            i = 0
+            while i < len(self.circuit) - 1:
+                gate = self.circuit[i]
+                if gate[1] == SqrtX:
+                    #print("sqrt")
+                    1 + 1
+                elif gate[0] == "SG":
+                    1 + 1
+                elif gate[0] == "TFG":
+                    1 + 1
+                else:
+                    j = i+1
+                    while j < len(self.circuit):
+                        if self.circuit[j][2] == gate[2]: 
+                            if self.circuit[j][1] != gate[1]:
+                                break
+                            self.circuit.pop(j)
+                            self.circuit.pop(i)
+                            finished = False
+                            break
+                        if self.circuit[j][0] == "TFG":
+                            break
+                        j += 1
+                i += 1
+            
+
+
     def evaluateCost(self):
         """
         Evaluates the cost of the self.circuit.

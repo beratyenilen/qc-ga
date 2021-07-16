@@ -42,14 +42,13 @@ def compare(pop, numberOfQubits, desired_state):
 
     fid = state_fidelity(perm_desired_state, dens_matr)
     
-    
+    print(pop[0])
     print(circ)
     print(fid)
-    pop[0].optimize()
+
+    pop[0].trim()
     circ = pop[0].toQiskitCircuit()
     circ.save_density_matrix()
-    perm_unitary = pop[0].getPermutationMatrix()
-    perm_desired_state = np.linalg.inv(perm_unitary) @ desired_state
     result = execute(circ,backend,shots=1).result()
     dens_matr = result.data()['density_matrix']
     fid = state_fidelity(perm_desired_state, dens_matr)
@@ -58,7 +57,7 @@ def compare(pop, numberOfQubits, desired_state):
 
     # Comparing the results with qiskit transpile funtion
     fake_machine = FakeAthens()
-    qiskit_circs, depths = genCircs(numberOfQubits, fake_machine, desired_state)    
+    qiskit_circs, depths = genCircs(numberOfQubits, fake_machine, desired_state, n_iter=10)    
     circs = [circ.toQiskitCircuit() for circ in pop]
     circs = circs[0:1]
     plotCircLengths(qiskit_circs, circs)
