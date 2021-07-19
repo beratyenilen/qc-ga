@@ -405,14 +405,17 @@ class Candidate:
                 else:
                     j = i+1
                     while j < len(self.circuit):
-                        if self.circuit[j][2] == gate[2]: 
-                            if self.circuit[j][1] != gate[1]:
-                                break
+                        if self.circuit[j][1] == gate[1] and self.circuit[j][2] == gate[2]:
                             self.circuit.pop(j)
                             self.circuit.pop(i)
                             finished = False
                             break
-                        if self.circuit[j][0] == "TFG":
+                        elif self.circuit[j][0] == "TFG":
+                            if self.circuit[j][2] == gate[2] or self.circuit[j][3] == gate[2]:
+                                break
+                        elif self.circuit == "SG":
+                            break
+                        elif self.circuit[j][2] == gate[2]:
                             break
                         j += 1
                 i += 1
