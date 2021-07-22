@@ -395,12 +395,18 @@ class Candidate:
             i = 0
             while i < len(self.circuit) - 1:
                 gate = self.circuit[i]
+
                 if gate[1] == SqrtX:
                     j = i+1
                     while j < len(self.circuit):
                         if self.circuit[j][1] == gate[1] and self.circuit[j][2] == gate[2]:
                             self.circuit.pop(j)
                             self.circuit[i] = ("SFG", X, gate[2])
+                            finished = False
+                            break
+                        elif self.circuit[j][1] == get_inverse(SqrtX) and self.circuit[j][2] == gate[2]:
+                            self.circuit.pop(j)
+                            self.circuit.pop(i)
                             finished = False
                             break
                         elif self.circuit[j][0] == "TFG":
@@ -426,8 +432,6 @@ class Candidate:
                         elif self.circuit[j][2] == gate[2]:
                             break
                         j += 1
-                elif gate[0] == "TFG":
-                    1 + 1
                 elif gate[1] == X:
                     j = i+1
                     while j < len(self.circuit):
@@ -444,6 +448,8 @@ class Candidate:
                         elif self.circuit[j][2] == gate[2]:
                             break
                         j += 1
+                elif gate[0] == "TFG":
+                    1 + 1
                 i += 1
             
 
