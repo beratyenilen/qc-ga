@@ -448,8 +448,44 @@ class Candidate:
                         elif self.circuit[j][2] == gate[2]:
                             break
                         j += 1
-                elif gate[0] == "TFG":
-                    1 + 1
+                elif gate[1] == CX:
+                    j = i+1
+                    while j < len(self.circuit):
+                        if self.circuit[j][1] == gate[1] and self.circuit[j][2] == gate[2] and self.circuit[j][3] == gate[3]:
+                            self.circuit.pop(j)
+                            self.circuit.pop(i)
+                            finished = False
+                            break
+                        elif self.circuit[j][0] == "TFG":
+                            if self.circuit[j][2] == gate[2] or self.circuit[j][3] == gate[2] or self.circuit[j][2] == gate[3] or self.circuit[j][3] == gate[3]:
+                                break
+                        elif self.circuit == "SG":
+                            break
+                        elif self.circuit[j][2] == gate[2]:
+                            break
+                        j += 1
+                elif gate[1] == Swap:
+                    j = i+1
+                    while j < len(self.circuit):
+                        if self.circuit[j][1] == gate[1] and self.circuit[j][2] == gate[2] and self.circuit[j][3] == gate[3]:
+                            self.circuit.pop(j)
+                            self.circuit.pop(i)
+                            finished = False
+                            break
+                        if self.circuit[j][1] == gate[1] and self.circuit[j][2] == gate[3] and self.circuit[j][3] == gate[2]:
+                            self.circuit.pop(j)
+                            self.circuit.pop(i)
+                            finished = False
+                            break
+                        elif self.circuit[j][0] == "TFG":
+                            if self.circuit[j][2] == gate[2] or self.circuit[j][3] == gate[2] or self.circuit[j][2] == gate[3] or self.circuit[j][3] == gate[3]:
+                                break
+                        elif self.circuit == "SG":
+                            break
+                        elif self.circuit[j][2] == gate[2]:
+                            break
+                        j += 1
+
                 i += 1
             
 
