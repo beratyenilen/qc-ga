@@ -386,7 +386,6 @@ class Candidate:
 
     def trim(self):
         """
-        (WIP)
         Optimizes self.circuit by removing redundant gates
         """
         finished = False
@@ -412,8 +411,6 @@ class Candidate:
                         elif self.circuit[j][0] == "TFG":
                             if self.circuit[j][2] == gate[2] or self.circuit[j][3] == gate[2]:
                                 break
-                        elif self.circuit == "SG":
-                            break
                         elif self.circuit[j][2] == gate[2]:
                             break
                         j += 1
@@ -443,8 +440,6 @@ class Candidate:
                         elif self.circuit[j][0] == "TFG":
                             if self.circuit[j][2] == gate[2] or self.circuit[j][3] == gate[2]:
                                 break
-                        elif self.circuit == "SG":
-                            break
                         elif self.circuit[j][2] == gate[2]:
                             break
                         j += 1
@@ -456,13 +451,13 @@ class Candidate:
                             self.circuit.pop(i)
                             finished = False
                             break
-                        elif self.circuit[j][0] == "TFG":
-                            if self.circuit[j][2] == gate[2] or self.circuit[j][3] == gate[2] or self.circuit[j][2] == gate[3] or self.circuit[j][3] == gate[3]:
-                                break
-                        elif self.circuit == "SG":
-                            break
                         elif self.circuit[j][2] == gate[2]:
                             break
+                        elif self.circuit[j][2] == gate[3]:
+                            break
+                        elif self.circuit[j][0] == "TFG":
+                            if self.circuit[j][3] == gate[2] or self.circuit[j][3] == gate[3]:
+                                break
                         j += 1
                 elif gate[1] == Swap:
                     j = i+1
@@ -477,13 +472,13 @@ class Candidate:
                             self.circuit.pop(i)
                             finished = False
                             break
-                        elif self.circuit[j][0] == "TFG":
-                            if self.circuit[j][2] == gate[2] or self.circuit[j][3] == gate[2] or self.circuit[j][2] == gate[3] or self.circuit[j][3] == gate[3]:
-                                break
-                        elif self.circuit == "SG":
-                            break
                         elif self.circuit[j][2] == gate[2]:
                             break
+                        elif self.circuit[j][2] == gate[3]:
+                            break
+                        elif self.circuit[j][0] == "TFG":
+                            if self.circuit[j][3] == gate[2] or self.circuit[j][3] == gate[3]:
+                                break
                         j += 1
 
                 i += 1
