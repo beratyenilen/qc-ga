@@ -43,6 +43,7 @@ def compare(pop, numberOfQubits, desired_state):
     fid = state_fidelity(perm_desired_state, dens_matr)
     
     print(pop[0])
+    print("Circuit before optimization")
     print(circ)
     print(fid)
 
@@ -53,7 +54,18 @@ def compare(pop, numberOfQubits, desired_state):
     dens_matr = result.data()['density_matrix']
     fid = state_fidelity(perm_desired_state, dens_matr)
     print(fid)
+    print("Circuit after optimization:")
     print(circ)
+    fake_machine = FakeAthens()
+    circ = pop[0].toQiskitCircuit()
+    new_circ = transpile(circ,fake_machine,optimization_level=2)
+    new_circ.save_density_matrix()
+    result = execute(new_circ,backend,shots=1).result()
+    dens_matr = result.data()['density_matrix']
+    fid = state_fidelity(perm_desired_state, dens_matr)
+    print("Circuit after transpile:")
+    print(new_circ)
+    print(fid)
 
     # Comparing the results with qiskit transpile funtion
     fake_machine = FakeAthens()
