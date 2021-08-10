@@ -56,13 +56,23 @@ def compare(pop, numberOfQubits, desired_state):
     print(fid)
     print("Circuit after optimization:")
     print(circ)
+    
+    n_phys = 5
+    n = numberOfQubits
+    anc = QuantumRegister(n_phys-n, 'ancilla')
+    circ.add_register(anc)
+    aug_desired_state = perm_desired_state
+    for k in range(n_phys-n):
+        aug_desired_state = np.kron([1,0],aug_desired_state)
+    print(aug_desired_state)
+
     fake_machine = FakeAthens()
     circ = pop[0].toQiskitCircuit()
-    new_circ = transpile(circ,fake_machine,optimization_level=2)
+    new_circ = transpile(circ,fake_machine,optimization_level=0)
     new_circ.save_density_matrix()
     result = execute(new_circ,backend,shots=1).result()
     dens_matr = result.data()['density_matrix']
-    fid = state_fidelity(perm_desired_state, dens_matr)
+    fid = state_fidelity(aug_desired_state, dens_matr)
     print("Circuit after transpile:")
     print(new_circ)
     print(fid)
