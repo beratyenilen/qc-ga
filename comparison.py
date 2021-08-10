@@ -57,32 +57,53 @@ def compare(pop, numberOfQubits, desired_state):
     print("Circuit after optimization:")
     print(circ)
     
-    n_phys = 5
     n = numberOfQubits
-    anc = QuantumRegister(n_phys-n, 'ancilla')
-    circ.add_register(anc)
+    fake_machine = FakeAthens()
+    circ = pop[0].toQiskitCircuit()
+    circ.barrier()
+    for i in range(n):
+        circ.measure(i,i)
+    circ = transpile(circ,fake_machine,optimization_level=0)
+    qubit_pattern = list(circ._layout.get_virtual_bits().values()) # How virtual bits map to physical bits
+    n_phys = len(qubit_pattern) # n of physical bits
+#    anc = QuantumRegister(n_phys-n, 'ancilla')
+#    circ.add_register(anc)
     aug_desired_state = perm_desired_state
     for k in range(n_phys-n):
         aug_desired_state = np.kron([1,0],aug_desired_state)
-    print(aug_desired_state)
 
-    fake_machine = FakeAthens()
-    circ = pop[0].toQiskitCircuit()
-    new_circ = transpile(circ,fake_machine,optimization_level=0)
-    new_circ.save_density_matrix()
-    result = execute(new_circ,backend,shots=1).result()
+    #   Computing the permutations done by
+    #   transpile function
+    perm = [0,1,2,3,4]
+    for op, qubits, clbits in circ.data:
+        if op.name == 'measure':
+            a = perm.index(clbits[0].index)
+            b = perm[qubits[0].index]
+            perm[qubits[0].index] = clbits[0].index
+            perm[a] = b
+    circ.remove_final_measurements()
+    circ.save_density_matrix()
+    qubit_pattern = perm
+
+    perm_circ = Permutation(n_phys, qubit_pattern) # Creating a circuit for qubit mapping
+    perm_unitary = Operator(perm_circ) # Matrix for the previous circuit
+
+    perm_aug_desired_state = perm_unitary.data @ aug_desired_state
+
+    result = execute(circ,backend,shots=1).result()
     dens_matr = result.data()['density_matrix']
-    fid = state_fidelity(aug_desired_state, dens_matr)
+    fid = state_fidelity(perm_aug_desired_state, dens_matr)
     print("Circuit after transpile:")
-    print(new_circ)
+    print(circ)
     print(fid)
+    print(perm)
 
     # Comparing the results with qiskit transpile funtion
     fake_machine = FakeAthens()
     qiskit_circs, depths = genCircs(numberOfQubits, fake_machine, desired_state, n_iter=10)    
     circs = [circ.toQiskitCircuit() for circ in pop]
     circs = circs[0:1]
-    plotCircLengths(qiskit_circs, circs)
+#    plotCircLengths(qiskit_circs, circs)
 
 def main():
     numberOfQubits = 3

@@ -281,7 +281,7 @@ class Candidate:
         """
         Returns: qiskit.QuantumCircuit object of the circuit of the Candidate
         """
-        qc = QuantumCircuit(self.numberOfQubits)
+        qc = QuantumCircuit(self.numberOfQubits, self.numberOfQubits)
         for op in self.circuit:
             if op[0] == "TFG":
                 # can be CNOT,CX,Swap,SwapGate
