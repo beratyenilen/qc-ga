@@ -27,12 +27,6 @@ from qiskit.test.mock import FakeVigo, FakeAthens
 from qiskit.circuit.library import Permutation
 from qiskit_transpiler.transpiled_initialization_circuits import genCircs, getFidelities
 
-def limit_cpu():
-    "is called at every process start"
-    p = psutil.Process(os.getpid())
-    # set to lowest priority, this is windows only, on Unix use ps.nice(19)
-    p.nice(19)
-
 
 def loadState(numberOfQubits, stateName):
     f = open('states/'+str(numberOfQubits)+'_qubits/' + stateName, 'rb')
@@ -152,7 +146,7 @@ toolbox.register("mate", crossoverInd, toolbox=toolbox)
 toolbox.register("mutate", mutateInd)
 toolbox.register("select", tools.selNSGA2)
 toolbox.register("selectAndEvolve", selectAndEvolve)
-toolbox.register("evaluate", evaluateInd)
+toolbox.register("evaluate", evaluateIndcostt)
 
 def main():
 # Your main function
@@ -199,11 +193,14 @@ def main():
 
     from comparison import compare
     compare(pop, numberOfQubits, desired_state)
+
      
     # Save the results
     if saveResult:
         save(pop, logbook, directory, problemName)
         print(f"The population and logbook were saved in {directory}{problemName}")
+
+    plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluateInd, POPSIZE)
 
     print(f'Runtime: {runtime}s')
     return runtime

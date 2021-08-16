@@ -82,10 +82,6 @@ def plotFitSize(logbook, fitness="min", size="avg"):
 
   plt.show()
 
-#   WIP
-def plotPopFitSize(pop):
-    return 0
-
 def plotCircLengths(circs, circs2):
     sizes1 = np.array([circ.size() for circ in circs])
     max_size = sizes1.max()
@@ -94,4 +90,35 @@ def plotCircLengths(circs, circs2):
         max_size = sizes2.max()
     plt.hist(sizes1, bins=max_size, range=(0,max_size), alpha=0.5)
     plt.hist(sizes2, bins=max_size, range=(0,max_size), alpha=0.5)
+    plt.show()
+
+
+def plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluateInd, POPSIZE):
+    name = problemName+".pop"
+    f = open('states/'+str(numberOfQubits)+'_qubits/' + stateName, 'rb')
+    desired_state = pickle.load(f)
+    f.close()
+
+    data = []
+    c=[]
+    for i in range(POPSIZE):
+        c.append(i)
+        f = open(directory+name, 'rb')
+        pop = pickle.load(f)
+        f.close()
+        pop[i].trim()
+        circ = pop[i]
+        data.append([circ.toQiskitCircuit().size(), 1-evaluateInd(circ)[0]])
+#    plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
+        
+    data = np.array(data)
+    x = data[:, 0]
+    y = data[:, 1]
+    plt.scatter(x, y, c=c)
+    plt.ylabel("Fidelity")
+    plt.xlabel("Length")
+#plt.xlim(0,400)
+#plt.ylim(0,1)
+    plt.title("Evaluation by length (1000 gen)")
+    plt.colorbar()
     plt.show()
