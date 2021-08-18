@@ -8,6 +8,7 @@ from constants import *
 import pickle
 from copy import deepcopy
 
+
 def mutateInd(individual, verbose=False):
   if individual.fitness.values[0] < NEXT_STAGE_ERROR and not individual.optimized:
     individual.optimize()
@@ -16,7 +17,7 @@ def mutateInd(individual, verbose=False):
   if individual.optimized:
     individual.parameterMutation()
     return individual
-  mutationChoice = random.choice(range(12))
+  mutationChoice = random.choice(range(11))
   if mutationChoice == 0:
     individual.discreteUniformMutation()
   elif mutationChoice == 1:
@@ -27,17 +28,17 @@ def mutateInd(individual, verbose=False):
     individual.sequenceAndInverseInsertion()
   elif mutationChoice == 4:
     individual.insertMutateInvert()
+  #elif mutationChoice == 5:
+  #  individual.swapQubits()
   elif mutationChoice == 5:
-    individual.swapQubits()
-  elif mutationChoice == 6:
     individual.sequenceDeletion()
-  elif mutationChoice == 7:
+  elif mutationChoice == 6:
     individual.sequenceReplacement()
-  elif mutationChoice == 8:
+  elif mutationChoice == 7:
     individual.sequenceSwap()
-  elif mutationChoice == 9:
+  elif mutationChoice == 8:
     individual.sequenceScramble()
-  elif mutationChoice == 10:
+  elif mutationChoice == 9:
     individual.permutationMutation()
   else:
     individual.moveGate()
@@ -94,9 +95,7 @@ def chooseIndividuals(ranks, N, toolbox, currentRank=1, verbose=False):
 
       if elementIndex >= len(ranks[listIndex]):
         elementIndex = -1
-      #print("copying")
       cp = deepcopy(ranks[listIndex][elementIndex])
-      #print("done")
       cp = toolbox.mutate(cp)
       cp.fitness.values = toolbox.evaluate(cp)
       cps.append(cp)
@@ -116,6 +115,8 @@ def selectAndEvolve(pop, toolbox, verbose=False):
   # individuals with rank i.
   ranks = sortNondominated(pop, len(pop))
   # Now we will carry the top 10% individuals to the next generation directly.
+#  for indv in ranks[0]:
+#      print(indv.fitness.values)
   toCarry = int(len(pop)/10)
   nextGeneration = []
   bestCandidate = ranks[0][0]

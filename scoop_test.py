@@ -81,8 +81,9 @@ def evaluateInd(individual, verbose=False):
         print("Error is:", error)
     if len(individual.circuit) > 0 and len(individual.circuit) < MAX_CIRCUIT_LENGTH:
         #return (error, len(individual.circuit) / MAX_CIRCUIT_LENGTH)
-        return (error, len(individual.circuit) / MAX_CIRCUIT_LENGTH)
+        return (error, len(individual.circuit))
     else:
+        return (error, len(individual.circuit))
         return (error, 1.0)
 
 
@@ -133,20 +134,21 @@ creator.create("Individual", Candidate, fitness=creator.FitnessMin)
 # Initialize your toolbox and population
 toolbox = base.Toolbox()
 
-from scoop import futures
+#from scoop import futures
 
 #if multiProcess:
 #    pool = multiprocessing.Pool()
 #    toolbox.register("map", pool.map)
 
-toolbox.register("individual", creator.Individual, numberOfQubits, allowedGates)
+
+toolbox.register("individual", creator.Individual, numberOfQubits, allowedGates, connectivity)
 toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
 toolbox.register("mate", crossoverInd, toolbox=toolbox)
 toolbox.register("mutate", mutateInd)
 toolbox.register("select", tools.selNSGA2)
 toolbox.register("selectAndEvolve", selectAndEvolve)
-toolbox.register("evaluate", evaluateIndcostt)
+toolbox.register("evaluate", evaluateInd)
 
 def main():
 # Your main function
@@ -160,13 +162,16 @@ def main():
     MUTPB = 0.2
 
     pop = toolbox.population(n=POPSIZE)
-    toolbox.register("map", futures.map)
+#    toolbox.register("map", futures.map)
 #    toolbox.unregister("individual")
 #    toolbox.unregister("population")
 
     start = time.perf_counter()
     pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
     runtime = round(time.perf_counter() - start, 2)
+    
+    for circ in pop:
+        print(circ.fitness.values)
 
 
 
