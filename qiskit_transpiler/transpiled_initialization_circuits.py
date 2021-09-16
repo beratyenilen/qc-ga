@@ -13,13 +13,17 @@ from qiskit.quantum_info import state_fidelity, DensityMatrix, Statevector, Oper
 from qiskit import BasicAer
 #from qiskit.extensions import Initialize
 #from qiskit.providers.aer import QasmSimulator
+from qiskit.providers.aer.noise import NoiseModel
 from qiskit.providers.aer.extensions import snapshot_density_matrix
 from qiskit.circuit.library import Permutation
 #from qiskit.transpiler import PassManager, CouplingMap, Layout
 #from qiskit.transpiler.passes import BasicSwap, LayoutTransformation, RemoveFinalMeasurements
 
 #   Computes the fidelities for transpiled circuits
-def getFidelities(n, circs, machine_simulator, desired_vector):
+def getFidelities(n, circs, machine_simulator, fake_machine, desired_vector):
+    noise_model = NoiseModel.from_backend(fake_machine)
+    coupling_map = fake_machine.configuration().coupling_map
+    basis_gates = noise_model.basis_gates
     fidelities = []
     #n_shots = 20
     n_iter = len(circs)
@@ -39,7 +43,8 @@ def getFidelities(n, circs, machine_simulator, desired_vector):
                 perm[qubits[0].index] = clbits[0].index
                 perm[a] = b
         circs[i].remove_final_measurements()
-        circs[i].save_density_matrix()
+#        circs[i].save_density_matrix()
+        circs[i].snapshot_density_matrix('final')
         
         qubit_pattern = perm
 
@@ -56,10 +61,22 @@ def getFidelities(n, circs, machine_simulator, desired_vector):
         pad_vectors.append(perm_aug_desired_vector)
 
     for i in range(n_iter):
-        result = execute(circs[i],machine_simulator,shots=1).result()
-        noisy_dens_matr = result.data()['density_matrix']
-        fid = state_fidelity(pad_vectors[i],noisy_dens_matr)
+#        result = execute(circs[i],machine_simulator,shots=1).result()
+#        noisy_dens_matr = result.data()['density_matrix']
+        s = 0
+        for _ in range(100):
+            result = execute(circs[i],machine_simulator,
+                            coupling_map=coupling_map,
+                            basis_gates=basis_gates,
+                            noise_model=noise_model,
+                            shots=1).result()
+            noisy_dens_matr = result.data()['snapshots']['density_matrix']['final'][0]['value']
+            fid = state_fidelity(pad_vectors[i],noisy_dens_matr)
+            s += fid
+        fid = s/100
         fidelities.append(fid)
+        print(i)
+        print(fid)
     return fidelities
 
 #   Generate a random desired_vector
@@ -94,15 +111,15 @@ def genCircs(n, fake_machine, desired_vector, n_iter=10, optimization_level=2):
 def main():
     machine_simulator = Aer.get_backend('qasm_simulator')
     fake_machine = FakeAthens()
-    n = 4
+    n = 2
 
     desired_vector = randomDV(n)
     print(desired_vector)
     print(np.linalg.norm(desired_vector))
 
-    circs, depths = genCircs(n, fake_machine, desired_vector)
+    circs, depths = genCircs(n, fake_machine, desired_vector, n_iter=100)
 
-    fidelities = getFidelities(n, circs, machine_simulator, desired_vector)
+    fidelities = getFidelities(n, circs, machine_simulator, fake_machine, desired_vector)
     mean_fidelity = sum(fidelities)/len(fidelities)
     print("mean fidelity: " + str(mean_fidelity))
 
@@ -110,6 +127,7 @@ def main():
     plt.hist(fidelities, bins=list(np.arange(0,1.2,0.01)), align='left', color='#AC557C')
     plt.xlabel('Fidelity', fontsize=14)
     plt.ylabel('Counts', fontsize=14)
+    plt.ylim(0,1000)
     plt.show()
 
 if __name__ == "__main__":
