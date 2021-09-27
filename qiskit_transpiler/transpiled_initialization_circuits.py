@@ -111,24 +111,23 @@ def genCircs(n, fake_machine, desired_vector, n_iter=10, optimization_level=2):
 def main():
     machine_simulator = Aer.get_backend('qasm_simulator')
     fake_machine = FakeAthens()
-    n = 2
 
-    desired_vector = randomDV(n)
-    print(desired_vector)
-    print(np.linalg.norm(desired_vector))
-
-    circs, depths = genCircs(n, fake_machine, desired_vector, n_iter=100)
-
-    fidelities = getFidelities(n, circs, machine_simulator, fake_machine, desired_vector)
-    mean_fidelity = sum(fidelities)/len(fidelities)
-    print("mean fidelity: " + str(mean_fidelity))
-
-    plt.figure(figsize=(8, 6))
-    plt.hist(fidelities, bins=list(np.arange(0,1.2,0.01)), align='left', color='#AC557C')
+    #plt.figure(figsize=(8, 6))
+    for n in range(2,6):
+        desired_vector = randomDV(n)
+        print(desired_vector)
+        print(np.linalg.norm(desired_vector))
+        circs, depths = genCircs(n, fake_machine, desired_vector, n_iter=10)
+        fidelities = getFidelities(n, circs, machine_simulator, fake_machine, desired_vector)
+        mean_fidelity = sum(fidelities)/len(fidelities)
+        print("mean fidelity: " + str(mean_fidelity))
+        plt.hist(fidelities, bins=list(np.arange(0,1,0.01)), align='left', label=str(n)+' qubits')
     plt.xlabel('Fidelity', fontsize=14)
     plt.ylabel('Counts', fontsize=14)
-    plt.ylim(0,1000)
-    plt.show()
+    plt.legend()
+    #plt.ylim(0,300)
+    plt.savefig('Avgfids300dpi.png', dpi=300)
+    plt.savefig('Avgfids.png')
 
 if __name__ == "__main__":
     main()
