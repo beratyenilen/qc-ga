@@ -1,6 +1,7 @@
 import random
 from candidate import Candidate
-from deap.tools.emo import sortNondominated
+from deap.tools.emo import sortNondominated, selNSGA2
+from deap.tools import selSPEA2
 from deap import tools
 import math
 import numpy as np
@@ -17,7 +18,7 @@ def mutateInd(individual, verbose=False):
   if individual.optimized:
     individual.parameterMutation()
     return individual
-  mutationChoice = random.choice(range(11))
+  mutationChoice = random.choice(range(12))
   if mutationChoice == 0:
     individual.discreteUniformMutation()
   elif mutationChoice == 1:
@@ -40,6 +41,8 @@ def mutateInd(individual, verbose=False):
     individual.sequenceScramble()
   elif mutationChoice == 9:
     individual.permutationMutation()
+  elif mutationChoice == 10:
+    individual.trim()
   else:
     individual.moveGate()
   return individual
@@ -96,7 +99,9 @@ def chooseIndividuals(ranks, N, toolbox, currentRank=1, verbose=False):
       if elementIndex >= len(ranks[listIndex]):
         elementIndex = -1
       cp = deepcopy(ranks[listIndex][elementIndex])
+#      while toolbox.evaluate(cp) == ranks[listIndex][elementIndex].fitness.values:
       cp = toolbox.mutate(cp)
+#          print("...")
       cp.fitness.values = toolbox.evaluate(cp)
       cps.append(cp)
       listIndexes.append(listIndex)
@@ -104,6 +109,7 @@ def chooseIndividuals(ranks, N, toolbox, currentRank=1, verbose=False):
   return cps, listIndexes, elementIndexes
 
 
+from matplotlib import pyplot as plt
 def selectAndEvolve(pop, toolbox, verbose=False):
   """
   We try to apply the selection and evolution procedure proposed in Potocek paper thing. 
@@ -113,7 +119,30 @@ def selectAndEvolve(pop, toolbox, verbose=False):
   """
   # This function returns a list and ith element of the list contains the 
   # individuals with rank i.
-  ranks = sortNondominated(pop, len(pop))
+  toCarry = int(len(pop)/10)
+  individuals = selSPEA2(pop, toCarry)
+  ranks = sortNondominated(individuals, len(pop))
+#  from matplotlib import pyplot as plt
+#
+#  j = 0
+#  for rank in ranks:
+#    color = (0,0,1-j/len(ranks))
+#    data = []
+#    for i in range(len(rank)):
+#        circ = rank[i]
+#        data.append([circ.fitness.values[1], 1-circ.fitness.values[0]])
+##    plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
+#        
+#    data = np.array(data)
+#    x = data[:, 0]
+#    y = data[:, 1]
+#    plt.scatter(x, y, label="rank "+str(j), color=color)
+#    j+=1
+#  plt.ylabel("Fidelity")
+#  plt.xlabel("Length")
+#  plt.ylim(0,1)
+#  plt.show()
+#  
   # Now we will carry the top 10% individuals to the next generation directly.
 #  for indv in ranks[0]:
 #      print(indv.fitness.values)
@@ -164,6 +193,31 @@ def selectAndEvolve(pop, toolbox, verbose=False):
       child2.fitness.values = toolbox.evaluate(child2)
       nextGeneration.append(child1)
       nextGeneration.append(child2)
+
+  j = 0
+  nG = sortNondominated(nextGeneration, len(nextGeneration))
+  nextGeneration = []
+  for n in nG:
+    nextGeneration += n
+
+#  for rankn in range(len(ranks)):
+#    for i in range(len(ranks[rankn])):
+#        circ = nextGeneration[j]
+#        color = (0,0,1-rankn/len(ranks))
+#        data = []
+#        for k in range(len(rank)):
+#            data.append([circ.fitness.values[1], circ.fitness.values[0]])
+##    plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
+#            
+#        data = np.array(data)
+#        x = data[:, 0]
+#        y = data[:, 1]
+#        plt.scatter(x, y, label="rank "+str(j), color=color)
+#        j+=1
+#  plt.ylabel("Fidelity")
+#  plt.xlabel("Length")
+#  plt.show()
+
   return nextGeneration
 
 def terminateCondition(pop, toolbox, epsilon=0.001, verbose=False):
@@ -231,6 +285,8 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
         bestCandidate = nonDominatedSolutions[i]
     bookKeep(bestCandidate, outputFile)
     
+  toCarry = int(len(pop)/10)
+  selSPEA2(pop, toCarry)
   logbook.header = "gen", "evals", "fitness", "size"
   logbook.chapters["fitness"].header = "min", "max", "avg", "std"
   logbook.chapters["size"].header = "min", "max", "avg", "std"

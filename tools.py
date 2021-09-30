@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pickle
 import numpy as np
 from datetime import datetime
+from deap.tools.emo import sortNondominated
 
 #   Functions for handling and analyzing 
 #   the population and logbook data
@@ -64,11 +65,12 @@ def plotFitSize(logbook, fitness="min", size="avg"):
   size_avgs = logbook.chapters["size"].select(size)
 
   fig, ax1 = plt.subplots()
-  line1 = ax1.plot(gen, fit_mins, "b-", label=f"{fitness} Fitness")
+  line1 = ax1.plot(gen, fit_mins, "b-", label=f"{fitness} Error")
   ax1.set_xlabel("Generation")
-  ax1.set_ylabel("Fitness", color="b")
+  ax1.set_ylabel("Error", color="b")
   for tl in ax1.get_yticklabels():
       tl.set_color("b")
+  plt.ylim(0,1)
 
   ax2 = ax1.twinx()
   line2 = ax2.plot(gen, size_avgs, "r-", label=f"{size} Size")
@@ -79,6 +81,7 @@ def plotFitSize(logbook, fitness="min", size="avg"):
   lns = line1 + line2
   labs = [l.get_label() for l in lns]
   ax1.legend(lns, labs, loc="center right")
+
 
   plt.show()
 
@@ -108,7 +111,7 @@ def plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluat
         f.close()
         pop[i].trim()
         circ = pop[i]
-        data.append([circ.toQiskitCircuit().size(), 1-evaluateInd(circ)[0]])
+        data.append([circ.toQiskitCircuit().size(), 1 - evaluateInd(circ)[0]])
 #    plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
         
     data = np.array(data)
@@ -118,7 +121,36 @@ def plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluat
     plt.ylabel("Fidelity")
     plt.xlabel("Length")
 #plt.xlim(0,400)
-#plt.ylim(0,1)
-    plt.title("Evaluation by length (1000 gen)")
+    plt.ylim(0,1)
+#    plt.title("Evaluation by length (1000 gen)")
     plt.colorbar()
     plt.show()
+
+def paretoFront(pop):
+  ranks = sortNondominated(pop, len(pop), first_front_only=True)
+  front = ranks[0]
+  data = []
+  for i in range(len(ranks[0]), len(pop)):
+      pop[i].trim()
+      circ = pop[i]
+      data.append([circ.toQiskitCircuit().size(), 1 - circ.fitness.values[0]])
+#   plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
+      
+  data = np.array(data)
+  x = data[:, 0]
+  y = data[:, 1]
+  plt.scatter(x, y, color='b')
+  data = []
+  data = np.array([[circ.toQiskitCircuit().size(), 1 - circ.fitness.values[0]] for circ in front])
+
+#  for i in range(0, len(front)):
+#      pop[i].trim()
+#      circ = pop[i]
+#      data.append([circ.toQiskitCircuit().size(), 1 - circ.fitness.values[0]])
+  x = data[:, 0]
+  y = data[:, 1]
+  plt.scatter(x, y, color='r')
+  plt.ylabel("Fidelity")
+  plt.xlabel("Length")
+  plt.ylim(0,1)
+  plt.show()

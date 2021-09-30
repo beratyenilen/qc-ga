@@ -15,6 +15,7 @@ from constants import *
 from new_evolution import crossoverInd, mutateInd, selectAndEvolve, geneticAlgorithm
 from tools import *
 from datetime import datetime
+from comparison import compare
 import time
 import multiprocessing
 import psutil
@@ -148,7 +149,7 @@ toolbox.register("mate", crossoverInd, toolbox=toolbox)
 toolbox.register("mutate", mutateInd)
 toolbox.register("select", tools.selNSGA2)
 toolbox.register("selectAndEvolve", selectAndEvolve)
-toolbox.register("evaluate", evaluateInd)
+toolbox.register("evaluate", evaluateIndcostt)
 
 def main():
 # Your main function
@@ -170,14 +171,7 @@ def main():
     pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
     runtime = round(time.perf_counter() - start, 2)
     
-    for circ in pop:
-        print(circ.fitness.values)
-
-
-
-#    plotFitSize(logbook)
-#    plotFitSize(logbook, fitness="avg")
-#    plotFitSize(logbook, fitness="std")
+    plotFitSize(logbook)
 
     print(evaluateInd(pop[0]))
     backend = Aer.get_backend('statevector_simulator')
@@ -187,17 +181,7 @@ def main():
 #    print(state_fidelity(pop[0].getPermutationMatrix() @ desiredState(), statevector))
 
 
-    # Matching the number of qubits with simulated machine
-#    n_phys = 5
-#    n = numberOfQubits
-#    anc = QuantumRegister(n_phys-n, 'ancilla')
-#    circ.add_register(anc)
-#    aug_desired_state = desired_state
-#    for k in range(n_phys-n):
-#        aug_desired_state = np.kron([1,0],aug_desired_state)
-
-    from comparison import compare
-    compare(pop, numberOfQubits, desired_state)
+#    compare(pop, numberOfQubits, desired_state)
 
      
     # Save the results
@@ -206,6 +190,7 @@ def main():
         print(f"The population and logbook were saved in {directory}{problemName}")
 
     plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluateInd, POPSIZE)
+    paretoFront(pop)
 
     print(f'Runtime: {runtime}s')
     return runtime
