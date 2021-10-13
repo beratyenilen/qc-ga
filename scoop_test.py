@@ -162,14 +162,68 @@ def main():
     CXPB = 0.2
     MUTPB = 0.2
 
-    pop = toolbox.population(n=POPSIZE)
+    tpop = toolbox.population(n=POPSIZE)
 #    toolbox.register("map", futures.map)
 #    toolbox.unregister("individual")
 #    toolbox.unregister("population")
 
-    start = time.perf_counter()
-    pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
-    runtime = round(time.perf_counter() - start, 2)
+    pops = []
+    n_circs = 100
+    for _ in range(n_circs):
+        start = time.perf_counter()
+        pop, logbook = geneticAlgorithm(tpop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
+        runtime = round(time.perf_counter() - start, 2)
+        pops.append(pop)
+    #-----------------------------------------------
+    from qiskit.quantum_info import Operator
+    from qiskit.circuit.library import Permutation
+    qubit_pattern = [0,1,2,3,4]
+    perm_unitary = pop[0].getPermutationMatrix()
+    perm_desired_state = np.linalg.inv(perm_unitary) @ desired_state
+    n_phys = 5
+    aug_desired_state = perm_desired_state
+    for k in range(n_phys-numberOfQubits):
+        aug_desired_state = np.kron([1,0],aug_desired_state)
+    perm_circ = Permutation(n_phys, qubit_pattern) # Creating a circuit for qubit mapping
+    perm_unitary = Operator(perm_circ) # Matrix for the previous circuit
+    perm_aug_desired_state = perm_unitary.data @ aug_desired_state
+    from qiskit.providers.aer.noise import NoiseModel
+    from deap.tools.emo import sortNondominated
+    machine_simulator = Aer.get_backend('qasm_simulator')
+    fake_machine = FakeAthens()
+    noise_model = NoiseModel.from_backend(fake_machine)
+    coupling_map = fake_machine.configuration().coupling_map
+    basis_gates = noise_model.basis_gates
+    plt.figure(figsize=(8, 6))
+
+    ranks = sortNondominated(pop, len(pop))
+    front = ranks[0]
+    fidelities = []
+    for i in range(n_circs):
+        circ = pops[i][0].toQiskitCircuit()
+        s=0
+        for _ in range(100):
+            circ.snapshot_density_matrix('final')
+            result = execute(circ,machine_simulator,
+                            coupling_map=coupling_map,
+                            basis_gates=basis_gates,
+                            noise_model=noise_model,
+                            shots=1).result()
+            noisy_dens_matr = result.data()['snapshots']['density_matrix']['final'][0]['value']
+            fid=state_fidelity(perm_aug_desired_state,noisy_dens_matr)
+            s+=fid
+        fidelities.append(s/100)
+    plt.hist(fidelities, bins=list(np.arange(0,1.2,0.01)), align='left', label='GA')
+    
+    qiskit_circs, depths = genCircs(numberOfQubits, fake_machine, desired_state, n_iter=100)
+    fidelities=getFidelities(5, qiskit_circs, machine_simulator, fake_machine, desired_state)
+    #fidelities.append(s/100)
+    plt.hist(fidelities, bins=list(np.arange(0,1.2,0.01)), align='left', color='#AC557C', label='Qiskit')
+    plt.legend()
+    print('!!!')
+    plt.xlabel('Fidelity', fontsize=14)
+    plt.ylabel('Counts', fontsize=14)
+    plt.savefig('100Fid_GA',dpi=300)
     
     plotFitSize(logbook)
 
@@ -189,11 +243,14 @@ def main():
         save(pop, logbook, directory, problemName)
         print(f"The population and logbook were saved in {directory}{problemName}")
 
-    plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluateInd, POPSIZE)
-    paretoFront(pop)
+#    plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluateInd, POPSIZE)
+#    paretoFront(pop)
 
     print(f'Runtime: {runtime}s')
     return runtime
 
 if __name__=="__main__":
-    main()
+    pop, logbook = load("performance_data/5QB/100POP/1-60000GEN-5QB_state33") 
+    plotFitSize(logbook)
+    paretoFront(pop)
+#    main()
