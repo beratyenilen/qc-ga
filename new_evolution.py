@@ -8,6 +8,7 @@ import numpy as np
 from constants import *
 import pickle
 from copy import deepcopy
+from tools import paretoFront
 
 
 def mutateInd(individual, verbose=False):
@@ -101,7 +102,6 @@ def chooseIndividuals(ranks, N, toolbox, currentRank=1, verbose=False):
       cp = deepcopy(ranks[listIndex][elementIndex])
 #      while toolbox.evaluate(cp) == ranks[listIndex][elementIndex].fitness.values:
       cp = toolbox.mutate(cp)
-#          print("...")
       cp.fitness.values = toolbox.evaluate(cp)
       cps.append(cp)
       listIndexes.append(listIndex)
@@ -120,48 +120,34 @@ def selectAndEvolve(pop, toolbox, verbose=False):
   # This function returns a list and ith element of the list contains the 
   # individuals with rank i.
   toCarry = int(len(pop)/10)
-  individuals = selSPEA2(pop, toCarry)
-  ranks = sortNondominated(individuals, len(pop))
-#  from matplotlib import pyplot as plt
-#
-#  j = 0
-#  for rank in ranks:
-#    color = (0,0,1-j/len(ranks))
-#    data = []
-#    for i in range(len(rank)):
-#        circ = rank[i]
-#        data.append([circ.fitness.values[1], 1-circ.fitness.values[0]])
-##    plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
-#        
-#    data = np.array(data)
-#    x = data[:, 0]
-#    y = data[:, 1]
-#    plt.scatter(x, y, label="rank "+str(j), color=color)
-#    j+=1
-#  plt.ylabel("Fidelity")
-#  plt.xlabel("Length")
-#  plt.ylim(0,1)
-#  plt.show()
-#  
+  individuals = toolbox.select(pop, toCarry)
+  ranks = sortNondominated(pop, len(pop))
+
+#  paretoFront(pop)
+  
   # Now we will carry the top 10% individuals to the next generation directly.
 #  for indv in ranks[0]:
 #      print(indv.fitness.values)
-  toCarry = int(len(pop)/10)
+
   nextGeneration = []
-  bestCandidate = ranks[0][0]
-  for rank in ranks:
-    for indv in rank:
-      if indv.fitness.values[0] < bestCandidate.fitness.values[0]:
-        bestCandidate = indv
-  nextGeneration.append(deepcopy(bestCandidate))
-  currentRank = 0
-  while len(nextGeneration) < toCarry:
-    if (len(nextGeneration) + len(ranks[currentRank])) < toCarry:
-      nextGeneration += deepcopy(ranks[currentRank])
-      currentRank += 1
-    else:
-      chooseUpTo = toCarry - len(nextGeneration)
-      nextGeneration += deepcopy(ranks[currentRank][:chooseUpTo])
+  for ind in individuals:
+    nextGeneration.append(ind)
+
+#  bestCandidate = ranks[0][0]
+#  for rank in ranks:
+#    for indv in rank:
+#      if indv.fitness.values[0] < bestCandidate.fitness.values[0]:
+#        bestCandidate = indv
+#  nextGeneration.append(deepcopy(bestCandidate))
+#
+#  currentRank = 0
+#  while len(nextGeneration) < toCarry:
+#    if (len(nextGeneration) + len(ranks[currentRank])) < toCarry:
+#      nextGeneration += deepcopy(ranks[currentRank])
+#      currentRank += 1
+#    else:
+#      chooseUpTo = toCarry - len(nextGeneration)
+#      nextGeneration += deepcopy(ranks[currentRank][:chooseUpTo])
 
   # Now at this step I may loop over the chosen individuals and check if
   # two indvs have really close fitness values, less than let's say 0.1, and 
@@ -173,11 +159,6 @@ def selectAndEvolve(pop, toolbox, verbose=False):
   currentRank = 1
   N=len(pop)-toCarry - 2*crossover
 
-#  N = len(pop)*probToMutate
-#  print(N)
-#  if (len(pop)-N)%2 != 0:
-#    N+=1
-#  print(N)
   individuals,lis,eis = chooseIndividuals(ranks, N, toolbox, currentRank, verbose)
   nextGeneration.extend(individuals)
 
@@ -193,30 +174,6 @@ def selectAndEvolve(pop, toolbox, verbose=False):
       child2.fitness.values = toolbox.evaluate(child2)
       nextGeneration.append(child1)
       nextGeneration.append(child2)
-
-  j = 0
-  nG = sortNondominated(nextGeneration, len(nextGeneration))
-  nextGeneration = []
-  for n in nG:
-    nextGeneration += n
-
-#  for rankn in range(len(ranks)):
-#    for i in range(len(ranks[rankn])):
-#        circ = nextGeneration[j]
-#        color = (0,0,1-rankn/len(ranks))
-#        data = []
-#        for k in range(len(rank)):
-#            data.append([circ.fitness.values[1], circ.fitness.values[0]])
-##    plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
-#            
-#        data = np.array(data)
-#        x = data[:, 0]
-#        y = data[:, 1]
-#        plt.scatter(x, y, label="rank "+str(j), color=color)
-#        j+=1
-#  plt.ylabel("Fidelity")
-#  plt.xlabel("Length")
-#  plt.show()
 
   return nextGeneration
 
@@ -274,9 +231,6 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
     # We will evaluate the fitnesses of all the individuals just to be safe.
     # Mutations might be changing the fitness values, I am not sure.
     
-  #  for ind in nextGeneration:
-  #      ind.fitness.values = toolbox.evaluate(ind)
-
     # The population is entirely replaced by the next generation of individuals.
     pop = nextGeneration
     bestCandidate = nonDominatedSolutions[0]
@@ -285,8 +239,6 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
         bestCandidate = nonDominatedSolutions[i]
     bookKeep(bestCandidate, outputFile)
     
-  toCarry = int(len(pop)/10)
-  selSPEA2(pop, toCarry)
   logbook.header = "gen", "evals", "fitness", "size"
   logbook.chapters["fitness"].header = "min", "max", "avg", "std"
   logbook.chapters["size"].header = "min", "max", "avg", "std"
