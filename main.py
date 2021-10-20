@@ -1,21 +1,33 @@
+#   
+#   An attempt to implement multiprocessing
+#
+
+
 # Importing the necessary modules.
 import projectq
 from projectq.ops import H,X,Y,Z,T,Tdagger,S,Sdagger,CNOT,Measure,All,Rx,Ry,Rz,SqrtX,Swap
 import numpy as np
-import copy
+import copy, sys, getopt, os
 
 from deap import creator, base, tools
 from candidate import Candidate
 from constants import *
-from evolution import crossoverInd, mutateInd, selectAndEvolve, geneticAlgorithm
+from new_evolution import crossoverInd, mutateInd, selectAndEvolve, geneticAlgorithm
 from tools import *
 from datetime import datetime
+from comparison import compare
 import time
 import multiprocessing
-import config
+import psutil
+import argparse
 
-from qiskit import Aer, execute
-from qiskit.quantum_info import state_fidelity
+from qiskit import Aer, execute, QuantumRegister
+from qiskit.quantum_info import state_fidelity, DensityMatrix, Statevector, Operator
+from qiskit.providers.aer import QasmSimulator
+from qiskit.test.mock import FakeVigo, FakeAthens
+from qiskit.circuit.library import Permutation
+from qiskit_transpiler.transpiled_initialization_circuits import genCircs, getFidelities
+
 
 def loadState(numberOfQubits, stateName):
     f = open('states/'+str(numberOfQubits)+'_qubits/' + stateName, 'rb')
@@ -68,55 +80,77 @@ def evaluateInd(individual, verbose=False):
         print("Wanted state is:", wanted)
         print("Produced state is", got)
         print("Error is:", error)
-    if len(individual.circuit) > 0 and len(individual.circuit) < MAX_CIRCUIT_LENGTH:
-        return (error, len(individual.circuit) / MAX_CIRCUIT_LENGTH)
-    else:
-        return (error, 1.0)
+    return (error, len(individual.circuit))
+#    if len(individual.circuit) > 0 and len(individual.circuit) < MAX_CIRCUIT_LENGTH:
+#        return (error, len(individual.circuit) / MAX_CIRCUIT_LENGTH)
+#    else:
+#        return (error, 1.0)
 
-def main():
-    # Initialize your variables
-    numberOfQubits = config.numberOfQubits
-    NGEN = config.NGEN
-    POPSIZE = config.POPSIZE
-    stateIndex = config.stateIndex
-    multiProcess = config.multiProcess
-    verbose = config.verbose
-    saveResult = config.saveResult
-    allowedGates = config.allowedGates
-     
-    stateName = str(numberOfQubits)+"QB_state"+str(stateIndex)
-    loadState(numberOfQubits, stateName)
-    now = datetime.now()
-    timeStr = now.strftime("%d.%m.%y-%H:%M")
-    ID = now.strftime("%d%m%y%H%M%S")+str(POPSIZE)+str(NGEN)+str(numberOfQubits)   #This needs improving
-    problemName = f"{ID}-{timeStr}-{POPSIZE}pop-{NGEN}GEN-{stateName}"
 
-    problemDescription = "State initalization for:\n"
-    problemDescription += "numberOfQubits=" + str(numberOfQubits) + "\n"
-    problemDescription += "allowedGates=" + str(allowedGates) + "\n"
+directory = f"performance_data/{numberOfQubits}QB/{POPSIZE}POP/"
+ID = int(len(os.listdir(directory)) / 2)
+
+# Initialize parser
+parser = argparse.ArgumentParser()
+
+# Adding optional argument
+parser.add_argument("-p", "--POPSIZE", help = "Size of the population")
+parser.add_argument("-g", "--NGEN", help = "The number of generations")
+parser.add_argument("-q", "--NQUBIT", help = "The number of qubits")
+parser.add_argument("-i", "--INDEX", help = "Index of desired state")
+parser.add_argument("-id", "--ID", help = "ID of the saved file")
+
+# Read arguments from command line
+args = parser.parse_args()
+
+if args.POPSIZE:
+    POPSIZE = int(args.POPSIZE)
+if args.NGEN:
+    NGEN = int(args.NGEN)
+if args.NQUBIT:
+    numberOfQubits = int(args.NQUBIT)
+if args.INDEX:
+    stateIndex = int(args.INDEX)
+if args.ID:
+    ID = int(args.ID)
+
+stateName = str(numberOfQubits)+"QB_state"+str(stateIndex)
+loadState(numberOfQubits, stateName)
+now = datetime.now()
+timeStr = now.strftime("%d.%m.%y-%H:%M")
+problemName = f"{ID}-{NGEN}GEN-{stateName}"
+
+problemDescription = "State initalization for:\n"
+problemDescription += "numberOfQubits=" + str(numberOfQubits) + "\n"
+problemDescription += "allowedGates=" + str(allowedGates) + "\n"
 
 # trying to minimize error and length !
-    fitnessWeights = (-1.0, -1.0)
+fitnessWeights = (-1.0, -0.5)
 
 # Create the type of the individual
-    creator.create("FitnessMin", base.Fitness, weights=fitnessWeights)
-    creator.create("Individual", Candidate, fitness=creator.FitnessMin)
+creator.create("FitnessMin", base.Fitness, weights=fitnessWeights)
+creator.create("Individual", Candidate, fitness=creator.FitnessMin)
+
 # Initialize your toolbox and population
-    toolbox = base.Toolbox()
+toolbox = base.Toolbox()
 
-    if multiProcess:
-        pool = multiprocessing.Pool()
-        toolbox.register("map", pool.map)
+#from scoop import futures
 
-    toolbox.register("individual", creator.Individual, numberOfQubits, allowedGates)
-    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+#if multiProcess:
+#    pool = multiprocessing.Pool()
+#    toolbox.register("map", pool.map)
 
-    toolbox.register("mate", crossoverInd, toolbox=toolbox)
-    toolbox.register("mutate", mutateInd)
-    toolbox.register("select", tools.selNSGA2)
-    toolbox.register("selectAndEvolve", selectAndEvolve)
-    toolbox.register("evaluate", evaluateInd)
 
+toolbox.register("individual", creator.Individual, numberOfQubits, allowedGates, connectivity)
+toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+
+toolbox.register("mate", crossoverInd, toolbox=toolbox)
+toolbox.register("mutate", mutateInd)
+toolbox.register("select", tools.selSPEA2)
+toolbox.register("selectAndEvolve", selectAndEvolve)
+toolbox.register("evaluate", evaluateInd)
+
+def main():
 # Your main function
 # epsilon is the error bound at which we simply finish the evolution and print out
 # all the rank zero solutions.
@@ -127,38 +161,100 @@ def main():
     CXPB = 0.2
     MUTPB = 0.2
 
-    pop = toolbox.population(n=POPSIZE)
+    tpop = toolbox.population(n=POPSIZE)
+#    toolbox.register("map", futures.map)
+#    toolbox.unregister("individual")
+#    toolbox.unregister("population")
 
-# Loaded checkpoint is provided as a comand line argument
-    import sys
-    if len(sys.argv) > 1:
-        pop, logbook = load(sys.argv[1])
-    
-    start = time.perf_counter()
-    pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
-    finish = time.perf_counter()
-
-
-    plotFitSize(logbook)
-    plotFitSize(logbook, fitness="avg")
-#    plotFitSize(logbook, fitness="std")
-
-    # Printing 10 best circuits
+    pops = []
+    n_circs = 1
+    for _ in range(n_circs):
+        start = time.perf_counter()
+        pop, logbook = geneticAlgorithm(tpop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
+        runtime = round(time.perf_counter() - start, 2)
+        pops.append(pop)
+    #-----------------------------------------------
+#    from qiskit.quantum_info import Operator
+#    from qiskit.circuit.library import Permutation
+#    qubit_pattern = [0,1,2,3,4]
+#    perm_unitary = pop[0].getPermutationMatrix()
+#    perm_desired_state = np.linalg.inv(perm_unitary) @ desired_state
+#    n_phys = 5
+#    aug_desired_state = perm_desired_state
+#    for k in range(n_phys-numberOfQubits):
+#        aug_desired_state = np.kron([1,0],aug_desired_state)
+#    perm_circ = Permutation(n_phys, qubit_pattern) # Creating a circuit for qubit mapping
+#    perm_unitary = Operator(perm_circ) # Matrix for the previous circuit
+#    perm_aug_desired_state = perm_unitary.data @ aug_desired_state
+#    from qiskit.providers.aer.noise import NoiseModel
+#    from deap.tools.emo import sortNondominated
+#    machine_simulator = Aer.get_backend('qasm_simulator')
+#    fake_machine = FakeAthens()
+#    noise_model = NoiseModel.from_backend(fake_machine)
+#    coupling_map = fake_machine.configuration().coupling_map
+#    basis_gates = noise_model.basis_gates
+#    plt.figure(figsize=(8, 6))
+#
+#    ranks = sortNondominated(pop, len(pop), first_front_only=True)
+#    front = ranks[0]
+#    print(len(front))
+#    c=[]
+#    data = []
+#    for circ in front:
+#        circ=circ.toQiskitCircuit()
+#        s=0
+#        for _ in range(100):
+#            circ.snapshot_density_matrix('final')
+#            result = execute(circ,machine_simulator,
+#                            coupling_map=coupling_map,
+#                            basis_gates=basis_gates,
+#                            noise_model=noise_model,
+#                            shots=1).result()
+#            noisy_dens_matr = result.data()['snapshots']['density_matrix']['final'][0]['value']
+#            fid=state_fidelity(perm_aug_desired_state,noisy_dens_matr)
+#            s+=fid
+#        data.append([circ.size(), s/100])
+#        c.append(len(data))
+#        print(s)
+#
+##    plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
+#        
+#    data = np.array(data)
+#    x = data[:, 0]
+#    y = data[:, 1]
+#    plt.scatter(x, y)
+#    plt.ylabel("Fidelity")
+#    plt.xlabel("Length")
+#    plt.ylim(0,1)
+#    #qiskit_circs, depths = genCircs(numberOfQubits, fake_machine, desired_state, n_iter=100)
+#    #fidelities=getFidelities(5, qiskit_circs, machine_simulator, fake_machine, desired_state)
+#    #plt.hist(fidelities, bins=list(np.arange(0,1.2,0.01)), align='left', color='#AC557C', label='Qiskit')
+#    print('!!!')
+#    plt.savefig('100Fid_GA',dpi=300)
+#    
+#    plotFitSize(logbook)
+#
+    print(evaluateInd(pop[0]))
     backend = Aer.get_backend('statevector_simulator')
-    for i in range(10):
-        print(evaluateInd(pop[i]))
-        circ = pop[i].toQiskitCircuit()
-        statevector = execute(circ, backend).result().get_statevector(circ)
-        print(1 - state_fidelity(desiredState(), pop[i].getPermutationMatrix() @ statevector))
-        
-    # Prompt to save the results
+    circ = pop[0].toQiskitCircuit()
+    statevector = execute(circ, backend).result().get_statevector(circ)
+    print(state_fidelity(desiredState(), pop[0].getPermutationMatrix() @ statevector))
+#    print(state_fidelity(pop[0].getPermutationMatrix() @ desiredState(), statevector))
+
+
+    paretoFront(pop)
+    compare(pop, numberOfQubits, desired_state)
+
+     
+    # Save the results
     if saveResult:
-        directory = "saved/test/"
         save(pop, logbook, directory, problemName)
         print(f"The population and logbook were saved in {directory}{problemName}")
 
-    print(f'Runtime: {round(finish-start, 2)}s')
+#    plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluateInd, POPSIZE)
+
+    print(f'Runtime: {runtime}s')
+    return runtime
 
 if __name__=="__main__":
     main()
-
