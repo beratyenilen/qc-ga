@@ -148,7 +148,7 @@ toolbox.register("mate", crossoverInd, toolbox=toolbox)
 toolbox.register("mutate", mutateInd)
 toolbox.register("select", tools.selSPEA2)
 toolbox.register("selectAndEvolve", selectAndEvolve)
-toolbox.register("evaluate", evaluateInd)
+toolbox.register("evaluate", evaluateIndcostt)
 
 def main():
 # Your main function
@@ -161,18 +161,26 @@ def main():
     CXPB = 0.2
     MUTPB = 0.2
 
-    tpop = toolbox.population(n=POPSIZE)
+    pop = toolbox.population(n=POPSIZE)
 #    toolbox.register("map", futures.map)
 #    toolbox.unregister("individual")
 #    toolbox.unregister("population")
 
-    pops = []
-    n_circs = 1
-    for _ in range(n_circs):
-        start = time.perf_counter()
-        pop, logbook = geneticAlgorithm(tpop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
-        runtime = round(time.perf_counter() - start, 2)
-        pops.append(pop)
+    from qiskit_transpiler.transpiled_initialization_circuits import genCircs, getPermutation, getFidelities, randomDV
+    from candidate import qasm2ls
+
+    qiskit_circs, depths = genCircs(numberOfQubits, fake_machine, desiredState(), n_iter=1)
+    perm = getPermutation(qiskit_circs[0]) 
+    qiskit_circ = qasm2ls(qiskit_circs[0].qasm())
+    pop[0].circuit = qiskit_circ
+    pop[0].permutation = perm 
+    print(1-toolbox.evaluate(pop[0])[0])
+
+
+    start = time.perf_counter()
+    pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon, verbose=verbose, returnLog=True)
+    runtime = round(time.perf_counter() - start, 2)
+
     #-----------------------------------------------
 #    from qiskit.quantum_info import Operator
 #    from qiskit.circuit.library import Permutation

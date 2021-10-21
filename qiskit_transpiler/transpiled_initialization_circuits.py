@@ -19,11 +19,24 @@ from qiskit.circuit.library import Permutation
 #from qiskit.transpiler import PassManager, CouplingMap, Layout
 #from qiskit.transpiler.passes import BasicSwap, LayoutTransformation, RemoveFinalMeasurements
 
+def getPermutation(circ):
+    #   Computing the permutations done by
+    #   transpile function
+    perm = [0,1,2,3,4]
+    for op, qubits, clbits in circ.data:
+        if op.name == 'measure':
+            a = perm.index(clbits[0].index)
+            b = perm[qubits[0].index]
+            perm[qubits[0].index] = clbits[0].index
+            perm[a] = b
+    circ.remove_final_measurements()
+    return perm
+
 #   Computes the fidelities for transpiled circuits
 def getFidelities(n, circs, machine_simulator, fake_machine, desired_vector):
-    noise_model = NoiseModel.from_backend(fake_machine)
-    coupling_map = fake_machine.configuration().coupling_map
-    basis_gates = noise_model.basis_gates
+#    noise_model = NoiseModel.from_backend(fake_machine)
+#    coupling_map = fake_machine.configuration().coupling_map
+#    basis_gates = noise_model.basis_gates
     fidelities = []
     #n_shots = 20
     n_iter = len(circs)
@@ -33,16 +46,7 @@ def getFidelities(n, circs, machine_simulator, fake_machine, desired_vector):
         qubit_pattern = list(circs[i]._layout.get_virtual_bits().values()) # How virtual bits map to physical bits
         n_phys = len(qubit_pattern) # n of physical bits
 
-        #   Computing the permutations done by
-        #   transpile function
-        perm = [0,1,2,3,4]
-        for op, qubits, clbits in circs[i].data:
-            if op.name == 'measure':
-                a = perm.index(clbits[0].index)
-                b = perm[qubits[0].index]
-                perm[qubits[0].index] = clbits[0].index
-                perm[a] = b
-        circs[i].remove_final_measurements()
+        perm = getPermutation(circs[i])
 #        circs[i].save_density_matrix()
         circs[i].snapshot_density_matrix('final')
         
@@ -66,14 +70,14 @@ def getFidelities(n, circs, machine_simulator, fake_machine, desired_vector):
         s = 0
         for _ in range(100):
             result = execute(circs[i],machine_simulator,
-                            coupling_map=coupling_map,
-                            basis_gates=basis_gates,
-                            noise_model=noise_model,
+#                            coupling_map=coupling_map,
+#                            basis_gates=basis_gates,
+#                            noise_model=noise_model,
                             shots=1).result()
             noisy_dens_matr = result.data()['snapshots']['density_matrix']['final'][0]['value']
             fid = state_fidelity(pad_vectors[i],noisy_dens_matr)
-            s += fid
-        fid = s/100
+#            s += fid
+#        fid = s/100
         fidelities.append(fid)
         print(i)
         print(fid)
@@ -90,14 +94,17 @@ def randomDV(n):
 #   Returns lists for circuits and for depths
 #
 #   Measurement gates are added to keep track of the permutations
-def genCircs(n, fake_machine, desired_vector, n_iter=10, optimization_level=2):
+def genCircs(n, fake_machine, desired_vector, n_iter=10, optimization_level=2, measuregates=True):
     qr = QuantumRegister(n)
-    cr = ClassicalRegister(n)
-    init_circ = QuantumCircuit(qr, cr)
+    init_circ = QuantumCircuit(qr)
+    if (measuregates):
+        cr = ClassicalRegister(n)
+        init_circ = QuantumCircuit(qr, cr)
 
     init_circ.initialize(desired_vector, qr)
-    init_circ.barrier()
-    init_circ.measure(qr, cr)
+    if (measuregates):
+        init_circ.barrier()
+        init_circ.measure(qr, cr)
 
     circs = []
     depths = []
@@ -112,22 +119,25 @@ def main():
     machine_simulator = Aer.get_backend('qasm_simulator')
     fake_machine = FakeAthens()
 
+    n = 5
     #plt.figure(figsize=(8, 6))
-    for n in range(2,6):
-        desired_vector = randomDV(n)
-        print(desired_vector)
-        print(np.linalg.norm(desired_vector))
-        circs, depths = genCircs(n, fake_machine, desired_vector, n_iter=10)
-        fidelities = getFidelities(n, circs, machine_simulator, fake_machine, desired_vector)
-        mean_fidelity = sum(fidelities)/len(fidelities)
-        print("mean fidelity: " + str(mean_fidelity))
-        plt.hist(fidelities, bins=list(np.arange(0,1,0.01)), align='left', label=str(n)+' qubits')
+    desired_vector = randomDV(n)
+    print(desired_vector)
+    print(np.linalg.norm(desired_vector))
+    circs, depths = genCircs(n, fake_machine, desired_vector, n_iter=100, measuregates=False)
+
+    fidelities = getFidelities(n, circs, machine_simulator, fake_machine, desired_vector)
+    mean_fidelity = sum(fidelities)/len(fidelities)
+    print("mean fidelity: " + str(mean_fidelity))
+    plt.hist(fidelities, bins=list(np.arange(0,1.1,0.01)), align='left', label=str(n)+' qubits')
+
     plt.xlabel('Fidelity', fontsize=14)
     plt.ylabel('Counts', fontsize=14)
     plt.legend()
     #plt.ylim(0,300)
-    plt.savefig('Avgfids300dpi.png', dpi=300)
-    plt.savefig('Avgfids.png')
+    plt.show()
+#    plt.savefig('Avgfids300dpi.png', dpi=300)
+#    plt.savefig('Avgfids.png')
 
 if __name__ == "__main__":
     main()

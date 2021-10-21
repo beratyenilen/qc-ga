@@ -6,7 +6,7 @@ import projectq
 from projectq.ops import H,X,Y,Z,T,Tdagger,S,Sdagger,CNOT,CX,Rx,Ry,Rz,SqrtX
 from projectq.ops import Measure,All,get_inverse,Swap,SwapGate
 from math import pi
-from qiskit import QuantumCircuit, transpile
+from qiskit import QuantumCircuit, transpile, QuantumRegister, ClassicalRegister
 
 
 class Candidate:
@@ -281,7 +281,9 @@ class Candidate:
         """
         Returns: qiskit.QuantumCircuit object of the circuit of the Candidate
         """
-        qc = QuantumCircuit(self.numberOfQubits, self.numberOfQubits)
+        qr = QuantumRegister(self.numberOfQubits)
+        cr = ClassicalRegister(self.numberOfQubits)
+        qc = QuantumCircuit(qr, cr)
         for op in self.circuit:
             if op[0] == "TFG":
                 # can be CNOT,CX,Swap,SwapGate
