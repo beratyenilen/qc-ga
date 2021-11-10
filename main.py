@@ -148,7 +148,8 @@ toolbox.register("mate", crossoverInd, toolbox=toolbox)
 toolbox.register("mutate", mutateInd)
 toolbox.register("select", tools.selSPEA2)
 toolbox.register("selectAndEvolve", selectAndEvolve)
-toolbox.register("evaluate", evaluateIndcostt)
+#toolbox.register("evaluate", evaluateIndcostt)
+toolbox.register("evaluate", evaluateInd)
 
 def main():
 # Your main function
@@ -251,7 +252,17 @@ def main():
 
 
     paretoFront(pop)
-    compare(pop, numberOfQubits, desired_state)
+
+    from qiskit import QuantumCircuit, transpile
+    from qiskit.providers.aer.noise import NoiseModel
+    from qiskit.providers.aer import AerSimulator
+    from qiskit.providers.aer import extensions
+    from matplotlib import pyplot as plt
+    noise_model = NoiseModel.from_backend(fake_machine)
+    backend = AerSimulator(method='density_matrix', noise_model=noise_model)
+
+    paretoNoiseFids(pop, fake_machine)
+#    compare(pop, numberOfQubits, desired_state)
 
      
     # Save the results

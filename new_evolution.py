@@ -208,7 +208,7 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
   print("Starting evolution, writing outputs to ./outputs/"+problemName+".txt")
   # Register statistics functions to the toolbox
   stats_fit = tools.Statistics(key=lambda ind: ind.fitness.values[0])
-  stats_size = tools.Statistics(key=lambda ind: ind.fitness.values[1]*MAX_CIRCUIT_LENGTH)
+  stats_size = tools.Statistics(key=lambda ind: ind.fitness.values[1])
   mstats = tools.MultiStatistics(fitness=stats_fit, size=stats_size)  
   mstats.register("avg", np.mean)
   mstats.register("std", np.std)

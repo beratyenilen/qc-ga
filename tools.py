@@ -1,8 +1,13 @@
 import matplotlib.pyplot as plt
 import pickle
+import argparse
 import numpy as np
 from datetime import datetime
 from deap.tools.emo import sortNondominated
+from qiskit import transpile
+from qiskit.providers.aer.noise import NoiseModel
+from qiskit.providers.aer import AerSimulator
+from qiskit.quantum_info import state_fidelity, DensityMatrix
 
 #   Functions for handling and analyzing 
 #   the population and logbook data
@@ -154,3 +159,77 @@ def paretoFront(pop):
   plt.xlabel("Length")
   plt.ylim(0,1)
   plt.show()
+
+def paretoNoiseFids(pop, fake_machine):
+    from scipy.special import gamma
+    # Circuit length
+    l = 1
+    # Probability of error
+    p = 0.02
+    # Number of qubits
+    n = 5
+    # Pairs of qubits connected by CNOT gates
+    L = 8
+    d = 2**(n+1)+3*n-1
+
+    Cn = (2*np.sqrt(np.pi))**(1-n)*gamma(d/2+1)/gamma(2**n)
+    
+    c1 = -np.log(L)/d
+    c2 = np.log(Cn)/d
+
+    x = np.linspace(0,300,3000)
+    y = ((1-p)**x)*(1-np.exp(c1*x+c2))
+    plt.plot(x,y)
+
+    noise_model = NoiseModel.from_backend(fake_machine)
+    backend = AerSimulator(method='density_matrix', noise_model=noise_model)
+    x=[]
+    y=[]
+    ranks = sortNondominated(pop, len(pop), first_front_only=True)
+    front = ranks[0]
+    print(front[0].toQiskitCircuit().size())
+    density_matrix = DensityMatrix.from_instruction(front[0].toQiskitCircuit())
+    for circ in front:
+        circ = circ.toQiskitCircuit()
+        circ = transpile(circ,fake_machine,optimization_level=0)
+        circ.snapshot_density_matrix('density_matrix')
+        result = backend.run(circ).result()
+        density_matrix_noisy = DensityMatrix(result.data()['snapshots']['density_matrix']['density_matrix'][0]['value'])
+        print(state_fidelity(density_matrix, density_matrix_noisy))
+        print(circ.size())
+        y.append(state_fidelity(density_matrix, density_matrix_noisy))
+        x.append(circ.size())
+    plt.plot(x,y,'o')
+    plt.show()
+
+if __name__ == "__main__":        
+    # Initialize parser
+    parser = argparse.ArgumentParser()
+
+    # Adding optional argument
+    parser.add_argument("-f", "--FILE", help = "Path to the file without the final '.pop' or '.logbook' extension")
+    parser.add_argument("-p", "--POPSIZE", help = "Size of the population")
+    parser.add_argument("-g", "--NGEN", help = "The number of generations")
+    parser.add_argument("-q", "--NQUBIT", help = "The number of qubits")
+    parser.add_argument("-i", "--INDEX", help = "Index of desired state")
+    parser.add_argument("-id", "--ID", help = "ID of the saved file")
+
+    # Read arguments from command line
+    args = parser.parse_args()
+
+    if args.POPSIZE:
+        POPSIZE = int(args.POPSIZE)
+    if args.NGEN:
+        NGEN = int(args.NGEN)
+    if args.NQUBIT:
+        numberOfQubits = int(args.NQUBIT)
+    if args.INDEX:
+        stateIndex = int(args.INDEX)
+    if args.ID:
+        ID = int(args.ID)
+
+    FILE_PATH = 'performance_data/'+numberOfQubits+'QB/'+POPSIZE+'POP/'+ID+'-'+NGEN+'GEN-'+numberOfQubits+'QB_state'+stateIndex
+    if args.FILE:
+        FILE_PATH = args.FILE
+
+    pop, logbook = load(FILE_PATH)
