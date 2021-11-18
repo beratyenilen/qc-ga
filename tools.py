@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pickle
 import argparse
 import numpy as np
+from scipy.special import gamma
 from datetime import datetime
 from deap.tools.emo import sortNondominated
 from qiskit import transpile
@@ -132,6 +133,15 @@ def plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluat
     plt.show()
 
 def paretoFront(pop):
+  n = 5
+# Pairs of qubits connected by CNOT gates
+  L = 8
+  d = 2**n-n-1  
+  c1 = -(2*np.log(2)*n+np.log(L))/d
+  c2 = -np.log(2)*n**2/d
+  x = np.linspace(0,300,3000)
+  y = 1-np.exp(c1*x)
+  plt.plot(x,y)
   ranks = sortNondominated(pop, len(pop), first_front_only=True)
   front = ranks[0]
   data = []
@@ -161,24 +171,31 @@ def paretoFront(pop):
   plt.show()
 
 def paretoNoiseFids(pop, fake_machine):
-    from scipy.special import gamma
     # Circuit length
     l = 1
     # Probability of error
-    p = 0.02
+    p = 0.001
     # Number of qubits
     n = 5
     # Pairs of qubits connected by CNOT gates
     L = 8
-    d = 2**(n+1)+3*n-1
+    d = 2**n-n-1
 
     Cn = (2*np.sqrt(np.pi))**(1-n)*gamma(d/2+1)/gamma(2**n)
     
-    c1 = -np.log(L)/d
-    c2 = np.log(Cn)/d
+    c1 = -(2*np.log(2)*n+np.log(L))/d
+    c2 = -np.log(2)*n**2/d
 
     x = np.linspace(0,300,3000)
     y = ((1-p)**x)*(1-np.exp(c1*x+c2))
+    plt.plot(x,y)
+    p = 0.005
+    y = ((1-p)**x)*(1-np.exp(c1*x+c2))
+    plt.plot(x,y)
+    p = 0.0075
+    y = ((1-p)**x)*(1-np.exp(c1*x+c2))
+    plt.plot(x,y)
+    y = ((1-p)**x)*(1-np.exp(c1*x))
     plt.plot(x,y)
 
     noise_model = NoiseModel.from_backend(fake_machine)
@@ -202,7 +219,8 @@ def paretoNoiseFids(pop, fake_machine):
     plt.plot(x,y,'o')
     plt.show()
 
-if __name__ == "__main__":        
+if __name__ == "__main__":
+    import constants
     # Initialize parser
     parser = argparse.ArgumentParser()
 
@@ -228,8 +246,8 @@ if __name__ == "__main__":
     if args.ID:
         ID = int(args.ID)
 
-    FILE_PATH = 'performance_data/'+numberOfQubits+'QB/'+POPSIZE+'POP/'+ID+'-'+NGEN+'GEN-'+numberOfQubits+'QB_state'+stateIndex
+    #FILE_PATH = 'performance_data/'+numberOfQubits+'QB/'+POPSIZE+'POP/'+ID+'-'+NGEN+'GEN-'+numberOfQubits+'QB_state'+stateIndex
     if args.FILE:
         FILE_PATH = args.FILE
-
     pop, logbook = load(FILE_PATH)
+    paretoNoiseFids(pop, constants.fake_machine)
