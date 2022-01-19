@@ -5,7 +5,7 @@ import numpy as np
 from scipy.special import gamma
 from datetime import datetime
 from deap.tools.emo import sortNondominated
-from qiskit import transpile
+from qiskit import transpile, Aer, execute
 from qiskit.providers.aer.noise import NoiseModel
 from qiskit.providers.aer import AerSimulator
 from qiskit.quantum_info import state_fidelity, DensityMatrix
@@ -13,7 +13,7 @@ from qiskit.quantum_info import state_fidelity, DensityMatrix
 #   Functions for handling and analyzing 
 #   the population and logbook data
 
-def problemName(pop, logbook, stateName):
+def problemName(pop, logbook, path, state_name):
     n = pop[0].numberOfQubits
     NGEN = len(logbook.select("gen")) 
     time = datetime.now()
@@ -98,7 +98,6 @@ def plotCircLengths(circs, circs2):
     if sizes2.max() > max_size:
         max_size = sizes2.max()
     plt.hist(sizes1, bins=max_size, range=(0,max_size), alpha=0.5)
-    plt.hist(sizes2, bins=max_size, range=(0,max_size), alpha=0.5)
     plt.show()
 
 
@@ -140,8 +139,8 @@ def paretoFront(pop):
   c1 = -(2*np.log(2)*n+np.log(L))/d
   c2 = -np.log(2)*n**2/d
   x = np.linspace(0,300,3000)
-  y = 1-np.exp(c1*x)
-  plt.plot(x,y)
+  y = 1-np.exp(c1*x+c2)-0.2
+#  plt.plot(x,y)
   ranks = sortNondominated(pop, len(pop), first_front_only=True)
   front = ranks[0]
   data = []
@@ -170,7 +169,7 @@ def paretoFront(pop):
   plt.ylim(0,1)
   plt.show()
 
-def paretoNoiseFids(pop, fake_machine):
+def paretoNoiseFids(pop, state_vector, fake_machine):
     # Circuit length
     l = 1
     # Probability of error
@@ -195,8 +194,8 @@ def paretoNoiseFids(pop, fake_machine):
     p = 0.0075
     y = ((1-p)**x)*(1-np.exp(c1*x+c2))
     plt.plot(x,y)
-    y = ((1-p)**x)*(1-np.exp(c1*x))
-    plt.plot(x,y)
+#    y = ((1-p)**x)*(1-np.exp(c1*x))
+#    plt.plot(x,y)
 
     noise_model = NoiseModel.from_backend(fake_machine)
     backend = AerSimulator(method='density_matrix', noise_model=noise_model)
@@ -204,6 +203,7 @@ def paretoNoiseFids(pop, fake_machine):
     y=[]
     ranks = sortNondominated(pop, len(pop), first_front_only=True)
     front = ranks[0]
+    front = pop
     print(front[0].toQiskitCircuit().size())
     density_matrix = DensityMatrix.from_instruction(front[0].toQiskitCircuit())
     for circ in front:
@@ -212,15 +212,26 @@ def paretoNoiseFids(pop, fake_machine):
         circ.snapshot_density_matrix('density_matrix')
         result = backend.run(circ).result()
         density_matrix_noisy = DensityMatrix(result.data()['snapshots']['density_matrix']['density_matrix'][0]['value'])
-        print(state_fidelity(density_matrix, density_matrix_noisy))
-        print(circ.size())
-        y.append(state_fidelity(density_matrix, density_matrix_noisy))
+        y.append(state_fidelity(state_vector, density_matrix_noisy))
         x.append(circ.size())
     plt.plot(x,y,'o')
     plt.show()
 
+def saveQiskitCircuit(qc, name):
+    path = "qiskit_circuits/"
+    f = open(path+name, 'wb')
+    pickle.dump(qc, f)
+    f.close()
+
+def loadQiskitCircuit(file):
+    path = "qiskit_circuits/"
+    f = open(path+file, 'rb')
+    qc = pickle.load(f)
+    f.close()
+    return qc
+
 if __name__ == "__main__":
-    import constants
+    from constants import *
     # Initialize parser
     parser = argparse.ArgumentParser()
 
@@ -246,8 +257,10 @@ if __name__ == "__main__":
     if args.ID:
         ID = int(args.ID)
 
-    #FILE_PATH = 'performance_data/'+numberOfQubits+'QB/'+POPSIZE+'POP/'+ID+'-'+NGEN+'GEN-'+numberOfQubits+'QB_state'+stateIndex
+    #FILE_PATH = 'performance_data/'+str(numberOfQubits)+'QB/'+str(POPSIZE)+'POP/'+str(ID)+'-'+str(NGEN)+'GEN-'+str(numberOfQubits)+'QB_state'+str(stateIndex)
+    FILE_PATH = 'saved/0-2000GEN-5QB_state33'
     if args.FILE:
         FILE_PATH = args.FILE
     pop, logbook = load(FILE_PATH)
-    paretoNoiseFids(pop, constants.fake_machine)
+    paretoNoiseFids(pop, fake_machine)
+    
