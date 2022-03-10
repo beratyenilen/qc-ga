@@ -3,6 +3,7 @@ import copy
 import numpy.random
 import numpy as np
 import projectq
+from constants import allowedGates
 from projectq.ops import H,X,Y,Z,T,Tdagger,S,Sdagger,CNOT,CX,Rx,Ry,Rz,SqrtX
 from projectq.ops import Measure,All,get_inverse,Swap,SwapGate
 from math import pi
@@ -642,7 +643,7 @@ class Candidate:
         else:
             print("WRONG BRANCH IN continuousMutation")
     
-    def parameterMutatıon(self):
+    def parameterMutation(self):
         ''' 
         This function iterates over all the gates defined in the circuit and 
         randomly adjusts the parameter of the rotation gates.
@@ -656,6 +657,7 @@ class Candidate:
                 if self.circuit[index][0] == "SG":
                     # This means we have a single rotation gate
                     newParameter = float(self.circuit[index][-1]) + numpy.random.normal(scale=self.CMW)
+                    newParameter = newParameter%(2*pi)
                     self.circuit[index] = ("SG",self.circuit[index][1],self.circuit[index][2],newParameter)
                 '''
                 # Maybe we can also apply a discrete mutation we'll see.
@@ -1056,9 +1058,9 @@ def qasm2ls(qasmstr):
             if opl[0][3:-1] in ["pi", "-pi"]:
                 p = pi
             elif "pi" in opl[0][3:-1] and "*" in opl[0][3:-1]:
-                p = float(opl[0][3:-1].split("*")[0]) * pi
+                p = float(opl[0][3:-1].split("*")[0]) * pi      # Bug here
             elif "pi" in opl[0][3:-1] and "/" in opl[0][3:-1]:
-                p = pi / float(opl[0][3:-1].split("/")[1])
+                p = pi / float(opl[0][3:-1].split("/")[1])      # And here
             else:
                 p = float(opl[0][3:-1])
 
@@ -1191,4 +1193,4 @@ def testOptimize(c):
     return wfs
 
 
-allowedGates = [H, X, Y, Z, CX, Rx, Ry, Rz, S, Sdagger, T, Tdagger, Swap, SqrtX]
+#allowedGates = [H, X, Y, Z, CX, Rx, Ry, Rz, S, Sdagger, T, Tdagger, Swap, SqrtX]

@@ -14,8 +14,8 @@ def mutateInd(individual, verbose=False):
     individual.parameterMutation()
     return individual 
   if individual.optimized:
-    individual.parameterMutatıon()
-    return individual 
+    individual.parameterMutation()
+    return individual
   mutationChoice = random.choice(range(12))
   if mutationChoice == 0:
     individual.discreteUniformMutation()
