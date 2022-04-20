@@ -8,7 +8,8 @@ from deap.tools.emo import sortNondominated
 from qiskit import transpile, Aer, execute
 from qiskit.providers.aer.noise import NoiseModel
 from qiskit.providers.aer import AerSimulator
-from qiskit.quantum_info import state_fidelity, DensityMatrix
+from qiskit.quantum_info import state_fidelity, DensityMatrix, Operator
+from qiskit.circuit.library import Permutation
 
 #   Functions for handling and analyzing 
 #   the population and logbook data
@@ -18,7 +19,6 @@ def problemName(pop, logbook, path, state_name):
     NGEN = len(logbook.select("gen")) 
     time = datetime.now()
     time_str = time.strftime("%d.%m.%y-%H:%M")
-#    ID = time.strftime("%d%m%y%H%M%S")+str(len(pop))+str(NGEN)+str(n)   #This needs improving
     f = open(path+time_str+"-"+str(len(pop))+"pop-"+str(NGEN)+"GEN-"+state_name+".pop", 'wb')
 
 #   Save a population object and a logbook   
@@ -117,7 +117,7 @@ def plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluat
         pop[i].trim()
         circ = pop[i]
         data.append([circ.toQiskitCircuit().size(), 1 - evaluateInd(circ)[0]])
-#    plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
+    #plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
         
     data = np.array(data)
     x = data[:, 0]
@@ -125,22 +125,21 @@ def plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluat
     plt.scatter(x, y, c=c)
     plt.ylabel("Fidelity")
     plt.xlabel("Length")
-#plt.xlim(0,400)
+    #plt.xlim(0,400)
     plt.ylim(0,1)
-#    plt.title("Evaluation by length (1000 gen)")
+    #plt.title("Evaluation by length (1000 gen)")
     plt.colorbar()
     plt.show()
 
-def paretoFront(pop):
-  n = 5
-# Pairs of qubits connected by CNOT gates
-  L = 8
-  d = 2**n-n-1  
-  c1 = -(2*np.log(2)*n+np.log(L))/d
-  c2 = -np.log(2)*n**2/d
-  x = np.linspace(0,300,3000)
-  y = 1-np.exp(c1*x+c2)-0.2
-#  plt.plot(x,y)
+def paretoFront(pop, n, color=[0,0,0], all=True):
+  # Pairs of qubits connected by CNOT gates
+  #L = 8
+  #d = 2**n-n-1  
+  #c1 = -(2*np.log(2)*n+np.log(L))/d
+  #c2 = -np.log(2)*n**2/d
+  #x = np.linspace(0,300,3000)
+  #y = 1-np.exp(c1*x+c2)-0.2
+  #plt.plot(x,y)
   ranks = sortNondominated(pop, len(pop), first_front_only=True)
   front = ranks[0]
   data = []
@@ -153,31 +152,31 @@ def paretoFront(pop):
   data = np.array(data)
   x = data[:, 0]
   y = data[:, 1]
-  plt.scatter(x, y, color='b')
+  if (all):
+    plt.scatter(x, y, color='b', marker='.')
   data = []
   data = np.array([[circ.toQiskitCircuit().size(), 1 - circ.fitness.values[0]] for circ in front])
 
-#  for i in range(0, len(front)):
-#      pop[i].trim()
-#      circ = pop[i]
-#      data.append([circ.toQiskitCircuit().size(), 1 - circ.fitness.values[0]])
+#for i in range(0, len(front)):
+#    pop[i].trim()
+#    circ = pop[i]
+#    data.append([circ.toQiskitCircuit().size(), 1 - circ.fitness.values[0]])
   x = data[:, 0]
   y = data[:, 1]
-  plt.scatter(x, y, color='r')
+  plt.scatter(x, y, color=color, marker='.')
   plt.ylabel("Fidelity")
   plt.xlabel("Length")
   plt.ylim(0,1)
-  plt.show()
+#  plt.show()
 
-def paretoNoiseFids(pop, state_vector, fake_machine):
+def paretoNoiseFids(pop, n, state_vector, noise_model, avg_cnot=0.2, connectivity_len=8, all=True):
     # Circuit length
-    l = 1
+    #l = 1
     # Probability of error
     p = 0.001
-    # Number of qubits
-    n = 5
+
     # Pairs of qubits connected by CNOT gates
-    L = 8
+    L = connectivity_len
     d = 2**n-n-1
 
     Cn = (2*np.sqrt(np.pi))**(1-n)*gamma(d/2+1)/gamma(2**n)
@@ -185,37 +184,43 @@ def paretoNoiseFids(pop, state_vector, fake_machine):
     c1 = -(2*np.log(2)*n+np.log(L))/d
     c2 = -np.log(2)*n**2/d
 
-    x = np.linspace(0,300,3000)
-    y = ((1-p)**x)*(1-np.exp(c1*x+c2))
-    plt.plot(x,y)
+    x = np.linspace(0,300,1000)
+    l = x*avg_cnot
+    y = ((1-p)**l)*(1-np.exp(c1*l+c2))
+    #plt.plot(x,y)
     p = 0.005
-    y = ((1-p)**x)*(1-np.exp(c1*x+c2))
+    y = ((1-p)**l)*(1-np.exp(c1*l+c2))
     plt.plot(x,y)
+    y = ((1-p)**x)*(1-np.exp(c1*x+c2))
+    #plt.plot(x,y)
     p = 0.0075
-    y = ((1-p)**x)*(1-np.exp(c1*x+c2))
-    plt.plot(x,y)
+    y = ((1-p)**l)*(1-np.exp(c1*l+c2))
+    #plt.plot(x,y)
 #    y = ((1-p)**x)*(1-np.exp(c1*x))
 #    plt.plot(x,y)
 
-    noise_model = NoiseModel.from_backend(fake_machine)
     backend = AerSimulator(method='density_matrix', noise_model=noise_model)
+    #backend = AerSimulator(noise_model=noise_model)
+
+
     x=[]
     y=[]
     ranks = sortNondominated(pop, len(pop), first_front_only=True)
     front = ranks[0]
-    front = pop
-    print(front[0].toQiskitCircuit().size())
-    density_matrix = DensityMatrix.from_instruction(front[0].toQiskitCircuit())
+    if (all): front = pop
+    
     for circ in front:
+        permutation = circ.getPermutationMatrix()
+        permutation = np.linalg.inv(permutation)
         circ = circ.toQiskitCircuit()
-        circ = transpile(circ,fake_machine,optimization_level=0)
+        circ = transpile(circ,backend,optimization_level=0)
         circ.snapshot_density_matrix('density_matrix')
         result = backend.run(circ).result()
         density_matrix_noisy = DensityMatrix(result.data()['snapshots']['density_matrix']['density_matrix'][0]['value'])
-        y.append(state_fidelity(state_vector, density_matrix_noisy))
+        y.append(state_fidelity(permutation @ state_vector, density_matrix_noisy))
         x.append(circ.size())
-    plt.plot(x,y,'o')
-    plt.show()
+    plt.scatter(x,y, marker='.')
+    #plt.show()
 
 def saveQiskitCircuit(qc, name):
     path = "qiskit_circuits/"
@@ -229,6 +234,54 @@ def loadQiskitCircuit(file):
     qc = pickle.load(f)
     f.close()
     return qc
+
+def addMeasureGates(circ, n):
+    circ.barrier()
+    for i in range(n):
+        circ.measure(i, i)
+    return circ
+
+def getPermutation(circ):
+    #   Computing the permutations done by
+    #   transpile function
+    ancilla = [0,1,2,3,4]
+    perm = [0,1,2,3,4]
+    for op, qubits, clbits in circ.data:
+        if op.name == 'measure':
+            a = perm.index(clbits[0].index)
+            b = perm[qubits[0].index]
+            ancilla.remove(qubits[0].index)
+            perm[qubits[0].index] = clbits[0].index
+            perm[a] = b
+    circ.remove_final_measurements()
+    print(ancilla)
+    return perm
+
+def get_perm_aug_vec(circs, desired_vector, n):
+    n_iter = len(circs)
+    pad_vectors = []    #   List of perm_aug_desired_vectors for every circ
+    for i in range(n_iter):
+        n_phys=5
+        qubit_pattern = getPermutation(circs[i])
+        print(qubit_pattern)
+        circs[i].remove_final_measurements()
+        circs[i].snapshot_density_matrix('final')
+
+
+        aug_desired_vector = desired_vector
+
+        for k in range(n_phys-n):
+            aug_desired_vector = np.kron([1,0],aug_desired_vector)
+
+
+        perm_circ = Permutation(n_phys, qubit_pattern) # Creating a circuit for qubit mapping
+        perm_unitary = Operator(perm_circ) # Matrix for the previous circuit
+
+        #perm_aug_desired_vector = perm_unitary.data @ aug_desired_vector
+        perm_aug_desired_vector = aug_desired_vector
+        pad_vectors.append(perm_aug_desired_vector)
+    return pad_vectors
+
 
 if __name__ == "__main__":
     from constants import *
@@ -258,9 +311,10 @@ if __name__ == "__main__":
         ID = int(args.ID)
 
     #FILE_PATH = 'performance_data/'+str(numberOfQubits)+'QB/'+str(POPSIZE)+'POP/'+str(ID)+'-'+str(NGEN)+'GEN-'+str(numberOfQubits)+'QB_state'+str(stateIndex)
-    FILE_PATH = 'saved/0-2000GEN-5QB_state33'
+    FILE_PATH = 'performance_data/5QB/50POP/4-10GEN-5QB_state93'
     if args.FILE:
         FILE_PATH = args.FILE
     pop, logbook = load(FILE_PATH)
     paretoNoiseFids(pop, fake_machine)
+    plt.savefig("PLOT")
     
