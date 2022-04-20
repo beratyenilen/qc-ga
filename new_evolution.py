@@ -26,6 +26,7 @@ def mutateInd(individual, verbose=False):
     individual.continuousUniformMutation()
   elif mutationChoice == 2:
     individual.sequenceInsertion()
+  # 3 and 4 cause the addition of sqrt(X)dagger gates
   elif mutationChoice == 3:
     individual.sequenceAndInverseInsertion()
   elif mutationChoice == 4:
@@ -246,8 +247,8 @@ def geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilo
   gen = logbook.select("gen")
   fit_mins = logbook.chapters["fitness"].select("min")
   size_avgs = logbook.chapters["size"].select("avg")
-  print(fit_mins)
-  print(size_avgs)
+  #print(fit_mins)
+  #print(size_avgs)
 
 
   if returnLog:
