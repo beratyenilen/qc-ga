@@ -4,7 +4,9 @@ import argparse
 import numpy as np
 from scipy.special import gamma
 from datetime import datetime
+from deap import creator, base, tools
 from deap.tools.emo import sortNondominated
+from projectq.ops import CNOT
 from qiskit import transpile, Aer, execute
 from qiskit.providers.aer.noise import NoiseModel
 from qiskit.providers.aer import AerSimulator
@@ -53,9 +55,6 @@ def loadState(numberOfQubits, index):
     f.close()
     return desired_state
 
-#   Load allowed gateset, fitness and seed from a file
-def getSetup(path):
-    return 0
 
 #   Plot the fitness and size
 def plotFitSize(logbook, fitness="min", size="avg"):
@@ -100,36 +99,62 @@ def plotCircLengths(circs, circs2):
     plt.hist(sizes1, bins=max_size, range=(0,max_size), alpha=0.5)
     plt.show()
 
-
-def plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluateInd, POPSIZE):
-    name = problemName+".pop"
-    f = open('states/'+str(numberOfQubits)+'_qubits/' + stateName, 'rb')
-    desired_state = pickle.load(f)
-    f.close()
-
+def plotLenFidScatter(pop):
     data = []
-    c=[]
-    for i in range(POPSIZE):
-        c.append(i)
-        f = open(directory+name, 'rb')
-        pop = pickle.load(f)
-        f.close()
-        pop[i].trim()
-        circ = pop[i]
-        data.append([circ.toQiskitCircuit().size(), 1 - evaluateInd(circ)[0]])
+    for circ in pop:
+        data.append([circ.toQiskitCircuit().size(), 1 - circ.fitness.values[0]])
     #plt.scatter(circ.toQiskitCircuit().size(), 1-evaluateInd(circ, desired_state)[0])
         
     data = np.array(data)
     x = data[:, 0]
     y = data[:, 1]
-    plt.scatter(x, y, c=c)
+    plt.scatter(x, y, marker='.')
     plt.ylabel("Fidelity")
     plt.xlabel("Length")
-    #plt.xlim(0,400)
     plt.ylim(0,1)
     #plt.title("Evaluation by length (1000 gen)")
-    plt.colorbar()
     plt.show()
+
+def plotCNOTSFidScatter(pop, color=[0,0,0]):
+  ranks = sortNondominated(pop, len(pop), first_front_only=True)
+  front = ranks[0]
+  data = []
+  for ind in front:
+        circ = ind.circuit
+        l = len(circ)
+        if (l==0) :
+            continue
+        cnots = 0
+        for gate in circ:
+            if (gate[1]==CNOT): cnots+=1
+        data.append([cnots, 1 - ind.fitness.values[0]])
+  data = np.array(data)
+  x = data[:, 0]
+  y = data[:, 1]
+  plt.scatter(x, y, color=color, marker='.')
+  plt.ylabel("Fidelity")
+  plt.xlabel("CNOTS")
+  plt.ylim(0,1)
+
+def plotLenCNOTScatter(pop, color=[0,0,0]):
+  ranks = sortNondominated(pop, len(pop), first_front_only=True)
+  front = ranks[0]
+  data = []
+  for ind in front:
+        circ = ind.circuit
+        l = len(circ)
+        if (l==0) :
+            continue
+        cnots = 0
+        for gate in circ:
+            if (gate[1]==CNOT): cnots+=1
+        data.append([l,cnots])
+  data = np.array(data)
+  x = data[:, 0]
+  y = data[:, 1]
+  plt.scatter(x, y, color=color, marker='.')
+  plt.ylabel("CNOTS")
+  plt.xlabel("Length")
 
 def paretoFront(pop, n, color=[0,0,0], all=True):
   # Pairs of qubits connected by CNOT gates
@@ -254,7 +279,6 @@ def getPermutation(circ):
             perm[qubits[0].index] = clbits[0].index
             perm[a] = b
     circ.remove_final_measurements()
-    print(ancilla)
     return perm
 
 def get_perm_aug_vec(circs, desired_vector, n):
@@ -311,7 +335,7 @@ if __name__ == "__main__":
         ID = int(args.ID)
 
     #FILE_PATH = 'performance_data/'+str(numberOfQubits)+'QB/'+str(POPSIZE)+'POP/'+str(ID)+'-'+str(NGEN)+'GEN-'+str(numberOfQubits)+'QB_state'+str(stateIndex)
-    FILE_PATH = 'performance_data/5QB/50POP/4-10GEN-5QB_state93'
+    FILE_PATH = '0-50000GEN-5QB_state73'
     if args.FILE:
         FILE_PATH = args.FILE
     pop, logbook = load(FILE_PATH)

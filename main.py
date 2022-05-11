@@ -28,17 +28,6 @@ from qiskit_transpiler.transpiled_initialization_circuits import genCircs, getFi
 
 from qclib.state_preparation.baa_schmidt import initialize
 
-#   TEMPORARY
-#-------------------------------
-import qiskit.quantum_info as qi
-
-def entropy(part_trace):    
-    v = desiredState()
-    rho = qi.partial_trace(v,part_trace)
-    ent = qi.entropy(rho)
-    return ent
-#--------------------------------
-
 desired_state = loadState(numberOfQubits, stateIndex)
 
 def desiredState():
@@ -139,11 +128,14 @@ if args.INDEX:
     stateIndex = int(args.INDEX)
 if args.ID:
     ID = int(args.ID)
+    load_file = True
 
 stateName = str(numberOfQubits)+"QB_state"+str(stateIndex)
+#problemName = f"{ID}-{NGEN}GEN-{stateName}"
+#FILE_PATH = f"performance_data/{numberOfQubits}QB/{POPSIZE}POP/"+problemName
+
 now = datetime.now()
 timeStr = now.strftime("%d.%m.%y-%H:%M")
-problemName = f"{ID}-{NGEN}GEN-{stateName}"
 
 problemDescription = "State initalization for:\n"
 problemDescription += "numberOfQubits=" + str(numberOfQubits) + "\n"
@@ -181,17 +173,12 @@ def main():
     MUTPB = 0.2
 
     pop = toolbox.population(n=POPSIZE)
-#    toolbox.register("map", futures.map)
-#    toolbox.unregister("individual")
-#    toolbox.unregister("population")
-
+        
 #---------------------------------
-
     # define list of fidelity loss values to try out
-    losses = list(np.linspace(0.0,1.0,50))
+    losses = list(np.linspace(0.0,1.0,100))
     # find the exact circuit
     circuit = initialize(desiredState(), max_fidelity_loss=0.0, strategy="brute_force", use_low_rank=True)
-    print(circuit)
     circuit.measure_all()
     transpiled_circuit = transpile(circuit, basis_gates=basis_gates, optimization_level=3)
 
@@ -204,8 +191,8 @@ def main():
         circuit.measure_all()
         transpiled_circuit = transpile(circuit, basis_gates=basis_gates, optimization_level=3)
     
-        if transpiled_circuit.depth() < circuits[-1].depth():
-            circuits.append(transpiled_circuit)
+        #if transpiled_circuit.depth() < circuits[-1].depth():
+        circuits.append(transpiled_circuit)
 #---------------------------------
 
     #qiskit_circs, depths = genCircs(numberOfQubits, fake_machine, desiredState(), n_iter=1, measuregates=True)
@@ -218,27 +205,15 @@ def main():
         pop[i].fitness.values = toolbox.evaluate(pop[i])
         unaltered.append(copy.deepcopy(pop[i]))
     
+    print(FILE_PATH)
+    if (load_file):
+        pop, log = load(FILE_PATH)
     
-    #pop = toolbox.population(n=POPSIZE)
     start = time.perf_counter()
     pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon=epsilon, verbose=verbose, returnLog=True)
     runtime = round(time.perf_counter() - start, 2)
 
-    
-    # Save the results
-    if saveResult:
-        save(pop, logbook, "", "TEST")
-        print(f"The population and logbook were saved in {directory}{problemName}")
-
-
-    #plotLenFidScatter(directory, problemName, numberOfQubits, stateName, evaluateInd, POPSIZE)
-
-    print(f'Runtime: {runtime}s')
-    return runtime
-
     avg_cnots = avgCNOTs(pop)
-    print("CNOTS")
-    print(avg_cnots)
 
     paretoFront(pop, numberOfQubits, color='red', all=False)
     paretoFront(unaltered, numberOfQubits, color='blue', all=False)
@@ -246,9 +221,8 @@ def main():
     plotLenCNOTScatter(pop, color='red')
     plotLenCNOTScatter(unaltered, color='blue')
     plt.show()
-    paretoNoiseFids(pop, numberOfQubits, desired_state, noise_model, avg_cnot=avg_cnots, connectivity_len=len(connectivity), all=False)
+    paretoNoiseFids(pop, numberOfQubits, desiredState(), noise_model, avg_cnot=avg_cnots, connectivity_len=len(connectivity), all=False)
     plt.show()
-
     print(evaluateInd(pop[0]))
     backend = Aer.get_backend('statevector_simulator')
     circ = pop[0].toQiskitCircuit()
@@ -257,67 +231,15 @@ def main():
 #    print(state_fidelity(pop[0].getPermutationMatrix() @ desiredState(), statevector))
 
     
-#    saveQiskitCircuit(pop[0].toQiskitCircuit(), problemName)
-#    circ = loadQiskitCircuit(problemName)
-#    statevector = execute(circ, backend).result().get_statevector(circ)
-#    print(state_fidelity(desiredState(), pop[0].getPermutationMatrix() @ statevector))
+    
+    # Save the results
+    if saveResult:
+        save(pop, logbook, "", "TEST")
+        print(f"The population and logbook were saved in {directory}{problemName}")
 
+    print(f'Runtime: {runtime}s')
+    return runtime
 
 
 if __name__=="__main__":
     main()
-    exit()
-    FILE_PATH = "performance_data/5QB/400POP/1-30000GEN-5QB_state56"
-    pop = toolbox.population(n=POPSIZE)
-    # define list of fidelity loss values to try out
-    losses = list(np.linspace(0.0,1.0,100))
-    # find the exact circuit
-    circuit = initialize(desiredState(), max_fidelity_loss=0.0, strategy="brute_force", use_low_rank=True)
-    #circuit.measure_all()
-    transpiled_circuit = transpile(circuit, basis_gates=basis_gates, optimization_level=3)
-
-    # create a list of circuits with increasing fidelity loss
-    circuits = [transpiled_circuit]
-
-    for loss in losses:
-        # find approximate initialization circuit with fidelity loss
-        circuit = initialize(desiredState(), max_fidelity_loss=loss, strategy="brute_force", use_low_rank=True)
-        #circuit.measure_all()
-        transpiled_circuit = transpile(circuit, basis_gates=basis_gates, optimization_level=3)
-    
-        if transpiled_circuit.size() < circuits[-1].size():
-            circuits.append(transpiled_circuit)
-    unaltered = []
-    for i in range(len(circuits)):
-        perm = getPermutation(circuits[i])
-        circ = qasm2ls(circuits[i].qasm())
-        
-        pop[i].circuit = circ
-        pop[i].permutation = perm
-        pop[i].fitness.values = toolbox.evaluate(pop[i])
-        unaltered.append(copy.deepcopy(pop[i]))
-        
-        #circ2 = qasm2ls(pop[i].toQiskitCircuit().qasm())
-        #print(circ == circ2)
-        print(circuits[i].size())
-        print(perm)
-
-    pop, log = load(FILE_PATH)
-    paretoFront(pop, numberOfQubits, color='red', all=False)
-    #paretoFront(unaltered, numberOfQubits, color='blue', all=True)
-    plotLenFidScatter(unaltered)
-
-    plt.show()
-    plotLenCNOTScatter(pop, color='red')
-    plotLenCNOTScatter(unaltered, color='blue')
-    plt.show()
-    plotCNOTSFidScatter(pop, color='red')
-    plotCNOTSFidScatter(unaltered, color='blue')
-    plt.show()
-    exit()
-    main()
-
-##  What probably happened was that I had generated new
-##  benchmark states without realizing it.
-##  That is why the values of Schmidt algoithm don't 
-##  correspond to the ones which were expected
