@@ -1055,14 +1055,7 @@ def qasm2ls(qasmstr):
 
         elif opl[0][:2] in ["rx", "ry", "rz"]:
             t = int(opl[1][2:-2])
-            if opl[0][3:-1] in ["pi", "-pi"]:
-                p = pi
-            elif "pi" in opl[0][3:-1] and "*" in opl[0][3:-1]:
-                p = float(opl[0][3:-1].split("*")[0]) * pi      # Bug here
-            elif "pi" in opl[0][3:-1] and "/" in opl[0][3:-1]:
-                p = pi / float(opl[0][3:-1].split("/")[1])      # And here
-            else:
-                p = float(opl[0][3:-1])
+            p = eval( compile(opl[0][3:-1], "<string>", "eval") )
 
             if opl[0][:2] == "rx":
                 oplist.append(("SG", Rx, t, p))
