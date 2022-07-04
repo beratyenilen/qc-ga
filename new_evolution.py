@@ -8,7 +8,6 @@ import numpy as np
 from constants import *
 import pickle
 from copy import deepcopy
-from tools import paretoFront
 
 
 def mutateInd(individual, verbose=False):

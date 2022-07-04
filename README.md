@@ -5,3 +5,13 @@ We are still working on the project and we are planning to improve it further.
 
 More details will be added later on.
 
+## TODOS:
+- Fix main after broken refactoring
+- Save statevector (and noisy densitymatrix) of circuit outcome
+- check remove consecutive inverse gates
+- compare fidelity between best noisy LRSP circuit and best GA individual
+
+## Known issues
+
+- does not filter empty/trivial circuits and gates
+- does not combine e.g. sqrtx gates
