@@ -284,7 +284,7 @@ def paretoFront(pop, color=[0,0,0], all=True):
   plt.ylim(0,1)
 #  plt.show()
 
-def theoreticalModel(n=5, p=0.01, l_lim=60, L=4):
+def theoreticalModel(n=5, p=0.01, l_lim=35, L=10, Nph=2.5, label=''):
     # p: Probability of error
     # L: Pairs of qubits connected by CNOT gates
     d = 2**n-n-1
@@ -293,18 +293,10 @@ def theoreticalModel(n=5, p=0.01, l_lim=60, L=4):
     c2 = -np.log(2)*n**2/d
 
     l = np.linspace(0,l_lim,1000)
-    y = ((1-p)**l)*(1-np.exp(c1*l+c2))
-    plt.plot(l,y)
-    p = 0.005
-    y = ((1-p)**l)*(1-np.exp(c1*l+c2))
-    #plt.plot(l,y)
-    y = ((1-p)**l)*(1-np.exp(c1*l+c2))
-    #plt.plot(x,y)
-    p = 0.0075
-    y = ((1-p)**l)*(1-np.exp(c1*l+c2))
-    #plt.plot(x,y)
-#    y = ((1-p)**x)*(1-np.exp(c1*x))
-#    plt.plot(x,y)
+
+    y = ((1-p)**l)*(1-np.exp(c1*(l/Nph)+c2))
+    plt.plot(l,y, label=label)
+
 
 def paretoNoiseFids(pop, state_vector, fake_machine, noise_model, all=True, color='red'):
     backend = AerSimulator(method='density_matrix', noise_model=noise_model)

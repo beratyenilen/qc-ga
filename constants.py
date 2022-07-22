@@ -5,10 +5,10 @@ import random
 
 load_file = False
 numberOfQubits = 5
-NGEN = 2000
-POPSIZE = 300
-#stateIndex = 32
-stateIndex = random.randint(1,100)
+NGEN = 30000
+POPSIZE = 400
+stateIndex = 41
+#stateIndex = random.randint(1,100)
 multiProcess = False
 verbose = True
 saveResult = True

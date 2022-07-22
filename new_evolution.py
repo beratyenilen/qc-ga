@@ -11,10 +11,10 @@ from copy import deepcopy
 
 
 def mutateInd(individual, verbose=False):
-  if individual.fitness.values[0] < NEXT_STAGE_ERROR and not individual.optimized:
-    individual.optimize()
-    individual.parameterMutation()
-    return individual
+  # if individual.fitness.values[0] < NEXT_STAGE_ERROR and not individual.optimized:
+  #   individual.optimize()
+  #   individual.parameterMutation()
+  #   return individual
   if individual.optimized:
     individual.parameterMutation()
     return individual
@@ -78,6 +78,9 @@ def chooseIndividuals(ranks, N, toolbox, currentRank=1, verbose=False):
       # Let's say T = exp(-1) + exp(-2) + exp(-3) + exp(-4) and if our random number
       # is between 0 and 1, than it belongs to first list, ranks[0]. If it is
       # between exp(-1) and exp(-1)+exp(-2) than it belongs to second list etc.
+
+      # FIXME Refactor list index
+
       listIndex = -1
       rightBorder = 0
       for i in range(L):
@@ -99,13 +102,13 @@ def chooseIndividuals(ranks, N, toolbox, currentRank=1, verbose=False):
 
       if elementIndex >= len(ranks[listIndex]):
         elementIndex = -1
-      cp = deepcopy(ranks[listIndex][elementIndex])
-#      while toolbox.evaluate(cp) == ranks[listIndex][elementIndex].fitness.values:
+      cp = deepcopy(ranks[listIndex][elementIndex]) # Copies the individual
       cp = toolbox.mutate(cp)
       cp.fitness.values = toolbox.evaluate(cp)
       cps.append(cp)
       listIndexes.append(listIndex)
       elementIndexes.append(elementIndex)
+  # FIXME remove Indexes from return
   return cps, listIndexes, elementIndexes
 
 
@@ -119,7 +122,7 @@ def selectAndEvolve(pop, toolbox, verbose=False):
   """
   # This function returns a list and ith element of the list contains the 
   # individuals with rank i.
-  toCarry = int(len(pop)/10)
+  toCarry = len(pop)//10
   individuals = toolbox.select(pop, toCarry)
   ranks = sortNondominated(pop, len(pop))
 
@@ -155,7 +158,7 @@ def selectAndEvolve(pop, toolbox, verbose=False):
 
   # We should assign a probability to choose each indv, w.r.t to their ranks.
   # Crossover prob. is 1/12 according to Potocek. We can increase it a little more.
-  crossover = int(len(pop)/12)
+  crossover = len(pop) // 12
   currentRank = 1
   N=len(pop)-toCarry - 2*crossover
 

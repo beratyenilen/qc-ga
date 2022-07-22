@@ -1,3 +1,5 @@
+from cProfile import label
+from turtle import color
 from numpy.ma.core import add
 from projectq.ops import H,X,Y,Z,T,Tdagger,S,Sdagger,CNOT,Measure,All,Rx,Ry,Rz,SqrtX,Swap
 import numpy as np
@@ -87,12 +89,6 @@ def main():
     start = time.perf_counter()
     pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon=epsilon, verbose=verbose, returnLog=True)
     runtime = round(time.perf_counter() - start, 2)    
-    
-    x,y = plotCNOTSFidScatter(pop)
-    plt.scatter(x,y)
-    plt.show()
-    paretoFront(pop)
-    plt.show()
 
     # Save the results
     if saveResult:

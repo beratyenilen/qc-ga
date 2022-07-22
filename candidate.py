@@ -333,10 +333,14 @@ class Candidate:
 
         return qc
 
+    # FIXME Unused
     def optimize(self, optimization_level=2):
         """
         Optimizes self.circuit using qiskit.transpile(optimization_level=2).
         """
+
+        #FIXME Utility function for converting basis gates
+
         basis = []
         for gate in self.allowedGates:
             if gate == H:
