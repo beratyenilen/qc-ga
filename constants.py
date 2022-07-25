@@ -1,42 +1,32 @@
-from projectq.ops import H,X,Y,Z,T,Tdagger,S,Sdagger,CNOT,Measure,All,Rx,Ry,Rz,SqrtX,Swap
+"""Configuration parameters for GA and noise simulation
+"""
+from projectq.ops import X, CNOT, Rz, SqrtX
 import qiskit.providers.aer.noise as noise
-from qiskit.test.mock import FakeLima, FakeVigo
-import random
+from qiskit.test.mock import FakeVigo
 
-load_file = False
-numberOfQubits = 5
-NGEN = 30000
-POPSIZE = 400
-stateIndex = 41
-#stateIndex = random.randint(1,100)
-multiProcess = False
-verbose = True
-saveResult = True
-# Let's try to use the basis gate of IBM Quantum Computers
-#allowedGates = [X, SqrtX, CNOT, Rz, Swap]
+# Number of qubits in the state
+NUMBER_OF_QUBITS = 5
 
-fake_machine = FakeVigo()
-#noise_model = noise.NoiseModel()
-#p = 0.005
-#error = noise.depolarizing_error(p, 2)
-#noise_model.add_all_qubit_quantum_error(error, ['cx'])
+NUMBER_OF_GENERATIONS = 10
+POPULATION_SIZE = 100
+VERBOSE = True
+SAVE_RESULT = True
 
-noise_model = noise.NoiseModel.from_backend(fake_machine)
+# Backend configurations for noise simulation
+FAKE_MACHINE = FakeVigo()
+NOISE_MODEL = noise.NoiseModel.from_backend(FAKE_MACHINE)
+BASIS_GATES = FAKE_MACHINE.configuration().basis_gates  # [X, SqrtX, CNOT, Rz]
+ALLOWED_GATES = []
 
-basis_gates = fake_machine.configuration().basis_gates #[X, SqrtX, CNOT, Rz]
-allowedGates = []
-for g in basis_gates:
+# TODO qiskit/text to projectq translate function
+for g in BASIS_GATES:
     if g == 'x':
-        allowedGates.append(X)
+        ALLOWED_GATES.append(X)
     elif g == 'cx':
-        allowedGates.append(CNOT)
+        ALLOWED_GATES.append(CNOT)
     elif g == 'sx':
-        allowedGates.append(SqrtX)
+        ALLOWED_GATES.append(SqrtX)
     elif g == 'rz':
-        allowedGates.append(Rz)
-connectivity = fake_machine.configuration().coupling_map
-#connectivity = [[0,1],[1,0],[1,2],[2,1],[2,3],[3,2]]
+        ALLOWED_GATES.append(Rz)
+CONNECTIVITY = FAKE_MACHINE.configuration().coupling_map
 MAX_CIRCUIT_LENGTH = 10
-epsilon = 0.1
-#allGates = [H, X, Y, Z, T, Tdagger, S, Sdagger, CNOT, Rz, Ry, Rx, SqrtX, Swap]
-NEXT_STAGE_ERROR = 0 # TOM: Changed from 0.12

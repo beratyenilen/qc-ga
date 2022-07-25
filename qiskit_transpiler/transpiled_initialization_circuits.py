@@ -8,7 +8,7 @@ from numpy import absolute, vdot
 
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute, Aer, transpile
 #from qiskit.tools.visualization import circuit_drawer, plot_circuit_layout, plot_histogram
-from qiskit.test.mock import FakeVigo, FakeAthens
+from qiskit.test.mock import FakeVigo, FakeAthens, FakeLima
 from qiskit.quantum_info import state_fidelity, DensityMatrix, Statevector, Operator
 from qiskit import BasicAer
 #from qiskit.extensions import Initialize
@@ -42,15 +42,12 @@ def getFidelities(n, circs, machine_simulator, fake_machine, desired_vector):
     n_iter = len(circs)
     pad_vectors = []    #   List of perm_aug_desired_vectors for every circ
     for i in range(n_iter):
-        
-        qubit_pattern = list(circs[i]._layout.get_virtual_bits().values()) # How virtual bits map to physical bits
-        n_phys = len(qubit_pattern) # n of physical bits
-
-        perm = getPermutation(circs[i])
-#        circs[i].save_density_matrix()
+        n_phys=5
+        qubit_pattern = getPermutation(circs[i])
+        print(qubit_pattern)
+        circs[i].remove_final_measurements()
         circs[i].snapshot_density_matrix('final')
-        
-        qubit_pattern = perm
+
 
         aug_desired_vector = desired_vector
 
@@ -65,17 +62,19 @@ def getFidelities(n, circs, machine_simulator, fake_machine, desired_vector):
         pad_vectors.append(perm_aug_desired_vector)
 
     for i in range(n_iter):
-#        result = execute(circs[i],machine_simulator,shots=1).result()
+        result = execute(circs[i],machine_simulator,shots=1).result()
+        noisy_dens_matr = result.data()['snapshots']['density_matrix']['final'][0]['value']
+        fid = state_fidelity(pad_vectors[i],noisy_dens_matr)
 #        noisy_dens_matr = result.data()['density_matrix']
-        s = 0
-        for _ in range(100):
-            result = execute(circs[i],machine_simulator,
+#        s = 0
+#        for _ in range(10):
+#            result = execute(circs[i],machine_simulator,
 #                            coupling_map=coupling_map,
 #                            basis_gates=basis_gates,
 #                            noise_model=noise_model,
-                            shots=1).result()
-            noisy_dens_matr = result.data()['snapshots']['density_matrix']['final'][0]['value']
-            fid = state_fidelity(pad_vectors[i],noisy_dens_matr)
+#                            shots=1).result()
+#            noisy_dens_matr = result.data()['snapshots']['density_matrix']['final'][0]['value']
+#            fid = state_fidelity(pad_vectors[i],noisy_dens_matr)
 #            s += fid
 #        fid = s/100
         fidelities.append(fid)
@@ -110,7 +109,7 @@ def genCircs(n, fake_machine, desired_vector, n_iter=10, optimization_level=2, m
     depths = []
 
     for _ in range(n_iter):
-        new_circ = transpile(init_circ,fake_machine,optimization_level=optimization_level)
+        new_circ = transpile(init_circ,fake_machine,optimization_level=optimization_level,approximation_degree=0)
         circs.append(new_circ)
         depths.append(new_circ.depth())
     return circs, depths
@@ -124,7 +123,7 @@ def main():
     desired_vector = randomDV(n)
     print(desired_vector)
     print(np.linalg.norm(desired_vector))
-    circs, depths = genCircs(n, fake_machine, desired_vector, n_iter=100, measuregates=False)
+    circs, depths = genCircs(n, fake_machine, desired_vector, n_iter=100, measuregates=True)
 
     fidelities = getFidelities(n, circs, machine_simulator, fake_machine, desired_vector)
     mean_fidelity = sum(fidelities)/len(fidelities)

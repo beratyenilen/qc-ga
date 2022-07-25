@@ -1,102 +1,84 @@
-from cProfile import label
-from turtle import color
-from numpy.ma.core import add
-from projectq.ops import H,X,Y,Z,T,Tdagger,S,Sdagger,CNOT,Measure,All,Rx,Ry,Rz,SqrtX,Swap
-import numpy as np
-from matplotlib import pyplot as plt
 import os
-
-from deap import creator, base, tools
-from qiskit.providers.aer.noise.errors.errorutils import circuit2superop
-from qiskit_transpiler.transpiled_initialization_circuits import genCircs, getPermutation, getFidelities, randomDV
-from candidate import qasm2ls
-from candidate import Candidate
-from constants import *
-from new_evolution import crossoverInd, mutateInd, selectAndEvolve, geneticAlgorithm
-from tools import *
-from datetime import datetime
-from comparison import compare
-import time
 import argparse
+from datetime import datetime
+import time
+from deap import creator, base
+from individual import Individual
+from constants import NUMBER_OF_GENERATIONS, NUMBER_OF_QUBITS, POPULATION_SIZE, VERBOSE, ALLOWED_GATES, SAVE_RESULT
+from evolution import genetic_algorithm
+from tools import initialize_toolbox, load_state, lrsp_circs, save
 
-from qiskit import Aer, execute, QuantumRegister
-from qiskit.quantum_info import state_fidelity, DensityMatrix, Statevector, Operator
-from qiskit.providers.aer import QasmSimulator
-from qiskit.test.mock import FakeVigo, FakeAthens
-from qiskit.circuit.library import Permutation
-from qiskit_transpiler.transpiled_initialization_circuits import genCircs, getFidelities
 
-
-directory = f"performance_data/{numberOfQubits}QB/{POPSIZE}POP/"
+directory = f"performance_data/{NUMBER_OF_QUBITS}QB/{POPULATION_SIZE}POP/"
 ID = int(len(os.listdir(directory)) / 2)
 
 # Initialize parser
 parser = argparse.ArgumentParser()
 
 # Adding optional argument
-parser.add_argument("-p", "--POPSIZE", help = "Size of the population")
-parser.add_argument("-g", "--NGEN", help = "The number of generations")
-parser.add_argument("-q", "--NQUBIT", help = "The number of qubits")
-parser.add_argument("-i", "--INDEX", help = "Index of desired state")
-parser.add_argument("-id", "--ID", help = "ID of the saved file")
+parser.add_argument("-p", "--POPSIZE", help="Size of the population")
+parser.add_argument("-g", "--NGEN", help="The number of generations")
+parser.add_argument("-q", "--NQUBIT", help="The number of qubits")
+parser.add_argument("-i", "--INDEX", help="Index of desired state")
+parser.add_argument("-id", "--ID", help="ID of the saved file")
 
 # Read arguments from command line
 args = parser.parse_args()
 
 if args.POPSIZE:
-    POPSIZE = int(args.POPSIZE)
+    POPULATION_SIZE = int(args.POPSIZE)
 if args.NGEN:
-    NGEN = int(args.NGEN)
+    NUMBER_OF_GENERATIONS = int(args.NGEN)
 if args.NQUBIT:
-    numberOfQubits = int(args.NQUBIT)
+    NUMBER_OF_QUBITS = int(args.NQUBIT)
 if args.INDEX:
-    stateIndex = int(args.INDEX)
+    STATE_INDEX = int(args.INDEX)
 if args.ID:
     ID = int(args.ID)
     load_file = True
 
-stateName = str(numberOfQubits)+"QB_state"+str(stateIndex)
-problemName = f"{ID}-{NGEN}GEN-{stateName}"
-#FILE_PATH = f"performance_data/{numberOfQubits}QB/{POPSIZE}POP/"+problemName
+state_name = str(NUMBER_OF_QUBITS)+"QB_state"+str(STATE_INDEX)
+problem_name = f"{ID}-{NUMBER_OF_GENERATIONS}GEN-{state_name}"
 
 now = datetime.now()
-timeStr = now.strftime("%d.%m.%y-%H:%M")
+time_str = now.strftime("%d.%m.%y-%H:%M")
 
-problemDescription = "State initalization for:\n"
-problemDescription += "numberOfQubits=" + str(numberOfQubits) + "\n"
-problemDescription += "allowedGates=" + str(allowedGates) + "\n"
+problem_description = "State initalization for:\n"
+problem_description += "numberOfQubits=" + str(NUMBER_OF_QUBITS) + "\n"
+problem_description += "allowedGates=" + str(ALLOWED_GATES) + "\n"
 
 # trying to minimize error and length !
-fitnessWeights = (-1.0, -0.5)
+fitness_weights = (-1.0, -0.5)
 
 # Create the type of the individual
-creator.create("FitnessMin", base.Fitness, weights=fitnessWeights)
-creator.create("Individual", Candidate, fitness=creator.FitnessMin)
+# TODO move to utils
+creator.create("fitness_min", base.Fitness, weights=fitness_weights)
+creator.create("individual", Individual, fitness=creator.fitness_min)
+
 
 def main():
     # Initialize your toolbox and population
-    desired_state = loadState(numberOfQubits, stateIndex).data
+    desired_state = load_state(NUMBER_OF_QUBITS, STATE_INDEX).data
     toolbox = initialize_toolbox(desired_state)
-    pop = toolbox.population(n=POPSIZE)
-    unaltered = LRSP_circs(desired_state, toolbox)
+    pop = toolbox.population(n=POPULATION_SIZE)
+    unaltered = lrsp_circs(desired_state, toolbox)
     for i in range(len(unaltered)):
         pop[i] = unaltered[i]
 
-#    print(FILE_PATH)
-#    if (load_file):
-#        pop, log = load(FILE_PATH)
-    
     start = time.perf_counter()
-    pop, logbook = geneticAlgorithm(pop, toolbox, NGEN, problemName, problemDescription, epsilon=epsilon, verbose=verbose, returnLog=True)
-    runtime = round(time.perf_counter() - start, 2)    
+    pop, logbook = genetic_algorithm(pop, toolbox, NUMBER_OF_GENERATIONS, problem_name,
+                                     problem_description, verbose=VERBOSE)
+    runtime = round(time.perf_counter() - start, 2)
 
     # Save the results
-    if saveResult:
-        save(pop, logbook, directory, problemName)
-        print(f"The population and logbook were saved in {directory}{problemName}")
+    if SAVE_RESULT:
+        save(pop, logbook, directory, problem_name)
+        print(
+            f"The population and logbook were saved in {directory}{problem_name}")
 
     print(f'Runtime: {runtime}s')
     return runtime
+
 
 if __name__ == '__main__':
     main()
