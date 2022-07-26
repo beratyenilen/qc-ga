@@ -9,39 +9,26 @@ from constants import *
 
 
 def mutate_ind(individual):
-    # if individual.fitness.values[0] < NEXT_STAGE_ERROR and not individual.optimized:
-    #   individual.optimize()
-    #   individual.parameterMutation()
-    #   return individual
+    """Does one of 12 mutations to the circuit randomly
+    """
     if individual.optimized:
         individual.parameterMutation()
         return individual
-    mutationChoice = random.choice(range(12))
-    if mutationChoice == 0:
-        individual.discreteUniformMutation()
-    elif mutationChoice == 1:
-        individual.continuousUniformMutation()
-    elif mutationChoice == 2:
-        individual.sequenceInsertion()
-    # 3 and 4 cause the addition of sqrt(X)dagger gates
-    elif mutationChoice == 3:
-        individual.sequenceAndInverseInsertion()
-    elif mutationChoice == 4:
-        individual.insertMutateInvert()
-    elif mutationChoice == 5:
-        individual.sequenceDeletion()
-    elif mutationChoice == 6:
-        individual.sequenceReplacement()
-    elif mutationChoice == 7:
-        individual.sequenceSwap()
-    elif mutationChoice == 8:
-        individual.sequenceScramble()
-    elif mutationChoice == 9:
-        individual.permutationMutation()
-    elif mutationChoice == 10:
-        individual.trim()
-    else:
-        individual.moveGate()
+    mutation_choice_fn = random.choice([
+        individual.discreteUniformMutation,
+        individual.continuousUniformMutation,
+        individual.sequenceInsertion,
+        individual.sequenceAndInverseInsertion,
+        individual.insertMutateInvert,
+        individual.sequenceDeletion,
+        individual.sequenceReplacement,
+        individual.sequenceSwap,
+        individual.sequenceScramble,
+        individual.permutationMutation,
+        individual.trim,
+        individual.moveGate
+    ])
+    mutation_choice_fn()
     return individual
 
 
@@ -107,7 +94,7 @@ def mutate_individuals(ranks, N, toolbox, current_rank=1):
     return cps, list_indexes, element_indexes
 
 
-def select_and_evolve(pop, toolbox, verbose=False):
+def select_and_evolve(pop, toolbox):
     """
     We try to apply the selection and evolution procedure proposed in Potocek paper thing. 
     That is, we rank each circuit according via nondominated sorting then each 
@@ -166,10 +153,10 @@ def book_keep(best_candidate, output_file):
     output_file.write("\nbestCandidate has error:" +
                       str(best_candidate.fitness.values[0]))
     output_file.write("\nbestCandidate has circuit:")
-    output_file.write(best_candidate.printCircuit(verbose=False))
+    output_file.write(best_candidate.printCircuit())
 
 
-def genetic_algorithm(pop, toolbox, n_gen, problem_name, problem_description, verbose=False):
+def genetic_algorithm(pop, toolbox, n_gen, problem_name, problem_description):
     # Evaluate the individuals with an invalid fitness
     for ind in pop:
         if not ind.fitness.valid:
@@ -198,7 +185,7 @@ def genetic_algorithm(pop, toolbox, n_gen, problem_name, problem_description, ve
         non_dominated_solutions = sort_nondominated(pop, len(pop))[0]
 
         # Select and evolve next generation of individuals
-        next_generation = toolbox.select_and_evolve(pop, toolbox, verbose)
+        next_generation = toolbox.select_and_evolve(pop, toolbox)
         # Evaluate the fitnesses of the new generation
         # We will evaluate the fitnesses of all the individuals just to be safe.
         # Mutations might be changing the fitness values, I am not sure.

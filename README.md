@@ -9,6 +9,13 @@ TODO: Add link to paper
 
 ## Requirements
 
+Python version: 3.9 (3.10 does not work due to numpy 1.19 requirement)
+
+Libraries:
+- libhdf5 (required by qclib)
+
+Pip modules (defined in [requirements.txt](./requirements.txt)): TODO
+
 ## Usage
 
 ## Roadmap
