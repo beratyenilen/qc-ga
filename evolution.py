@@ -12,28 +12,28 @@ def mutate_ind(individual):
     """Does one of 12 mutations to the circuit randomly
     """
     if individual.optimized:
-        individual.parameterMutation()
+        individual.parameter_mutation()
         return individual
     mutation_choice_fn = random.choice([
-        individual.discreteUniformMutation,
-        individual.continuousUniformMutation,
-        individual.sequenceInsertion,
-        individual.sequenceAndInverseInsertion,
-        individual.insertMutateInvert,
-        individual.sequenceDeletion,
-        individual.sequenceReplacement,
-        individual.sequenceSwap,
-        individual.sequenceScramble,
-        individual.permutationMutation,
+        individual.discrete_uniform_mutation,
+        individual.continuous_uniform_mutation,
+        individual.sequence_insertion,
+        individual.sequence_and_inverse_insertion,
+        individual.insert_mutate_invert,
+        individual.sequence_deletion,
+        individual.sequence_replacement,
+        individual.sequence_swap,
+        individual.sequence_scramble,
+        individual.permutation_mutation,
         individual.trim,
-        individual.moveGate
+        individual.move_gate
     ])
     mutation_choice_fn()
     return individual
 
 
 def mate(parent1, parent2, toolbox):
-    return (parent1.crossOver(parent2, toolbox), parent2.crossOver(parent1, toolbox))
+    return (parent1.cross_over(parent2, toolbox), parent2.cross_over(parent1, toolbox))
 
 
 def mutate_individuals(ranks, N, toolbox, current_rank=1):
@@ -153,7 +153,7 @@ def book_keep(best_candidate, output_file):
     output_file.write("\nbestCandidate has error:" +
                       str(best_candidate.fitness.values[0]))
     output_file.write("\nbestCandidate has circuit:")
-    output_file.write(best_candidate.printCircuit())
+    output_file.write(best_candidate.print_circuit())
 
 
 def genetic_algorithm(pop, toolbox, n_gen, problem_name, problem_description):

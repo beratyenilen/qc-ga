@@ -3,37 +3,33 @@ import copy
 import numpy.random
 import numpy as np
 import projectq
-from constants import ALLOWED_GATES
 from projectq.ops import H, X, Y, Z, T, Tdagger, S, Sdagger, CNOT, CX, Rx, Ry, Rz, SqrtX, Measure, All, get_inverse, Swap, SwapGate
 from math import pi
 from qiskit import QuantumCircuit, transpile, QuantumRegister, ClassicalRegister
 
 from tools import qasm2ls, string_of_projectq
 
-# TODO snake case
-
 
 class Individual:
     """This class is a container for an individual in GA.
     """
 
-    # TODO remove defaults
-    def __init__(self, numberOfQubits=2, allowedGates=[X, Rz, SqrtX, Swap, CNOT], connectivity="ALL", EMC=2.0, ESL=2.0,):
-        self.numberOfQubits = numberOfQubits
-        self.allowedGates = allowedGates
+    def __init__(self, number_of_qubits, allowed_gates, connectivity="ALL", EMC=2.0, ESL=2.0,):
+        self.number_of_qubits = number_of_qubits
+        self.allowed_gates = allowed_gates
         self.connectivity = connectivity
         self.permutation = random.sample(
-            range(self.numberOfQubits), numberOfQubits)
+            range(number_of_qubits), number_of_qubits)
         # TODO why use initialism rather than full name for the variables?
         # EMC stands for Expected Mutation Count
         self.EMC = EMC
         # ESL stands for Expected Sequence Length
         self.ESL = ESL
-        self.circuit = self.generateRandomCircuit()
+        self.circuit = self.generate_random_circuit()
         self.CMW = 0.2
         self.optimized = False
 
-    def getPermutationMatrix(self):
+    def get_permutation_matrix(self):
         """
         Args:
             perm: a list representing where each qubit is mapped to.
@@ -43,84 +39,84 @@ class Individual:
             2^N x 2^N numpy matrix representing the action of the permutation where
             N is the number of qubits.
         """
-        Nexp = 2 ** self.numberOfQubits
+        Nexp = 2 ** self.number_of_qubits
         M = np.zeros((Nexp, Nexp))
         for frm in range(Nexp):
-            toBin = list(bin(0)[2:].zfill(self.numberOfQubits))
-            frmBin = list(bin(frm)[2:].zfill(self.numberOfQubits))
-            toBin.reverse()
-            frmBin.reverse()
-            for p in range(self.numberOfQubits):
-                toBin[p] = frmBin[self.permutation.index(p)]
-            toBin.reverse()
-            to = int("".join(toBin), 2)
+            to_bin = list(bin(0)[2:].zfill(self.number_of_qubits))
+            frm_bin = list(bin(frm)[2:].zfill(self.number_of_qubits))
+            to_bin.reverse()
+            frm_bin.reverse()
+            for p in range(self.number_of_qubits):
+                to_bin[p] = frm_bin[self.permutation.index(p)]
+            to_bin.reverse()
+            to = int("".join(to_bin), 2)
             M[to][frm] = 1.0
         return M
 
     def __str__(self):
-        output = "numberOfQubits: " + str(self.numberOfQubits)
+        output = "number_of_qubits: " + str(self.number_of_qubits)
         output += "\nConnectivity = " + str(self.connectivity)
         output += "\nQubit Mapping = " + str(self.permutation)
         output += "\nallowedGates: ["
-        for i in range(len(self.allowedGates)):
-            if self.allowedGates[i] == Rx:
+        for i in range(len(self.allowed_gates)):
+            if self.allowed_gates[i] == Rx:
                 output += "Rx, "
-            elif self.allowedGates[i] == Ry:
+            elif self.allowed_gates[i] == Ry:
                 output += "Ry, "
-            elif self.allowedGates[i] == Rz:
+            elif self.allowed_gates[i] == Rz:
                 output += "Rz, "
-            elif self.allowedGates[i] in [SwapGate, Swap]:
+            elif self.allowed_gates[i] in [SwapGate, Swap]:
                 output += "Swap, "
-            elif self.allowedGates[i] in [SqrtX]:
+            elif self.allowed_gates[i] in [SqrtX]:
                 output += "SqrtX, "
-            elif self.allowedGates[i] in [CNOT, CX]:
+            elif self.allowed_gates[i] in [CNOT, CX]:
                 output += "CX, "
             else:
-                output += str(self.allowedGates[i]) + ", "
+                output += str(self.allowed_gates[i]) + ", "
         output = output[:-2]
         output += "]\nEMC: " + str(self.EMC) + ", ESL: " + str(self.ESL) + "\n"
-        output += self.printCircuit()
+        output += self.print_circuit()
         output += "\ncircuitLength: " + str(len(self.circuit))
         return output
 
     def print(self):
         print(self)
 
-    def printCircuit(self, verbose=True):
+    def print_circuit(self):
         output = "Qubit Mapping:" + str(self.permutation) + "\n"
         output += "Circuit: ["
-        for i in range(len(self.circuit)):
-            if self.circuit[i][0] == "SFG":
+        for operator in self.circuit:
+            if operator[0] == "SFG":
                 output += (
                     "("
-                    + str(self.circuit[i][1])
+                    + str(operator[1])
                     + ","
-                    + str(self.circuit[i][2])
+                    + str(operator[2])
                     + "), "
                 )
-            elif self.circuit[i][0] == "TFG":
+            elif operator[0] == "TFG":
                 output += (
                     "("
-                    + str(self.circuit[i][1])
+                    + str(operator[1])
                     + ","
-                    + str(self.circuit[i][2])
+                    + str(operator[2])
                     + ","
-                    + str(self.circuit[i][3])
+                    + str(operator[3])
                     + "), "
                 )
-            elif self.circuit[i][0] == "SG":
+            elif operator[0] == "SG":
                 output += (
                     "("
-                    + str(self.circuit[i][1](round(self.circuit[i][3], 3)))
+                    + str(operator[1](round(operator[3], 3)))
                     + ","
-                    + str(self.circuit[i][2])
+                    + str(operator[2])
                     + "), "
                 )
         output = output[:-2]
         output += "]"
         return output
 
-    def generateRandomCircuit(self, initialize=True):
+    def generate_random_circuit(self, initialize=True):
         """
         Generates a random circuit with its length chosen from a geometric distr.
         with mean value self.ESL.
@@ -138,33 +134,34 @@ class Individual:
             # we should choose the mean value of the geometric dist. to be ESL.
             p = 1 / self.ESL
         # Produced circuit will have this length
-        cirLength = numpy.random.geometric(p)
-        producedCircuit = []
-        for i in range(cirLength):
-            # Choose a gate to add from allowedGates
-            gate = random.choice(self.allowedGates)
+        cir_length = numpy.random.geometric(p)
+        produced_circuit = []
+        for _ in range(cir_length):
+            # Choose a gate to add from allowed_gates
+            gate = random.choice(self.allowed_gates)
             if gate in [CNOT, CX, Swap, SwapGate]:
                 # if gate to add is CNOT we need to choose control and target indices
                 if self.connectivity == "ALL":
                     control, target = random.sample(
-                        range(self.numberOfQubits), 2)
+                        range(self.number_of_qubits), 2)
                 else:
                     control, target = random.choice(self.connectivity)
                 # TFG stands for Two Qubit Fixed Gate
-                producedCircuit.append(("TFG", gate, control, target))
+                produced_circuit.append(("TFG", gate, control, target))
             elif gate in [H, X, Y, Z, T, Tdagger, S, Sdagger, SqrtX]:
                 # choose the index to apply
-                target = random.choice(range(self.numberOfQubits))
+                target = random.choice(range(self.number_of_qubits))
                 # SFG stands for Single Qubit Fixed Gate
-                producedCircuit.append(("SFG", gate, target))
+                produced_circuit.append(("SFG", gate, target))
             elif gate in [Rx, Ry, Rz]:
                 # choose the index to apply the operator
-                target = random.choice(range(self.numberOfQubits))
+                target = random.choice(range(self.number_of_qubits))
                 # choose the rotation parameter between 0 and 2pi up to 3 significiant figures
                 # !! We may change this significant figure things later on
-                significantFigure = 2
-                parameter = round(pi * random.uniform(0, 2), significantFigure)
-                producedCircuit.append(("SG", gate, target, parameter))
+                significant_figure = 2
+                parameter = round(pi * random.uniform(0, 2),
+                                  significant_figure)
+                produced_circuit.append(("SG", gate, target, parameter))
             else:
                 print("WHAT ARE YOU DOING HERE!!")
                 print("GATE IS:", gate)
@@ -174,9 +171,9 @@ class Individual:
 
         # Produced circuit will be a list of tuples in the following form:
         # [(type, gate, index), (type, gate, control, target), ...]
-        return producedCircuit
+        return produced_circuit
 
-    def simulateCircuit(self):
+    def simulate_circuit(self):
         """
         Simulates the action of self.circuit and return the resulting state.
         Args:
@@ -190,32 +187,32 @@ class Individual:
         # We need to define the MainEngine, which will be our compiler.
         # Let us remove engine_list from the equation. (I didn't understand what it is yet)
         eng = projectq.MainEngine(backend=sim, engine_list=[])
-        qureg = eng.allocate_qureg(self.numberOfQubits)
+        qureg = eng.allocate_qureg(self.number_of_qubits)
 
         # Now we can start applying the gates as proposed in self.circuit
         # I am not sure about this way of checking circuit length, this may create problems if I am not careful
-        for i in range(len(self.circuit)):
-            if self.circuit[i][0] == "SFG":
-                gate = self.circuit[i][1]
-                target = self.circuit[i][2]
+        for operator in self.circuit:
+            if operator[0] == "SFG":
+                gate = operator[1]
+                target = operator[2]
                 gate | qureg[target]
-            elif self.circuit[i][0] == "TFG":
-                gate = self.circuit[i][1]
-                control = self.circuit[i][2]
-                target = self.circuit[i][3]
+            elif operator[0] == "TFG":
+                gate = operator[1]
+                control = operator[2]
+                target = operator[3]
                 gate | (qureg[control], qureg[target])
-            elif self.circuit[i][0] == "SG":
-                gate = self.circuit[i][1]
-                target = self.circuit[i][2]
-                parameter = self.circuit[i][3]
+            elif operator[0] == "SG":
+                gate = operator[1]
+                target = operator[2]
+                parameter = operator[3]
                 gate(parameter) | qureg[target]
             else:
-                print("WRONG BRANCH IN simulateCircuit")
+                print("WRONG BRANCH IN simulate_circuit")
         # This sends all the added gates to the compiler to be optimized.
         # Without this, we may have problems.
         eng.flush()
         # Let us get a deepcopy of the our resulting state.
-        mapping, wavefunction = copy.deepcopy(eng.backend.cheat())
+        _, wavefunction = copy.deepcopy(eng.backend.cheat())
 
         # I am not sure if we need mapping at any point of our calculations due
         # to the fact that we'll only be using Simulator backend, but I need to do
@@ -229,9 +226,9 @@ class Individual:
         All(Measure) | qureg
 
         # Multiply it with the permutation
-        return self.getPermutationMatrix() @ wavefunction
+        return self.get_permutation_matrix() @ wavefunction
 
-    def drawCircuit(self, form="qiskit"):
+    def draw_circuit(self, form="qiskit"):
         """
         Args:
             if type='projectq' this function draws the circuit using
@@ -245,52 +242,52 @@ class Individual:
             # Set the backend and initalize the registers.
             drawBackend = projectq.backends.CircuitDrawerMatplotlib()
             eng = projectq.MainEngine(drawBackend, engine_list=[])
-            qureg = eng.allocate_qureg(self.numberOfQubits)
+            qureg = eng.allocate_qureg(self.number_of_qubits)
 
             # Constructing the circuit.
-            for i in range(len(self.circuit)):
-                if self.circuit[i][0] == "SFG":
-                    gate = self.circuit[i][1]
-                    target = self.circuit[i][2]
+            for operator in self.circuit:
+                if operator[0] == "SFG":
+                    gate = operator[1]
+                    target = operator[2]
                     gate | qureg[target]
-                elif self.circuit[i][0] == "TFG":
-                    gate = self.circuit[i][1]
-                    control = self.circuit[i][2]
-                    target = self.circuit[i][3]
+                elif operator[0] == "TFG":
+                    gate = operator[1]
+                    control = operator[2]
+                    target = operator[3]
                     gate | (qureg[control], qureg[target])
-                elif self.circuit[i][0] == "SG":
-                    gate = self.circuit[i][1]
-                    target = self.circuit[i][2]
-                    parameter = self.circuit[i][3]
+                elif operator[0] == "SG":
+                    gate = operator[1]
+                    target = operator[2]
+                    parameter = operator[3]
                     gate(parameter) | qureg[target]
                 else:
-                    print("WRONG BRANCH IN drawCircuit")
+                    print("WRONG BRANCH IN draw_circuit")
             # This sends all the added gates to the compiler to be optimized.
             # Without this, we may have problems.
             eng.flush()
 
             # In order to plot, we need to input labels for out qubits and a drawing order.
             # I will simply name qubits as 0,1 for the moment, later on we can change this.
-            qubitLabels = {}
+            qubit_labels = {}
             # I will choose the topmost qubit to be the zeroth qubit.
             drawingOrder = {}
-            for i in range(self.numberOfQubits):
-                # qubitLabels[i] = i
-                qubitLabels[i] = self.permutation[i]
-                drawingOrder[i] = self.numberOfQubits - 1 - i
+            for i in range(self.number_of_qubits):
+                # qubit_labels[i] = i
+                qubit_labels[i] = self.permutation[i]
+                drawingOrder[i] = self.number_of_qubits - 1 - i
 
-            # drawBackend.draw(qubitLabels, drawingOrder)[0].show()
-            return drawBackend.draw(qubitLabels, drawingOrder)[0]
+            # drawBackend.draw(qubit_labels, drawingOrder)[0].show()
+            return drawBackend.draw(qubit_labels, drawingOrder)[0]
 
         else:
-            return self.toQiskitCircuit().draw("mpl")
+            return self.to_qiskit_circuit().draw("mpl")
 
-    def toQiskitCircuit(self):
+    def to_qiskit_circuit(self):
         """
         Returns: qiskit.QuantumCircuit object of the circuit of the Candidate
         """
-        qr = QuantumRegister(self.numberOfQubits)
-        cr = ClassicalRegister(self.numberOfQubits)
+        qr = QuantumRegister(self.number_of_qubits)
+        cr = ClassicalRegister(self.number_of_qubits)
         qc = QuantumCircuit(qr, cr)
         for op in self.circuit:
             if op[0] == "TFG":
@@ -300,7 +297,7 @@ class Individual:
                 elif op[1] in [Swap, SwapGate]:
                     qc.swap(op[2], op[3])
                 else:
-                    print("Problem in toQiskitCircuit:", op[1])
+                    print("Problem in to_qiskit_circuit:", op[1])
 
             elif op[0] == "SFG":
                 # can be H,X,Y,Z,T,T^d,S,S^d,sqrtX,sqrtXdagger
@@ -325,7 +322,7 @@ class Individual:
                 elif op[1] == get_inverse(SqrtX):
                     qc.sxdg(op[2])
                 else:
-                    print("Problem in toQiskitCircuit:", op[1])
+                    print("Problem in to_qiskit_circuit:", op[1])
 
             elif op[0] == "SG":
                 # can be Rx,Ry,Rz
@@ -336,7 +333,7 @@ class Individual:
                 elif op[1] == Rz:
                     qc.rz(op[3], op[2])
                 else:
-                    print("Problem in toQiskitCircuit:", op[1])
+                    print("Problem in to_qiskit_circuit:", op[1])
 
         return qc
 
@@ -346,18 +343,18 @@ class Individual:
         Optimizes self.circuit using qiskit.transpile(optimization_level=2).
         """
 
-        basis = [string_of_projectq(gate) for gate in self.allowedGates]
+        basis = [string_of_projectq(gate) for gate in self.allowed_gates]
 
         if self.connectivity == "ALL":
             qc = transpile(
-                self.toQiskitCircuit(),
+                self.to_qiskit_circuit(),
                 optimization_level=optimization_level,
                 basis_gates=basis,
                 layout_method="trivial",
             )
         else:
             qc = transpile(
-                self.toQiskitCircuit(),
+                self.to_qiskit_circuit(),
                 optimization_level=optimization_level,
                 basis_gates=basis,
                 layout_method="trivial",
@@ -464,7 +461,7 @@ class Individual:
 
                 i += 1
 
-    def evaluateCost(self):
+    def evaluate_cost(self):
         """
         Evaluates the cost of the self.circuit.
         Each SWAP gate is 30, CNOT is 10, and all the single qubit gates
@@ -488,77 +485,77 @@ class Individual:
 
     ###################### Mutations from here on ############################
 
-    def permutationMutation(self):
+    def permutation_mutation(self):
         '''
         Randomly changes the permutation of the individual.
         '''
         self.permutation = random.sample(
-            range(self.numberOfQubits), self.numberOfQubits)
+            range(self.number_of_qubits), self.number_of_qubits)
 
-    def discreteUniformMutation(self, verbose=False):
+    def discrete_uniform_mutation(self):
         """
         This function iterates over all the gates defined in the circuit and
-        randomly changes target and/or control qubits with probability EMC / circuitLength.
+        randomly changes target and/or control qubits with probability EMC / circuit_length.
         Args:
           None
         Returns:
           None -> should I return sth ? maybe self?
         """
-        circuitLength = len(self.circuit)
-        if circuitLength == 0:
-            mutationProb = 0
+        circuit_length = len(self.circuit)
+        if circuit_length == 0:
+            mutation_prob = 0
         else:
-            mutationProb = self.EMC / circuitLength
+            mutation_prob = self.EMC / circuit_length
         # I don't know if we really need this part
-        if mutationProb >= 1.0:
-            mutationProb = 0.5
+        if mutation_prob >= 1.0:
+            mutation_prob = 0.5
 
         # We will loop over all the gates
-        for i in range(circuitLength):
-            if random.random() < mutationProb:
-                self.discreteMutation(i, verbose=verbose)
+        for i in range(circuit_length):
+            if random.random() < mutation_prob:
+                self.discrete_mutation(i)
 
-    def sequenceInsertion(self):
+    def sequence_insertion(self):
         """
         This function generates a random circuit with circuit length given by choosing
         a value from a geometric distribution with mean value ESL, and it is inserted
         to a random point in self.circuit.
         """
-        circuitToInsert = self.generateRandomCircuit(initialize=False)
-        oldCircuitLength = len(self.circuit)
-        if oldCircuitLength == 0:
-            insertionIndex = 0
+        circuit_to_insert = self.generate_random_circuit(initialize=False)
+        old_circuit_length = len(self.circuit)
+        if old_circuit_length == 0:
+            insertion_index = 0
         else:
-            insertionIndex = random.choice(range(oldCircuitLength))
-        self.circuit[insertionIndex:] = circuitToInsert + \
-            self.circuit[insertionIndex:]
+            insertion_index = random.choice(range(old_circuit_length))
+        self.circuit[insertion_index:] = circuit_to_insert + \
+            self.circuit[insertion_index:]
 
-    def sequenceAndInverseInsertion(self, verbose=False):
+    def sequence_and_inverse_insertion(self, verbose=False):
         """
         This function generates a random circuit with circuit length given by choosing
         a value from a geometric distribution with mean value ESL, it is inserted to a
         random point in self.circuit and its inverse is inserted to another point.
         """
-        circuitToInsert = self.generateRandomCircuit(initialize=False)
+        circuit_to_insert = self.generate_random_circuit(initialize=False)
         # MAYBE CONNECTIVITY IS NOT REFLECTIVE ?
-        inverseCircuit = getInverseCircuit(circuitToInsert, verbose)
-        oldCircuitLength = len(self.circuit)
-        if oldCircuitLength >= 2:
-            index1, index2 = random.sample(range(oldCircuitLength), 2)
+        inverse_circuit = get_inverse_circuit(circuit_to_insert, verbose)
+        old_circuit_length = len(self.circuit)
+        if old_circuit_length >= 2:
+            index1, index2 = random.sample(range(old_circuit_length), 2)
             if index1 > index2:
                 index2, index1 = index1, index2
         else:
             index1, index2 = 0, 1
-        newCircuit = (
+        new_circuit = (
             self.circuit[:index1]
-            + circuitToInsert
+            + circuit_to_insert
             + self.circuit[index1:index2]
-            + inverseCircuit
+            + inverse_circuit
             + self.circuit[index2:]
         )
-        self.circuit = newCircuit
+        self.circuit = new_circuit
 
-    def discreteMutation(self, index, verbose=False):
+    def discrete_mutation(self, index):
         """
         This function applies a discrete mutation to the circuit element at index.
         Discrete mutation means that the control and/or target qubits are randomly changed.
@@ -569,34 +566,34 @@ class Individual:
             index -= 1
         if self.circuit[index][0] == "SFG":
             # This means we have a single qubit fixed gate
-            newTarget = random.choice(range(self.numberOfQubits))
-            self.circuit[index] = ("SFG", self.circuit[index][1], newTarget)
+            new_target = random.choice(range(self.number_of_qubits))
+            self.circuit[index] = ("SFG", self.circuit[index][1], new_target)
         elif self.circuit[index][0] == "TFG":
             # This means we have two qubit fixed gate
             if self.connectivity == "ALL":
-                newControl, newTarget = random.sample(
-                    range(self.numberOfQubits), 2)
+                new_control, new_target = random.sample(
+                    range(self.number_of_qubits), 2)
             else:
-                newControl, newTarget = random.choice(self.connectivity)
+                new_control, new_target = random.choice(self.connectivity)
             self.circuit[index] = (
-                "TFG", self.circuit[index][1], newControl, newTarget)
+                "TFG", self.circuit[index][1], new_control, new_target)
         elif self.circuit[index][0] == "SG":
             # This means we have a single rotation gate
-            newTarget = random.choice(range(self.numberOfQubits))
+            new_target = random.choice(range(self.number_of_qubits))
             self.circuit[index] = (
                 "SG",
                 self.circuit[index][1],
-                newTarget,
+                new_target,
                 self.circuit[index][3],
             )
         else:
-            print("WRONG BRANCH IN discreteMutation")
+            print("WRONG BRANCH IN discrete_mutation")
 
-    def continuousMutation(self, index, verbose=False):
+    def continuous_mutation(self, index):
         """
         This function applies a continuous mutation to the circuit element at index.
         Continuous mutation means that if the gate has a parameter, its parameter its
-        changed randomly, if not a discreteMutation is applied.
+        changed randomly, if not a discrete_mutation is applied.
         """
         if len(self.circuit) == 0:
             return
@@ -611,22 +608,22 @@ class Individual:
                 "SG", self.circuit[index][1], self.circuit[index][2], newParameter)
         elif self.circuit[index][0] == "SFG":
             # This means we have a single qubit/two qubit fixed gate and we need to
-            # apply a discreteMutation.
-            newTarget = random.choice(range(self.numberOfQubits))
-            self.circuit[index] = ("SFG", self.circuit[index][1], newTarget)
+            # apply a discrete_mutation.
+            new_target = random.choice(range(self.number_of_qubits))
+            self.circuit[index] = ("SFG", self.circuit[index][1], new_target)
         elif self.circuit[index][0] == "TFG":
             # This means we have two qubit fixed gate
             if self.connectivity == "ALL":
-                newControl, newTarget = random.sample(
-                    range(self.numberOfQubits), 2)
+                new_control, new_target = random.sample(
+                    range(self.number_of_qubits), 2)
             else:
-                newControl, newTarget = random.choice(self.connectivity)
+                new_control, new_target = random.choice(self.connectivity)
             self.circuit[index] = (
-                "TFG", self.circuit[index][1], newControl, newTarget)
+                "TFG", self.circuit[index][1], new_control, new_target)
         else:
-            print("WRONG BRANCH IN continuousMutation")
+            print("WRONG BRANCH IN continuous_mutation")
 
-    def parameterMutation(self):
+    def parameter_mutation(self):
         ''' 
         This function iterates over all the gates defined in the circuit and 
         randomly adjusts the parameter of the rotation gates.
@@ -634,9 +631,9 @@ class Individual:
         if len(self.circuit) == 0:
             return
 
-        mutationProb = self.EMC / len(self.circuit)
+        mutation_prob = self.EMC / len(self.circuit)
         for index in range(len(self.circuit)):
-            if random.random() < mutationProb:
+            if random.random() < mutation_prob:
                 if self.circuit[index][0] == "SG":
                     # This means we have a single rotation gate
                     newParameter = float(
@@ -645,31 +642,31 @@ class Individual:
                     self.circuit[index] = (
                         "SG", self.circuit[index][1], self.circuit[index][2], newParameter)
 
-    def continuousUniformMutation(self, verbose=False):
+    def continuous_uniform_mutation(self):
         """
         This function iterates over all the gates defined in the circuit and
         randomly changes the parameter if possible, if not target and/or control qubits
-        with probability EMC / circuitLength.
+        with probability EMC / circuit_length.
         Args:
           None
         Returns:
           None -> should I return sth ? maybe self?
         """
-        circuitLength = len(self.circuit)
-        if circuitLength == 0:
-            mutationProb = 0
+        circuit_length = len(self.circuit)
+        if circuit_length == 0:
+            mutation_prob = 0
         else:
-            mutationProb = self.EMC / circuitLength
+            mutation_prob = self.EMC / circuit_length
         # I don't know if we really need this part
-        if mutationProb >= 1.0:
-            mutationProb = 0.5
+        if mutation_prob >= 1.0:
+            mutation_prob = 0.5
 
         # We will loop over all the gates
-        for i in range(circuitLength):
-            if random.random() < mutationProb:
-                self.continuousMutation(i, verbose=verbose)
+        for i in range(circuit_length):
+            if random.random() < mutation_prob:
+                self.continuous_mutation(i)
 
-    def insertMutateInvert(self, verbose=False):
+    def insert_mutate_invert(self):
         """
         This function performs a discrete mutation on a single gate, then places a
         randomly selected gate immediately before it and its inverse immediately
@@ -682,139 +679,139 @@ class Individual:
             index = random.choice(range(len(self.circuit)))
 
         # Discrete Mutation
-        self.discreteMutation(index)
+        self.discrete_mutation(index)
 
         # Generate the circuit to insert and its inverse
-        circuitToInsert = self.generateRandomCircuit(initialize=False)
-        while len(circuitToInsert) == 0:
-            circuitToInsert = self.generateRandomCircuit(initialize=False)
-        circuitToInsert = [circuitToInsert[0]]
-        inverseCircuit = getInverseCircuit(circuitToInsert)
+        circuit_to_insert = self.generate_random_circuit(initialize=False)
+        while len(circuit_to_insert) == 0:
+            circuit_to_insert = self.generate_random_circuit(initialize=False)
+        circuit_to_insert = [circuit_to_insert[0]]
+        inverse_circuit = get_inverse_circuit(circuit_to_insert)
         if index >= len(self.circuit):
             # This probably happens only when index = 0 and length of the circuit = 0
             if index == 0:
-                newCircuit = circuitToInsert + inverseCircuit
+                new_circuit = circuit_to_insert + inverse_circuit
             else:
                 print("\n\nIT SHOULD NEVER ENTER HEREE!!!\n\n")
         else:
-            newCircuit = (
+            new_circuit = (
                 self.circuit[:index]
-                + circuitToInsert
+                + circuit_to_insert
                 + [self.circuit[index]]
-                + inverseCircuit
+                + inverse_circuit
                 + self.circuit[(index + 1):]
             )
-        self.circuit = newCircuit
+        self.circuit = new_circuit
 
-    def swapQubits(self, verbose=False):
+    def swap_qubits(self, verbose=False):
         """
         This function swaps two randomly selected qubits.
         """
-        qubit1, qubit2 = random.sample(range(self.numberOfQubits), 2)
+        qubit1, qubit2 = random.sample(range(self.number_of_qubits), 2)
         if verbose:
             print("\nqubit1:", qubit1, " qubit2:", qubit2)
-            print("Before swapQubits:")
-            self.printCircuit()
+            print("Before swap_qubits:")
+            self.print_circuit()
 
-        for i in range(len(self.circuit)):
-            if self.circuit[i][0] == "SFG":
-                if self.circuit[i][2] == qubit1:
-                    self.circuit[i] = self.circuit[i][0:2] + (qubit2,)
-                elif self.circuit[i][2] == qubit2:
-                    self.circuit[i] = self.circuit[i][0:2] + (qubit1,)
+        for operator in self.circuit:
+            if operator[0] == "SFG":
+                if operator[2] == qubit1:
+                    operator = operator[0:2] + (qubit2,)
+                elif operator[2] == qubit2:
+                    operator = operator[0:2] + (qubit1,)
 
-            elif self.circuit[i][0] == "TFG":
-                if self.circuit[i][2] == qubit1 and self.circuit[i][3] == qubit2:
-                    self.circuit[i] = self.circuit[i][0:2] + (qubit2, qubit1)
+            elif operator[0] == "TFG":
+                if operator[2] == qubit1 and operator[3] == qubit2:
+                    operator = operator[0:2] + (qubit2, qubit1)
 
-                elif self.circuit[i][2] == qubit2 and self.circuit[i][3] == qubit1:
-                    self.circuit[i] = self.circuit[i][0:2] + (qubit1, qubit2)
+                elif operator[2] == qubit2 and operator[3] == qubit1:
+                    operator = operator[0:2] + (qubit1, qubit2)
 
-                elif self.circuit[i][2] == qubit1:
-                    self.circuit[i] = (
-                        self.circuit[i][0:2] + (qubit2,) + self.circuit[i][3:]
+                elif operator[2] == qubit1:
+                    operator = (
+                        operator[0:2] + (qubit2,) + operator[3:]
                     )
 
-                elif self.circuit[i][2] == qubit2:
-                    self.circuit[i] = (
-                        self.circuit[i][0:2] + (qubit1,) + self.circuit[i][3:]
+                elif operator[2] == qubit2:
+                    operator = (
+                        operator[0:2] + (qubit1,) + operator[3:]
                     )
 
-                elif self.circuit[i][3] == qubit1:
-                    self.circuit[i] = self.circuit[i][0:3] + (qubit2,)
+                elif operator[3] == qubit1:
+                    operator = operator[0:3] + (qubit2,)
 
-                elif self.circuit[i][3] == qubit2:
-                    self.circuit[i] = self.circuit[i][0:3] + (qubit1,)
+                elif operator[3] == qubit2:
+                    operator = operator[0:3] + (qubit1,)
 
-            elif self.circuit[i][0] == "SG":
-                if self.circuit[i][2] == qubit1:
-                    self.circuit[i] = (
-                        self.circuit[i][0:2] +
-                        (qubit2,) + (self.circuit[i][3],)
+            elif operator[0] == "SG":
+                if operator[2] == qubit1:
+                    operator = (
+                        operator[0:2] +
+                        (qubit2,) + (operator[3],)
                     )
-                elif self.circuit[i][2] == qubit2:
-                    self.circuit[i] = (
-                        self.circuit[i][0:2] +
-                        (qubit1,) + (self.circuit[i][3],)
+                elif operator[2] == qubit2:
+                    operator = (
+                        operator[0:2] +
+                        (qubit1,) + (operator[3],)
                     )
 
         if verbose:
-            print("After swapQubits:")
-            self.printCircuit()
+            print("After swap_qubits:")
+            self.print_circuit()
 
-    def sequenceDeletion(self, verbose=False):
+    def sequence_deletion(self, verbose=False):
         """
         This function deletes a randomly selected interval of the circuit.
         """
         if len(self.circuit) < 2:
             return
 
-        circuitLength = len(self.circuit)
-        index = random.choice(range(circuitLength))
+        circuit_length = len(self.circuit)
+        index = random.choice(range(circuit_length))
         if verbose:
             print("\nindex:", index)
-            print("Before sequenceDeletion:")
-            self.printCircuit()
+            print("Before sequence_deletion:")
+            self.print_circuit()
         # If this is the case, we'll simply remove the last element
-        if index == (circuitLength - 1):
+        if index == (circuit_length - 1):
             self.circuit = self.circuit[:-1]
         else:
-            sequenceLength = numpy.random.geometric(p=(1 / self.ESL))
+            sequence_length = numpy.random.geometric(p=(1 / self.ESL))
             if verbose:
-                print("sequenceLength:", sequenceLength)
-            if (index + sequenceLength) >= circuitLength:
-                self.circuit = self.circuit[: (-circuitLength + index)]
+                print("sequence_length:", sequence_length)
+            if (index + sequence_length) >= circuit_length:
+                self.circuit = self.circuit[: (-circuit_length + index)]
             else:
                 self.circuit = (
                     self.circuit[:index] +
-                    self.circuit[(index + sequenceLength):]
+                    self.circuit[(index + sequence_length):]
                 )
 
         if verbose:
-            print("After sequenceDeletion:")
-            self.printCircuit()
+            print("After sequence_deletion:")
+            self.print_circuit()
 
-    def sequenceReplacement(self, verbose=False):
+    def sequence_replacement(self, verbose=False):
         """
-        This function first applies sequenceDeletion, then applies a sequenceInsertion.
+        This function first applies sequence_deletion, then applies a sequence_insertion.
         """
         if verbose:
-            print("\nBefore sequenceDeletion:")
-            self.printCircuit()
+            print("\nBefore sequence_deletion:")
+            self.print_circuit()
 
-        self.sequenceDeletion()
-
-        if verbose:
-            print("After sequenceDeletion and before sequenceInsertion:")
-            self.printCircuit()
-
-        self.sequenceInsertion()
+        self.sequence_deletion()
 
         if verbose:
-            print("After sequenceInsertion:")
-            self.printCircuit()
+            print("After sequence_deletion and before sequence_insertion:")
+            self.print_circuit()
 
-    def sequenceSwap(self, verbose=False):
+        self.sequence_insertion()
+
+        if verbose:
+            print("After sequence_insertion:")
+            self.print_circuit()
+
+    def sequence_swap(self, verbose=False):
         """
         This function randomly chooses two parts of the circuit and swaps them.
         """
@@ -826,7 +823,7 @@ class Individual:
         i1, i2, i3, i4 = indices[0], indices[1], indices[2], indices[3]
         if verbose:
             print(
-                "\nBefore sequenceSwap index1:",
+                "\nBefore sequence_swap index1:",
                 i1,
                 "index2:",
                 i2,
@@ -835,7 +832,7 @@ class Individual:
                 "index4:",
                 i4,
             )
-            self.printCircuit()
+            self.print_circuit()
 
         self.circuit = (
             self.circuit[0:i1]
@@ -847,76 +844,76 @@ class Individual:
 
         if verbose:
             print("After sequeceSwap:")
-            self.printCircuit()
+            self.print_circuit()
 
-    def sequenceScramble(self, verbose=False):
+    def sequence_scramble(self, verbose=False):
         """
         This function randomly chooses an index and chooses a length from a geometric
         dist. w/ mean value ESL, and permutes the gates in that part of the circuit.
         """
-        circuitLength = len(self.circuit)
-        if circuitLength < 2:
+        circuit_length = len(self.circuit)
+        if circuit_length < 2:
             index1 = 0
         else:
-            index1 = random.choice(range(circuitLength - 1))
+            index1 = random.choice(range(circuit_length - 1))
 
-        sequenceLength = numpy.random.geometric(p=(1 / self.ESL))
-        if (index1 + sequenceLength) >= circuitLength:
-            index2 = circuitLength - 1
+        sequence_length = numpy.random.geometric(p=(1 / self.ESL))
+        if (index1 + sequence_length) >= circuit_length:
+            index2 = circuit_length - 1
         else:
-            index2 = index1 + sequenceLength
+            index2 = index1 + sequence_length
 
         toShuffle = self.circuit[index1:index2]
         random.shuffle(toShuffle)
 
         if verbose:
-            print("\nBefore sequenceScramble w/ index1:",
+            print("\nBefore sequence_scramble w/ index1:",
                   index1, "index2:", index2)
-            self.printCircuit()
+            self.print_circuit()
 
         self.circuit = self.circuit[:index1] + \
             toShuffle + self.circuit[index2:]
 
         if verbose:
-            print("After sequenceScramble:")
-            self.printCircuit()
+            print("After sequence_scramble:")
+            self.print_circuit()
 
-    def moveGate(self, verbose=False):
+    def move_gate(self, verbose=False):
         """
         This function randomly moves a gate from one point to another point.
         """
-        circuitLength = len(self.circuit)
-        if circuitLength < 2:
+        circuit_length = len(self.circuit)
+        if circuit_length < 2:
             return
-        oldIndex, newIndex = random.sample(range(circuitLength), 2)
+        old_index, new_index = random.sample(range(circuit_length), 2)
         if verbose:
-            print("\nBefore moveGate w/ oldIndex",
-                  oldIndex, "newIndex", newIndex)
-            self.printCircuit()
+            print("\nBefore move_gate w/ old_index",
+                  old_index, "new_index", new_index)
+            self.print_circuit()
 
-        temp = self.circuit.pop(oldIndex)
-        self.circuit.insert(newIndex, temp)
+        temp = self.circuit.pop(old_index)
+        self.circuit.insert(new_index, temp)
 
         if verbose:
-            print("After moveGate:")
-            self.printCircuit()
+            print("After move_gate:")
+            self.print_circuit()
 
-    def crossOver(self, parent2, toolbox):
+    def cross_over(self, parent2, toolbox):
         """This function gets two parent solutions, creates an empty child, randomly
         picks the number of gates to be selected from each parent and selects that
         number of gates from the first parent, and discards that many from the
         second parent. Repeats this until parent solutions are exhausted.
         """
-        selfCircuit = self.circuit[:]
-        parent2Circuit = parent2.circuit[:]
+        self_circuit = self.circuit[:]
+        parent2_circuit = parent2.circuit[:]
         p1 = p2 = 1.0
 
-        if len(selfCircuit) != 0:
+        if len(self_circuit) != 0:
             p1 = self.EMC / len(self.circuit)
         if (p1 <= 0) or (p1 > 1):
             p1 = 1.0
 
-        if len(parent2Circuit) != 0:
+        if len(parent2_circuit) != 0:
             p2 = parent2.EMC / len(parent2.circuit)
         if (p2 <= 0) or (p2 > 1):
             p2 = 1.0
@@ -924,21 +921,21 @@ class Individual:
         child = toolbox.individual()
         child.circuit = []
         turn = 1
-        while len(selfCircuit) or len(parent2Circuit):
+        while len(self_circuit) or len(parent2_circuit):
             if turn == 1:
-                numberOfGatesToSelect = numpy.random.geometric(p1)
-                child.circuit += selfCircuit[:numberOfGatesToSelect]
+                number_of_gates_to_select = numpy.random.geometric(p1)
+                child.circuit += self_circuit[:number_of_gates_to_select]
                 turn = 2
             else:
-                numberOfGatesToSelect = numpy.random.geometric(p2)
-                child.circuit += parent2Circuit[:numberOfGatesToSelect]
+                number_of_gates_to_select = numpy.random.geometric(p2)
+                child.circuit += parent2_circuit[:number_of_gates_to_select]
                 turn = 1
-            selfCircuit = selfCircuit[numberOfGatesToSelect:]
-            parent2Circuit = parent2Circuit[numberOfGatesToSelect:]
+            self_circuit = self_circuit[number_of_gates_to_select:]
+            parent2_circuit = parent2_circuit[number_of_gates_to_select:]
         return child
 
 
-def printCircuit(circuit, verbose=True):
+def print_circuit(circuit, verbose=True):
     output = "Circuit: ["
     for i in range(len(circuit)):
         if circuit[i][0] == "SFG":
@@ -969,47 +966,47 @@ def printCircuit(circuit, verbose=True):
     return output
 
 
-def getInverseCircuit(circuit, verbose=False):
+def get_inverse_circuit(circuit, verbose=False):
     """
     This function takes a circuit and returns a circuit which is the inverse circuit.
     """
     if len(circuit) == 0:
         return []
 
-    reversedCircuit = circuit[::-1]
-    for i in range(len(reversedCircuit)):
-        if reversedCircuit[i][1] in [H, X, Y, Z, CX, Swap, SwapGate]:
+    reversed_circuit = circuit[::-1]
+    for gate in reversed_circuit:
+        if gate[1] in [H, X, Y, Z, CX, Swap, SwapGate]:
             continue
-        elif reversedCircuit[i][1] == S:
-            reversedCircuit[i] = ("SFG", Sdagger, reversedCircuit[i][2])
-        elif reversedCircuit[i][1] == Sdagger:
-            reversedCircuit[i] = ("SFG", S, reversedCircuit[i][2])
-        elif reversedCircuit[i][1] == T:
-            reversedCircuit[i] = ("SFG", Tdagger, reversedCircuit[i][2])
-        elif reversedCircuit[i][1] == Tdagger:
-            reversedCircuit[i] = ("SFG", T, reversedCircuit[i][2])
-        elif reversedCircuit[i][1] in [Rx, Ry, Rz]:
-            reversedCircuit[i] = (
+        elif gate[1] == S:
+            gate = ("SFG", Sdagger, gate[2])
+        elif gate[1] == Sdagger:
+            gate = ("SFG", S, gate[2])
+        elif gate[1] == T:
+            gate = ("SFG", Tdagger, gate[2])
+        elif gate[1] == Tdagger:
+            gate = ("SFG", T, gate[2])
+        elif gate[1] in [Rx, Ry, Rz]:
+            gate = (
                 "SG",
-                reversedCircuit[i][1],
-                reversedCircuit[i][2],
-                round(2 * pi - reversedCircuit[i][3], 3),
+                gate[1],
+                gate[2],
+                round(2 * pi - gate[3], 3),
             )
-        elif reversedCircuit[i][1] in [SqrtX]:
-            reversedCircuit[i] = ("SFG", get_inverse(
-                SqrtX), reversedCircuit[i][2])
-        elif reversedCircuit[i][1] in [get_inverse(SqrtX)]:
-            reversedCircuit[i] = ("SFG", SqrtX, reversedCircuit[i][2])
+        elif gate[1] in [SqrtX]:
+            gate = ("SFG", get_inverse(
+                SqrtX), gate[2])
+        elif gate[1] in [get_inverse(SqrtX)]:
+            gate = ("SFG", SqrtX, gate[2])
         else:
-            print("\nWRONG BRANCH IN getInverseCircuit\n")
+            print("\nWRONG BRANCH IN get_inverse_circuit\n")
 
     if verbose:
         print("Circuit to invert:")
-        printCircuit(circuit)
+        print_circuit(circuit)
         print("Inverse circuit:")
-        printCircuit(reversedCircuit)
+        print_circuit(reversed_circuit)
 
-    return reversedCircuit
+    return reversed_circuit
 
 
 def testDiscreteUniformMutation(candidate, trials=10, verbose=False):
@@ -1019,66 +1016,66 @@ def testDiscreteUniformMutation(candidate, trials=10, verbose=False):
 
 def testSequenceInsertion(candidate, trials=10, verbose=False):
     for i in range(trials):
-        candidate.sequenceInsertion(verbose)
+        candidate.sequence_insertion(verbose)
 
 
 def testSequenceAndInverseInsertion(candidate, trials=10, verbose=False):
     for i in range(trials):
-        candidate.sequenceAndInverseInsertion(verbose)
+        candidate.sequence_and_inverse_insertion(verbose)
 
 
 def testInsertMutateInvert(candidate, trials=10, verbose=False):
     for i in range(trials):
-        candidate.insertMutateInvert(verbose)
+        candidate.insert_mutate_invert(verbose)
 
 
 def testSwapQubits(candidate, trials=10, verbose=False):
     for i in range(trials):
-        candidate.swapQubits(verbose)
+        candidate.swap_qubits(verbose)
 
 
 def testSequenceDeletion(candidate, trials=10, verbose=False):
     for i in range(trials):
-        candidate.sequenceDeletion(verbose)
+        candidate.sequence_deletion(verbose)
 
 
 def testSequenceReplacement(candidate, trials=10, verbose=False):
     for i in range(trials):
-        candidate.sequenceReplacement(verbose)
+        candidate.sequence_replacement(verbose)
 
 
 def testSequenceSwao(candidate, trials=10, verbose=False):
     for i in range(trials):
-        candidate.sequenceSwap(verbose)
+        candidate.sequence_swap(verbose)
 
 
 def testSequenceScramble(candidate, trials=10, verbose=False):
     for i in range(trials):
-        candidate.sequenceScramble(verbose)
+        candidate.sequence_scramble(verbose)
 
 
 def testMoveGate(candidate, trials=10, verbose=False):
     for i in range(trials):
-        candidate.moveGate(verbose)
+        candidate.move_gate(verbose)
 
 
 def testContinuousUniformMutation(candidate, trials=10, verbose=False):
     for i in range(trials):
-        candidate.continuousUniformMutation(verbose)
+        candidate.continuous_uniform_mutation(verbose)
 
 
 def testOptimize(c):
-    c.drawCircuit().savefig("./c10.png")
+    c.draw_circuit().savefig("./c10.png")
     print("Before optimization:")
-    print(c.toQiskitCircuit().count_ops())
+    print(c.to_qiskit_circuit().count_ops())
     wfs = []
-    wfs.append(c.simulateCircuit())
+    wfs.append(c.simulate_circuit())
     for optlvl in [0, 1, 2, 3]:
-        c2 = Individual(c.numberOfQubits)
+        c2 = Individual(c.number_of_qubits)
         c2.circuit = c.circuit
         c2.optimize(optlvl)
-        c2.drawCircuit().savefig("./c" + str(optlvl) + ".png")
+        c2.draw_circuit().savefig("./c" + str(optlvl) + ".png")
         print("Optimization level:", optlvl)
-        print(c2.toQiskitCircuit().count_ops())
-        wfs.append(c2.simulateCircuit())
+        print(c2.to_qiskit_circuit().count_ops())
+        wfs.append(c2.simulate_circuit())
     return wfs

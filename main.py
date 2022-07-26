@@ -3,11 +3,8 @@
 
 import os
 import argparse
-from datetime import datetime
 import time
-from deap import creator, base
-from individual import Individual
-from constants import NUMBER_OF_GENERATIONS, NUMBER_OF_QUBITS, POPULATION_SIZE, VERBOSE, ALLOWED_GATES, SAVE_RESULT, BASIS_GATES
+from constants import NUMBER_OF_GENERATIONS, NUMBER_OF_QUBITS, POPULATION_SIZE, ALLOWED_GATES, SAVE_RESULT, BASIS_GATES
 from evolution import genetic_algorithm
 from tools import load_state, lrsp_circs, save
 from toolbox import initialize_toolbox  # also initializes creator
@@ -18,7 +15,6 @@ directory = f"performance_data/{NUMBER_OF_QUBITS}QB/{POPULATION_SIZE}POP/"
 def main():
     """Runs the genetic algorithm based on the global constants
     """
-    ID = int(len(os.listdir(directory)) / 2)
 
     # Initialize parser
     parser = argparse.ArgumentParser()
@@ -39,7 +35,8 @@ def main():
         args.NGEN) if args.NGEN else NUMBER_OF_GENERATIONS
     number_of_qubits = int(args.NQUBIT) if args.NQUBIT else NUMBER_OF_QUBITS
     state_index = int(args.INDEX)
-    save_file_id = int(args.ID)
+    save_file_id = int(args.ID) if args.ID else int(
+        len(os.listdir(directory)) / 2)
 
     state_name = str(number_of_qubits)+"QB_state"+str(state_index)
     problem_name = f"{save_file_id}-{number_of_generations}GEN-{state_name}"
@@ -52,12 +49,12 @@ allowedGates={ALLOWED_GATES}"""
     toolbox = initialize_toolbox(desired_state)
     pop = toolbox.population(n=population_size)
     unaltered = lrsp_circs(desired_state, toolbox, BASIS_GATES)
-    for ind, i in enumerate(unaltered):
+    for i, ind in enumerate(unaltered):
         pop[i] = ind
 
     start = time.perf_counter()
-    pop, logbook = genetic_algorithm(pop, toolbox, number_of_generations, problem_name,
-                                     problem_description, verbose=VERBOSE)
+    pop, logbook = genetic_algorithm(pop, toolbox, number_of_generations,
+                                     problem_name,                                 problem_description)
     runtime = round(time.perf_counter() - start, 2)
 
     if SAVE_RESULT:

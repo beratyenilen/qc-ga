@@ -151,10 +151,10 @@ def evaluate_cost(desired_state, individual):
     wantedState > circuitLen = len(individual.circuit) / MAX_CIRCUIT_LENGTH
     MAX_CIRCUIT_LENGTH is the expected circuit length for the problem.
     """
-    got = individual.simulateCircuit()
+    got = individual.simulate_circuit()
     error = 1 - np.absolute(np.vdot(desired_state, got))**2
     individual.setCMW(error)
-    cost = individual.evaluateCost()
+    cost = individual.evaluate_cost()
     return (error, cost)
 
 
@@ -237,7 +237,7 @@ projectq_of_string_map = {
     "rz": Rz
 }
 
-string_of_projectq_map = {v: k for k, v in projectq_of_string_map}
+string_of_projectq_items = [(v, k) for k, v in projectq_of_string_map.items()]
 
 
 def projectq_of_string(string):
@@ -245,4 +245,5 @@ def projectq_of_string(string):
 
 
 def string_of_projectq(gate):
-    return string_of_projectq_map[gate]
+    maybe_string = [s for g, s in string_of_projectq_items if g == gate]
+    return maybe_string[0]
