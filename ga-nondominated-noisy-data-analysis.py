@@ -1,21 +1,17 @@
 from qiskit.providers.aer import QasmSimulator
 import pickle
 import os
-from tools import *
-from individual import Individual
+import re
+from threading import Thread
 from numpy import *
 from matplotlib import pyplot as plt
 import pandas as pd
-from deap import *
 from deap.tools.emo import sortNondominated
 from qiskit import *
 from qiskit.quantum_info import state_fidelity
-import re
-from threading import Thread
 
-fitnessWeights = (-1.0, -0.5)
-creator.create("fitness_min", base.Fitness, weights=fitnessWeights)
-creator.create("individual", Candidate, fitness=creator.fitness_min)
+from tools import *
+from individual import Individual
 
 
 def load_files_by_name(basedir):

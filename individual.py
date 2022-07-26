@@ -8,20 +8,23 @@ from projectq.ops import H, X, Y, Z, T, Tdagger, S, Sdagger, CNOT, CX, Rx, Ry, R
 from math import pi
 from qiskit import QuantumCircuit, transpile, QuantumRegister, ClassicalRegister
 
-from tools import qasm2ls
+from tools import qasm2ls, string_of_projectq
+
+# TODO snake case
 
 
 class Individual:
-    """
-    This class is a container for an individual in GA.
+    """This class is a container for an individual in GA.
     """
 
+    # TODO remove defaults
     def __init__(self, numberOfQubits=2, allowedGates=[X, Rz, SqrtX, Swap, CNOT], connectivity="ALL", EMC=2.0, ESL=2.0,):
         self.numberOfQubits = numberOfQubits
         self.allowedGates = allowedGates
         self.connectivity = connectivity
         self.permutation = random.sample(
             range(self.numberOfQubits), numberOfQubits)
+        # TODO why use initialism rather than full name for the variables?
         # EMC stands for Expected Mutation Count
         self.EMC = EMC
         # ESL stands for Expected Sequence Length
@@ -343,40 +346,7 @@ class Individual:
         Optimizes self.circuit using qiskit.transpile(optimization_level=2).
         """
 
-        # FIXME Utility function for converting basis gates
-
-        basis = []
-        for gate in self.allowedGates:
-            if gate == H:
-                basis.append("h")
-            elif gate == X:
-                basis.append("x")
-            elif gate == Y:
-                basis.append("y")
-            elif gate == Z:
-                basis.append("z")
-            elif gate == T:
-                basis.append("t")
-            elif gate == Tdagger:
-                basis.append("tdg")
-            elif gate == S:
-                basis.append("s")
-            elif gate == Sdagger:
-                basis.append("sdg")
-            elif gate == SqrtX:
-                basis.append("sx")
-            elif gate == get_inverse(SqrtX):
-                basis.append("sxdg")
-            elif gate in [CX, CNOT]:
-                basis.append("cx")
-            elif gate in [Swap, SwapGate]:
-                basis.append("swap")
-            elif gate == Rx:
-                basis.append("rx")
-            elif gate == Ry:
-                basis.append("ry")
-            elif gate == Rz:
-                basis.append("rz")
+        basis = [string_of_projectq(gate) for gate in self.allowedGates]
 
         if self.connectivity == "ALL":
             qc = transpile(
@@ -505,7 +475,7 @@ class Individual:
             if op[0] in ["SG", "SFG"]:
                 cost += 1
             elif op[1] in [SwapGate, Swap]:
-                cost += 30
+                cost += 30  # FIXME magic numbers -> constants.py
             elif op[1] in [CNOT, CX]:
                 cost += 10
         return cost
@@ -514,7 +484,7 @@ class Individual:
         """
             Sets CMW (Continuous Mutation Width) to error / 5. 
         """
-        self.CMW = error / 5
+        self.CMW = error / 5  # FIXME magic number
 
     ###################### Mutations from here on ############################
 
@@ -674,23 +644,6 @@ class Individual:
                     newParameter = newParameter % (2*pi)
                     self.circuit[index] = (
                         "SG", self.circuit[index][1], self.circuit[index][2], newParameter)
-                '''
-                # Maybe we can also apply a discrete mutation we'll see.
-                elif self.circuit[index][0] == "SFG":
-                    # This means we have a single qubit/two qubit fixed gate and we need to
-                    # apply a discreteMutation.
-                    newTarget = random.choice(range(self.numberOfQubits))
-                    self.circuit[index] = ("SFG", self.circuit[index][1], newTarget)
-                elif self.circuit[index][0] == "TFG":
-                    # This means we have two qubit fixed gate
-                    if self.connectivity == "ALL":
-                        newControl, newTarget = random.sample(range(self.numberOfQubits), 2)
-                    else:
-                        newControl, newTarget = random.choice(self.connectivity)
-                    self.circuit[index] = ("TFG", self.circuit[index][1], newControl, newTarget)
-                else:
-                    print("WRONG BRANCH IN continuousMutation")
-                '''
 
     def continuousUniformMutation(self, verbose=False):
         """
