@@ -1,2 +1,7 @@
 outputs
+performance_data
+qiskit_circuits
 __pycache__
+*.png
+saved
+LS-performance

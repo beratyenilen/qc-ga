@@ -13,6 +13,11 @@ from qiskit.quantum_info import state_fidelity
 from tools import *
 from individual import Individual
 
+# TODO refactor analysis_tools.py
+# TODO create analysis script for lrsp noisy fids
+# TODO analysis.ipynb should only contain load + plot code
+# TODO plot code to plot_tools
+
 
 def load_files_by_name(basedir):
     loaded = {}

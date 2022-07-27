@@ -54,7 +54,7 @@ allowedGates={ALLOWED_GATES}"""
 
     start = time.perf_counter()
     pop, logbook = genetic_algorithm(pop, toolbox, number_of_generations,
-                                     problem_name,                                 problem_description)
+                                     problem_name, problem_description)
     runtime = round(time.perf_counter() - start, 2)
 
     if SAVE_RESULT:

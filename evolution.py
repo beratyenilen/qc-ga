@@ -56,9 +56,10 @@ def mutate_individuals(ranks, N, toolbox, current_rank=1):
         # Choose a random number between 0 and T
         random_number = random.uniform(0, T)
         # Find out which sublist this random number corresponds to
-        # Let's say T = exp(-1) + exp(-2) + exp(-3) + exp(-4) and if our random number
-        # is between 0 and 1, than it belongs to first list, ranks[0]. If it is
-        # between exp(-1) and exp(-1)+exp(-2) than it belongs to second list etc.
+        # Let's say T = exp(-1) + exp(-2) + exp(-3) + exp(-4) and if our
+        # random number is between 0 and 1, than it belongs to first list,
+        # ranks[0]. If it is between exp(-1) and exp(-1)+exp(-2) than it
+        # belongs to second list etc.
 
         # FIXME Refactor list index and everything else
         list_index = -1
@@ -71,8 +72,8 @@ def mutate_individuals(ranks, N, toolbox, current_rank=1):
         if list_index == -1:
             list_index = L-1
         left_border = right_border - math.exp(-current_rank-list_index)
-        # Now, we will find out which index approximately the chosen number corresponds
-        # to by using a simple relation.
+        # Now, we will find out which index approximately the chosen number
+        # corresponds to by using a simple relation.
         element_index = math.floor(
             len(ranks[list_index]) * (random_number-left_border)/(right_border-left_border))
 
@@ -156,7 +157,7 @@ def book_keep(best_candidate, output_file):
     output_file.write(best_candidate.print_circuit())
 
 
-def genetic_algorithm(pop, toolbox, n_gen, problem_name, problem_description):
+def genetic_algorithm(pop, toolbox, number_of_generations, problem_name, problem_description):
     # Evaluate the individuals with an invalid fitness
     for ind in pop:
         if not ind.fitness.valid:
@@ -177,8 +178,8 @@ def genetic_algorithm(pop, toolbox, n_gen, problem_name, problem_description):
     # Create the logbook
     logbook = tools.Logbook()
     # Start evolution
-    for g in range(n_gen):
-        print(g, "/", n_gen)
+    for g in range(number_of_generations):
+        print(g, "/", number_of_generations)
         # Retrieve the statistics for this generation.
         record = mstats.compile(pop)
         logbook.record(gen=g+1, **record)
