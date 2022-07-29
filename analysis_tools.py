@@ -1,4 +1,5 @@
 
+from email.mime import base
 import os
 import pickle
 import re
@@ -59,12 +60,31 @@ def increment_suffix(name):
     return f'{basename}_{int(index or 0) + 1}'
 
 
-def create_datadir(datadir):
+def iterate(func, start):
+    while True:
+        yield(start)
+        start = func(start)
+
+
+def get_latest_datadir(basename):
+    """Returns the datadir with the last suffix, or None if basename
+    directory does not exist
+    """
+    if not os.path.exists(basename):
+        return None
+    for datadir in iterate(increment_suffix, basename):
+        if not os.path.exists(increment_suffix(datadir)):
+            return datadir
+
+
+def create_datadir(basename):
     """Creates a new directory with incrementing suffix, returning the name of
     the new directory"""
-    while os.path.exists(datadir):
-        datadir = increment_suffix(datadir)
-
+    last_datadir = get_latest_datadir(basename)
+    if last_datadir is None:
+        datadir = basename
+    else:
+        datadir = increment_suffix(last_datadir)
     os.mkdir(datadir)
     return datadir
 
