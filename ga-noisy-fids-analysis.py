@@ -16,13 +16,13 @@ from constants import FAKE_MACHINE, NOISE_MODEL, BASIS_GATES
 from tools import get_permutation, get_permutation_new_and_improved, total_cnots, lrsp_circs
 from old_toolbox import initialize_toolbox
 
-NUMBER_OF_SIMULATIONS = 1  # 100 is a sensible default
+NUMBER_OF_SIMULATIONS = 100  # 100 is a sensible default
 
 # How many threads to spawn, chunks to split the simulations into
 NUMBER_OF_TASKS = 4
 
 # Set to None to run simulations for all individuals
-LIMIT_INDIVIDUALS = 1
+LIMIT_INDIVIDUALS = None
 
 if __name__ == '__main__':
     states = load_states()
@@ -160,3 +160,7 @@ if __name__ == '__main__':
     multithread_chunks(states_with_pop.items(),
                        NUMBER_OF_TASKS,
                        lambda chunk: run_ga_nondominated_noisy_fids(ga_noisy_datadir, chunk))
+
+    print(f"LRSP front circuits were saved in {lrsp_fronts_datadir}")
+    print(f"LRSP noisy data was saved in {lrsp_noisy_datadir}")
+    print(f"GA nondominated noisy data was saved in {ga_noisy_datadir}")
