@@ -9,6 +9,8 @@ from qiskit import execute
 
 from constants import CONNECTIVITY, NOISE_MODEL
 
+import old_toolbox
+
 
 def load_files_by_name(basedir):
     loaded = {}
@@ -56,7 +58,7 @@ def increment_suffix(name):
     to 0.
     """
     basename, index = re.match(
-        r'^(5QB[A-Za-z-]+)_?(\d+?)?$', name).groups()
+        r'^([^_]+)_?(\d+?)?$', name).groups()
     return f'{basename}_{int(index or 0) + 1}'
 
 

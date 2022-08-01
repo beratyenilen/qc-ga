@@ -1,3 +1,64 @@
+from matplotlib import pyplot as plt
+import numpy as np
+from deap.tools.emo import sortNondominated
+from qiskit import transpile
+from qiskit.quantum_info import DensityMatrix, Operator, state_fidelity
+from qiskit.circuit.library import Permutation
+
+
+def plot_fid_cnot_count(states, analysis, title):
+    plt.figure(figsize=(10, 7))
+    plt.title(title)
+
+    for name, _ in states.items():
+        data = analysis[name]
+        ga_max_fids = data['ga_max_fids']
+        lrsp_max_fids = data['lrsp_max_fids']
+
+        ga_best_cnot = ga_max_fids.cnots[ga_max_fids.noisy_fids.eq(
+            ga_max_fids.noisy_fids.max())].max()
+        lrsp_best_cnot = lrsp_max_fids.cnots[lrsp_max_fids.noisy_fids.eq(
+            lrsp_max_fids.noisy_fids.max())].max()
+        plt.scatter(x=ga_best_cnot,
+                    y=ga_max_fids.noisy_fids.max(), color='red')
+        plt.scatter(x=lrsp_best_cnot,
+                    y=lrsp_max_fids.noisy_fids.max(), color='blue', marker='.')
+    plt.ylim(0, 1)
+    plt.ylabel('Fidelity')
+    plt.xlabel('CNOT count')
+
+
+def plot_fid_avg_ent(states_with_avg_ent, analysis, title, xlabel):
+    plt.figure(figsize=(10, 7))
+    plt.title(title)
+    for name, avg_ent in states_with_avg_ent.items():
+        data = analysis[name]
+        ga_max_fids = data['ga_max_fids']
+        lrsp_max_fids = data['lrsp_max_fids']
+        plt.scatter(x=avg_ent, y=ga_max_fids.noisy_fids.max(), color='red')
+        plt.scatter(x=avg_ent, y=lrsp_max_fids.noisy_fids.max(),
+                    color='blue', marker='.')
+    plt.ylim(0, 1)
+    plt.ylabel('Fidelity')
+    plt.xlabel(xlabel)
+
+
+def plot_improvement_avg_ent(states_with_avg_ent, analysis, title):
+    plt.figure(figsize=(10, 7))
+    plt.title(title)
+    for name, avg_ent in states_with_avg_ent.items():
+        data = analysis[name]
+        ga_max_fids = data['ga_max_fids']
+        lrsp_max_fids = data['lrsp_max_fids']
+
+        plt.scatter(x=avg_ent, y=data['ga_max_fids'].noisy_fids.max(
+        ) - data['lrsp_max_fids'].noisy_fids.max(), color='green', marker='.')
+
+    plt.ylabel('Fidelity difference')
+    plt.xlabel('Mean entanglement of a single qubit')
+
+# ====================== UNUSED ======================
+
 
 def plotFitSize(logbook, fitness="min", size="avg"):
     """Plot the fitness and size
@@ -30,8 +91,6 @@ def plotFitSize(logbook, fitness="min", size="avg"):
     labs = [line.get_label() for line in lns]
     ax1.legend(lns, labs, loc="center right")
 
-    plt.show()
-
 
 def plotCircLengths(circs, circs2):
     sizes1 = np.array([circ.size() for circ in circs])
@@ -40,7 +99,6 @@ def plotCircLengths(circs, circs2):
     if sizes2.max() > max_size:
         max_size = sizes2.max()
     plt.hist(sizes1, bins=max_size, range=(0, max_size), alpha=0.5)
-    plt.show()
 
 
 def plotLenFidScatter(pop):
@@ -56,7 +114,6 @@ def plotLenFidScatter(pop):
     plt.ylabel("Fidelity")
     plt.xlabel("Length")
     plt.ylim(0, 1)
-    plt.show()
 
 
 def fitfidScatter(pop, color='red', plot_all=True):
@@ -143,7 +200,7 @@ def plotCNOTSFidScatter(pop):
     return x, y
 
 
-def plotCNOTSNoiseFidScatter(pop, state_vector, fake_machine, noise_model):
+def plotCNOTSNoiseFidScatter(pop, state_vector, fake_machine, noise_model, color='red'):
     backend = AerSimulator(method='density_matrix', noise_model=noise_model)
 
     ranks = sortNondominated(pop, len(pop), first_front_only=True)
@@ -179,7 +236,7 @@ def plotCNOTSNoiseFidScatter(pop, state_vector, fake_machine, noise_model):
     plt.ylabel("Fidelity")
     plt.xlabel("CNOTS")
     plt.ylim(0, 1)
-    return x, y
+    plt.scatter(x, y, color=color, marker='.')
 
 
 def plotLenCNOTScatter(pop, color='red'):
@@ -249,7 +306,7 @@ def theoreticalModel(n=5, p=0.01, l_lim=35, L=10, Nph=2.5, label=''):
 
 def paretoNoiseFids(pop, state_vector, fake_machine, noise_model, plot_all=True, color='red'):
     backend = AerSimulator(method='density_matrix', noise_model=noise_model)
-    #backend = AerSimulator(method='density_matrix')
+    # backend = AerSimulator(method='density_matrix')
 
     x = []
     y = []
@@ -279,4 +336,4 @@ def paretoNoiseFids(pop, state_vector, fake_machine, noise_model, plot_all=True,
     plt.ylabel("Fidelity")
     plt.xlabel("Length")
     plt.ylim(0, 1)
-    return x, y
+    plt.scatter(x, y, color=color, marker='.')
