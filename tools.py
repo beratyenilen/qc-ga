@@ -78,7 +78,7 @@ def filter_measure_operator(operator_triple):
 
 
 def map_operator_indices(operator_triple):
-    return [operator_triple[0], qubit(operator_triple).index, clbit(operator_triple).index]
+    return [operator_triple[0], qubit(operator_triple)[0].index, clbit(operator_triple)[0].index]
 
 
 def sort_by_qubit_index(operator_indices):

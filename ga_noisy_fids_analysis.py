@@ -2,6 +2,8 @@
 
 import pickle
 from os import path
+import sys
+import psutil
 
 import numpy as np
 from qiskit import transpile
@@ -16,16 +18,26 @@ from constants import FAKE_MACHINE, NOISE_MODEL, BASIS_GATES
 from tools import get_permutation, get_permutation_new_and_improved, total_cnots, lrsp_circs
 from old_toolbox import initialize_toolbox
 
-NUMBER_OF_SIMULATIONS = 100  # 100 is a sensible default
+NUMBER_OF_SIMULATIONS = 2  # 100 is a sensible default
 
 # How many threads to spawn, chunks to split the simulations into
 NUMBER_OF_TASKS = 4
 
 # Set to None to run simulations for all individuals
-LIMIT_INDIVIDUALS = None
+LIMIT_INDIVIDUALS = 1
+
+# Set to None to run analysis for all states
+LIMIT_STATES = None
+
+
+def print_mem():
+    print(
+        f"memory used: {psutil.Process().memory_info().rss / (1024 * 1024)}MiB")
+
 
 if __name__ == '__main__':
-    states = load_states()
+    states = {name: state
+              for name, state in list(load_states().items())[0:LIMIT_STATES]}
     backend = QasmSimulator(method='density_matrix', noise_model=NOISE_MODEL)
     permutation_matrix_cache = {}
 
@@ -39,15 +51,19 @@ if __name__ == '__main__':
             print(f'run_init_lrsp_fronts: finished {name}')
 
     # TODO don't init lrsp fronts if they already exist
-    lrsp_fronts_datadir = create_datadir('5QB-LRSP-fronts')
-    multithread_chunks(states.items(),
-                       NUMBER_OF_TASKS,
-                       lambda chunk: run_init_lrsp_fronts(lrsp_fronts_datadir, chunk))
+    # lrsp_fronts_datadir = create_datadir('5QB-LRSP-fronts')
+    # multithread_chunks(states.items(),
+    #                    NUMBER_OF_TASKS,
+    #                    lambda chunk: run_init_lrsp_fronts(lrsp_fronts_datadir, chunk))
 
-    lrsp_fronts = load_files_by_name('5QB-LRSP-fronts')
+    # lrsp_fronts = load_files_by_name(lrsp_fronts_datadir)
+    lrsp_fronts = load_files_by_name('5QB-LRSP-fronts_3')
 
     lrsp_fronts_uniq = {name: uniq_by(circs, lambda c: c.circuit)
                         for name, circs in lrsp_fronts.items()}
+
+    # print(f"lrsp_fronts: {sys.getsizeof(lrsp_fronts) / 1024 / 1024}")
+    print_mem()
 
     assert states.keys() == lrsp_fronts_uniq.keys()
 
@@ -102,6 +118,12 @@ if __name__ == '__main__':
     multithread_chunks(states.items(),
                        NUMBER_OF_TASKS,
                        lambda chunk: run_lrsp_noisy_fids(lrsp_noisy_datadir, chunk))
+
+    print(
+        f"permutation_matrix_cache: {sys.getsizeof(permutation_matrix_cache) / 1024 / 1024}")
+
+    print(f"lrsp_fronts: {sys.getsizeof(lrsp_fronts) / 1024 / 1024}")
+    print_mem()
 
     # ===================== 5QB-GA-nondominated-noisy-data ====================
 
@@ -160,6 +182,9 @@ if __name__ == '__main__':
     multithread_chunks(states_with_pop.items(),
                        NUMBER_OF_TASKS,
                        lambda chunk: run_ga_nondominated_noisy_fids(ga_noisy_datadir, chunk))
+
+    print(
+        f"permutation_matrix_cache: {sys.getsizeof(permutation_matrix_cache) / 1024 / 1024}")
 
     print(f"LRSP front circuits were saved in {lrsp_fronts_datadir}")
     print(f"LRSP noisy data was saved in {lrsp_noisy_datadir}")

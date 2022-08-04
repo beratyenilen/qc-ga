@@ -104,27 +104,17 @@ def select_and_evolve(pop, toolbox):
     """
     # This function returns a list and ith element of the list contains the
     # individuals with rank i.
+
+    # Now we will carry the top 10% individuals to the next generation directly.
     to_carry = len(pop)//10
     individuals = toolbox.select(pop, to_carry)
     ranks = sort_nondominated(pop, len(pop))
-
-#  paretoFront(pop)
-
-    # Now we will carry the top 10% individuals to the next generation directly.
-#  for indv in ranks[0]:
-#      print(indv.fitness.values)
 
     next_generation = []
     for ind in individuals:
         next_generation.append(ind)
 
-    # Now at this step I may loop over the chosen individuals and check if
-    # two indvs have really close fitness values, less than let's say 0.1, and
-    # remove one. However, I will skip this at this point.
-
-    # We should assign a probability to choose each indv, w.r.t to their ranks.
-    # Crossover prob. is 1/12 according to Potocek. We can increase it a little more.
-    crossover = len(pop) // 12
+    crossover = len(pop) // 13
     current_rank = 1
     N = len(pop)-to_carry - 2*crossover
 
@@ -194,9 +184,9 @@ def genetic_algorithm(pop, toolbox, number_of_generations, problem_name, problem
         # The population is entirely replaced by the next generation of individuals.
         pop = next_generation
         best_candidate = non_dominated_solutions[0]
-        for i in range(len(non_dominated_solutions)):
-            if best_candidate.fitness.values[0] > non_dominated_solutions[i].fitness.values[0]:
-                best_candidate = non_dominated_solutions[i]
+        for ind in non_dominated_solutions:
+            if best_candidate.fitness.values[0] > ind.fitness.values[0]:
+                best_candidate = ind
         book_keep(best_candidate, output_file)
 
     logbook.header = "gen", "evals", "fitness", "size"

@@ -9,10 +9,14 @@ from qiskit import execute
 
 from constants import CONNECTIVITY, NOISE_MODEL
 
+# initializes the creator which is required for loading the pickled data
 import old_toolbox
 
 
 def load_files_by_name(basedir):
+    """Loads all pickled files from the directory `basedir` to a dictionary
+    "{filename}": {data}
+    """
     loaded = {}
     for name in next(os.walk(basedir))[2]:
         with open(os.path.join(basedir, name), 'rb') as file:
@@ -21,6 +25,9 @@ def load_files_by_name(basedir):
 
 
 def load_states():
+    """Loads the 5 qubit static states from `./states/5_qubits` into a
+    dictionary "{name}": state
+    """
     return load_files_by_name('./states/5_qubits')
 
 
