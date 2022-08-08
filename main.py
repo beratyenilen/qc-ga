@@ -65,15 +65,6 @@ allowedGates={ALLOWED_GATES}"""
 
     print(f'Runtime: {runtime}s')
 
-    from plot_tools import plot_cnots_fid_scatter, costfidScatter
-    from matplotlib import pyplot as plt
-    plot_cnots_fid_scatter(pop)
-    plot_cnots_fid_scatter(unaltered, color='blue')
-    plt.show()
-    costfidScatter(pop)
-    costfidScatter(unaltered, color='blue')
-    plt.show()
-
 
 if __name__ == '__main__':
     main()
