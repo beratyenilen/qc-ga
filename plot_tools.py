@@ -219,7 +219,7 @@ def plotCircLengths(circs, circs2):
 def plotLenFidScatter(pop):
     data = []
     for circ in pop:
-        data.append([circ.toQiskitCircuit().size(),
+        data.append([circ.to_qiskit_circuit().size(),
                     1 - circ.fitness.values[0]])
 
     data = np.array(data)
@@ -231,12 +231,12 @@ def plotLenFidScatter(pop):
     plt.ylim(0, 1)
 
 
-def fitfidScatter(pop, color='red', plot_all=True):
+def costfidScatter(pop, color='red', plot_all=True):
     ranks = sortNondominated(pop, len(pop), first_front_only=True)
     front = ranks[0]
     data = []
     for i in range(len(ranks[0]), len(pop)):
-        pop[i].trim()
+        pop[i].clean()
         circ = pop[i]
         data.append([circ.fitness.values[1], 1 - circ.fitness.values[0]])
     data = np.array(data)
@@ -320,7 +320,7 @@ def paretoFront(pop, color='red', plot_all=True):
     front = ranks[0]
     data = []
     for i in range(len(ranks[0]), len(pop)):
-        pop[i].trim()
+        pop[i].clean()
         circ = pop[i]
         data.append([circ.toQiskitCircuit().size(),
                     1 - circ.fitness.values[0]])

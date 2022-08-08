@@ -362,7 +362,7 @@ class Individual:
         self.circuit = qasm2ls(qc.qasm())
         self.optimized = True
 
-    def trim(self):
+    def clean(self):
         """
         Optimizes self.circuit by removing redundant gates
         """

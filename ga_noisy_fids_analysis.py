@@ -18,13 +18,13 @@ from constants import FAKE_MACHINE, NOISE_MODEL, BASIS_GATES
 from tools import get_permutation, get_permutation_new_and_improved, total_cnots, lrsp_circs
 from old_toolbox import initialize_toolbox
 
-NUMBER_OF_SIMULATIONS = 2  # 100 is a sensible default
+NUMBER_OF_SIMULATIONS = 100  # 100 is a sensible default
 
 # How many threads to spawn, chunks to split the simulations into
 NUMBER_OF_TASKS = 4
 
 # Set to None to run simulations for all individuals
-LIMIT_INDIVIDUALS = 1
+LIMIT_INDIVIDUALS = None
 
 # Set to None to run analysis for all states
 LIMIT_STATES = None
@@ -89,18 +89,18 @@ if __name__ == '__main__':
                     circ = transpile(circ, FAKE_MACHINE, optimization_level=0)
                     transpile_permutation = tuple(get_permutation(circ))
 
-                    cached_permutation_matrix = permutation_matrix_cache.get(
-                        transpile_permutation)
-                    if cached_permutation_matrix is None:
-                        # Creating a circuit for qubit mapping
-                        perm_circ = Permutation(5, transpile_permutation)
-                        cached_permutation_matrix = Operator(
-                            perm_circ)  # Matrix for the previous circuit
-                        permutation_matrix_cache[transpile_permutation] = cached_permutation_matrix
+#                    cached_permutation_matrix = permutation_matrix_cache.get(
+#                        transpile_permutation)
+#                    if cached_permutation_matrix is None:
+#                        # Creating a circuit for qubit mapping
+#                        perm_circ = Permutation(5, transpile_permutation)
+#                        cached_permutation_matrix = Operator(
+#                            perm_circ)  # Matrix for the previous circuit
+#                        permutation_matrix_cache[transpile_permutation] = cached_permutation_matrix
 
                     density_matrix_noisy = noisy_simulation_density_matrix(
                         backend, circ)
-                    fid = state_fidelity(cached_permutation_matrix @
+                    fid = state_fidelity(transpile_permutation @
                                          permutation @
                                          state._data, density_matrix_noisy,
                                          validate=False)

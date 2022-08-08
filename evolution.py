@@ -25,7 +25,7 @@ def mutate_ind(individual):
         individual.sequence_swap,
         individual.sequence_scramble,
         individual.permutation_mutation,
-        individual.trim,
+        individual.clean,
         individual.move_gate
     ])
     mutation_choice_fn()

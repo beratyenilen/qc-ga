@@ -23,10 +23,9 @@ Pip modules (defined in [requirements.txt](./requirements.txt)): TODO
 ## Contributing
 
 ## TODOS:
-- Fix main after broken refactoring
 - Save statevector (and noisy densitymatrix) of circuit outcome
 - check remove consecutive inverse gates
-- compare fidelity between best noisy LRSP circuit and best GA individual
+- create picture of ga process and data processing
 
 ## Known issues
 

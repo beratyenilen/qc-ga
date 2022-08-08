@@ -8,8 +8,8 @@ from tools import projectq_of_string
 # number of qubits to be used for the problem
 NUMBER_OF_QUBITS = 5
 
-NUMBER_OF_GENERATIONS = 10
-POPULATION_SIZE = 100
+NUMBER_OF_GENERATIONS = 2000
+POPULATION_SIZE = 200
 SAVE_RESULT = True
 
 # Backend configurations for noise simulation
