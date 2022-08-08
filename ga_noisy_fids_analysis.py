@@ -18,7 +18,7 @@ from constants import FAKE_MACHINE, NOISE_MODEL, BASIS_GATES
 from tools import get_permutation, get_permutation_new_and_improved, total_cnots, lrsp_circs
 from old_toolbox import initialize_toolbox
 
-NUMBER_OF_SIMULATIONS = 100  # 100 is a sensible default
+NUMBER_OF_SIMULATIONS = 1  # 100 is a sensible default
 
 # How many threads to spawn, chunks to split the simulations into
 NUMBER_OF_TASKS = 4
@@ -98,9 +98,12 @@ if __name__ == '__main__':
 #                            perm_circ)  # Matrix for the previous circuit
 #                        permutation_matrix_cache[transpile_permutation] = cached_permutation_matrix
 
+                    perm_circ = Permutation(5, transpile_permutation)
+                    transpile_matrix = Operator(perm_circ)
+
                     density_matrix_noisy = noisy_simulation_density_matrix(
                         backend, circ)
-                    fid = state_fidelity(transpile_permutation @
+                    fid = state_fidelity(transpile_matrix @
                                          permutation @
                                          state._data, density_matrix_noisy,
                                          validate=False)
