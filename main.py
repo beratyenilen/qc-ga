@@ -4,7 +4,7 @@
 import os
 import argparse
 import time
-from constants import NUMBER_OF_GENERATIONS, NUMBER_OF_QUBITS, POPULATION_SIZE, ALLOWED_GATES, SAVE_RESULT, BASIS_GATES
+from constants import FAKE_MACHINE, NUMBER_OF_GENERATIONS, NUMBER_OF_QUBITS, POPULATION_SIZE, ALLOWED_GATES, SAVE_RESULT, BASIS_GATES
 from evolution import genetic_algorithm
 from tools import load_state, lrsp_circs, save
 from toolbox import initialize_toolbox  # also initializes creator
