@@ -100,16 +100,16 @@ def get_permutation_new_and_improved(circ):
     return perm
 
 
-def lrsp_circs(state, toolbox, basis_gates):
+def lrsp_circs(state, toolbox, backend):
     # define list of fidelity loss values to try out
-    losses = list(np.linspace(0.0, 1.0, 80))
+    losses = list(np.linspace(0.0, 1.0, 10))
     pop = toolbox.population(n=1)
     # find the exact circuit
     circuit = initialize(state, max_fidelity_loss=0.0,
                          strategy="brute_force", use_low_rank=True)
     circuit.measure_all()
     transpiled_circuit = transpile(
-        circuit, basis_gates=basis_gates, optimization_level=3)
+        circuit, backend, optimization_level=3)
 
     # create a list of circuits with increasing fidelity loss
     circuits = [transpiled_circuit]
@@ -120,7 +120,7 @@ def lrsp_circs(state, toolbox, basis_gates):
                              strategy="brute_force", use_low_rank=True)
         circuit.measure_all()
         transpiled_circuit = transpile(
-            circuit, basis_gates=basis_gates, optimization_level=3)
+            circuit, backend, optimization_level=3)
 
         # if transpiled_circuit.depth() < circuits[-1].depth():
         circuits.append(transpiled_circuit)
