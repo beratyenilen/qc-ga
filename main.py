@@ -48,7 +48,7 @@ allowedGates={ALLOWED_GATES}"""
     desired_state = load_state(number_of_qubits, state_index).data
     toolbox = initialize_toolbox(desired_state)
     pop = toolbox.population(n=population_size)
-    unaltered = lrsp_circs(desired_state, toolbox, BASIS_GATES)
+    unaltered = lrsp_circs(desired_state, toolbox, FAKE_MACHINE)
     for i, ind in enumerate(unaltered):
         pop[i] = ind
 
