@@ -105,14 +105,11 @@ def select_and_evolve(pop, toolbox):
     # This function returns a list and ith element of the list contains the
     # individuals with rank i.
 
-    # Now we will carry the top 10% individuals to the next generation directly.
-    to_carry = len(pop)//10
-    individuals = toolbox.select(pop, to_carry)
+    # Now we will carry the non-dominated individuals to the next generation directly.
     ranks = sort_nondominated(pop, len(pop))
-
-    next_generation = []
-    for ind in individuals:
-        next_generation.append(ind)
+    to_carry = len(ranks[0])
+    individuals = toolbox.select(pop, to_carry)
+    next_generation = individuals
 
     crossover = len(pop) // 13
     current_rank = 1
