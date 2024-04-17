@@ -52,7 +52,9 @@ def mutate_individuals(ranks, N, toolbox, current_rank=1):
     list_indexes = []
     element_indexes = []
 
+    k = 1
     for _ in range(N):
+        k += 1
         # Choose a random number between 0 and T
         random_number = random.uniform(0, T)
         # Find out which sublist this random number corresponds to
@@ -85,9 +87,17 @@ def mutate_individuals(ranks, N, toolbox, current_rank=1):
         if element_index >= len(ranks[list_index]):
             element_index = -1
         # Copies the individual
+        old_fit = ranks[list_index][element_index].fitness.values
         cp = deepcopy(ranks[list_index][element_index])
         cp = toolbox.mutate(cp)
         cp.fitness.values = toolbox.evaluate(cp)
+
+        while True:
+            cp = toolbox.mutate(cp)
+            cp.fitness.values = toolbox.evaluate(cp)
+            if cp.fitness.values != old_fit:
+                break
+
         cps.append(cp)
         list_indexes.append(list_index)
         element_indexes.append(element_index)
@@ -105,16 +115,21 @@ def select_and_evolve(pop, toolbox):
     # This function returns a list and ith element of the list contains the
     # individuals with rank i.
 
-    # Now we will carry the non-dominated individuals to the next generation directly.
+    # Now we will carry the top 10% individuals to the next generation directly.
+    #to_carry = len(pop)//10
+    #next_generation = toolbox.select(pop, to_carry)
     ranks = sort_nondominated(pop, len(pop))
     to_carry = len(ranks[0])
-    individuals = toolbox.select(pop, to_carry)
-    next_generation = individuals
+    if to_carry > len(pop) // 10:
+        to_carry = len(pop) // 10
+    next_generation = toolbox.select(pop, to_carry)
 
     crossover = len(pop) // 13
     current_rank = 1
     N = len(pop)-to_carry - 2*crossover
 
+    print(N)
+    print(len(pop))
     # TODO refactor chooseindividuals away: choose in this function and mutate with mutateindividual
     # individual_to_mutate = chooseindividualsToMutate(fronts, N, toolbox)
     individuals, _lis, _eis = mutate_individuals(

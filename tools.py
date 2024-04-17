@@ -99,6 +99,21 @@ def get_permutation_new_and_improved(circ):
     circ.remove_final_measurements()
     return perm
 
+def make_gacircuit(circs, toolbox, backend):
+    pop = toolbox.population(n=1)
+
+    unaltered = []
+    for circ in circs:
+        circ.measure_all()
+        circ = transpile(circ, backend, optimization_level=3)
+        print(circ)
+        perm = get_permutation(circ)
+        circ = qasm2ls(circ.qasm())
+        pop[0].circuit = circ
+        pop[0].permutation = perm
+        pop[0].fitness.values = toolbox.evaluate(pop[0])
+        unaltered.append(copy.deepcopy(pop[0]))
+    return unaltered
 
 def lrsp_circs(state, toolbox, backend):
     # define list of fidelity loss values to try out
@@ -152,7 +167,9 @@ def evaluate_cost(desired_state, individual):
     MAX_CIRCUIT_LENGTH is the expected circuit length for the problem.
     """
     got = individual.simulate_circuit()
-    error = 1 - np.absolute(np.vdot(desired_state, got))**2
+    fid = np.absolute(np.vdot(desired_state, got))**2
+    if fid > 1: fid = 1
+    error = 1-fid
     individual.setCMW(error)
     cost = individual.evaluate_cost()
     return (error, cost)
